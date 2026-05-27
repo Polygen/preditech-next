@@ -21,6 +21,8 @@ if (preorderForm) {
       alert('İstek listenize eklendi! Çıkış yapıldığında size haber vereceğiz.');
       window.location.href = '/';
     } else {
+      localStorage.setItem('preditech_orderDevice', summaryDevice.innerHTML);
+      localStorage.setItem('preditech_orderPrice', summaryPrice.innerText);
       window.location.href = '/odeme';
     }
   });

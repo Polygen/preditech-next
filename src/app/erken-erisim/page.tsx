@@ -95,7 +95,19 @@ export default function Page() {
 <div class="form-group"><label>Soyad</label><input type="text" class="sporty-input" style="width:100%;box-sizing:border-box" required></div>
 </div>
 <div class="form-group" style="margin-bottom:20px"><label>E-posta</label><input type="email" class="sporty-input" style="width:100%;box-sizing:border-box" required></div>
-<div class="form-group" style="margin-bottom:20px"><label>Telefon</label><div style="display:flex;gap:12px"><div class="sporty-input" style="display:flex;align-items:center;background:var(--surface2);padding:0 16px;font-weight:700">+90</div><input type="tel" class="sporty-input" style="flex:1;box-sizing:border-box" placeholder="5XX XXX XX XX" required></div></div>
+<div class="form-group" style="margin-bottom:20px">
+  <label>Telefon</label>
+  <div style="display:flex; gap:12px;">
+    <select class="sporty-input" style="background:var(--surface2); padding:0 12px; font-weight:700; border:1px solid rgba(255,255,255,0.1); outline:none; color:var(--text); cursor:pointer; width:110px;">
+      <option value="+90">🇹🇷 +90</option>
+      <option value="+1">🇺🇸 +1</option>
+      <option value="+44">🇬🇧 +44</option>
+      <option value="+49">🇩🇪 +49</option>
+      <option value="+33">🇫🇷 +33</option>
+    </select>
+    <input type="tel" class="sporty-input" style="flex:1;box-sizing:border-box" placeholder="5XX XXX XX XX" pattern="[0-9 ]+" required>
+  </div>
+</div>
 <div class="form-group" style="margin-bottom:20px"><label>Teslimat Adresi</label><textarea class="sporty-input" style="width:100%;box-sizing:border-box;resize:none" rows="3" required></textarea></div>
 <button id="submitBtn" type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:16px;font-size:16px">Ödeme Sayfasına Geç</button>
 </form>

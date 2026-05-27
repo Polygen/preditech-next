@@ -1,17 +1,47 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function OdemePage() {
   const router = useRouter();
   
+  const [baseDevice, setBaseDevice] = useState('Preditech');
+  const [basePriceStr, setBasePriceStr] = useState('0₺');
+  const [basePrice, setBasePrice] = useState(0);
+
   // Card states
   const [cardNumber, setCardNumber] = useState('');
   const [cardName, setCardName] = useState('');
   const [cardExpiry, setCardExpiry] = useState('');
   const [cardCvv, setCardCvv] = useState('');
   const [isFlipped, setIsFlipped] = useState(false);
+
+  // Add-ons
+  const [wantRacebox, setWantRacebox] = useState(false);
+  const [wantSentinel, setWantSentinel] = useState(false);
+  const [wantCursor, setWantCursor] = useState(false);
+
+  const addons = [
+    { id: 'racebox', name: 'Racebox Eklentisi', price: 1500, state: wantRacebox, setter: setWantRacebox, img: '/assets/images/devices/preditech racebox.png' },
+    { id: 'sentinel', name: 'Sentinel Eklentisi', price: 2000, state: wantSentinel, setter: setWantSentinel, img: '/assets/images/devices/preditech sentinel.png' },
+    { id: 'cursor', name: 'Cursor Eklentisi', price: 850, state: wantCursor, setter: setWantCursor, img: '/assets/images/devices/preditech cursor.png' }
+  ];
+
+  useEffect(() => {
+    const dev = localStorage.getItem('preditech_orderDevice') || 'Preditech';
+    const price = localStorage.getItem('preditech_orderPrice') || '0₺';
+    setBaseDevice(dev.replace(/<[^>]*>?/gm, '')); // remove html tags just in case
+    setBasePriceStr(price);
+    
+    // Parse price safely
+    const num = parseInt(price.replace(/[^0-9]/g, ''));
+    if(!isNaN(num)) setBasePrice(num);
+  }, []);
+
+  const totalAddonsPrice = addons.reduce((acc, curr) => curr.state ? acc + curr.price : acc, 0);
+  const grandTotal = basePrice + totalAddonsPrice;
+  const isCustom = baseDevice.toLowerCase().includes('özel');
 
   // Formatting helpers
   const formatCardNumber = (val: string) => {
@@ -34,7 +64,6 @@ export default function OdemePage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Redirect to siparis-takip
     router.push('/siparis-takip');
   };
 
@@ -71,6 +100,17 @@ export default function OdemePage() {
         .card-detail-col { display: flex; flex-direction: column; }
         .card-detail-label { font-size: 10px; color: var(--text2); text-transform: uppercase; margin-bottom: 4px; }
         .card-detail-value { font-family: 'SF Mono', monospace; font-size: 14px; color: #fff; text-transform: uppercase; min-height: 20px; }
+
+        /* Addon Checkbox Styles */
+        .addon-card { display: flex; align-items: center; justify-content: space-between; background: var(--surface2); border: 1px solid rgba(255,255,255,0.05); padding: 16px; border-radius: 16px; cursor: pointer; transition: all 0.3s ease; margin-bottom: 12px; }
+        .addon-card:hover { background: rgba(255,255,255,0.05); }
+        .addon-card.active { border-color: var(--accent); background: linear-gradient(145deg, rgba(255,215,0,0.05), transparent); }
+        .addon-info { display: flex; align-items: center; gap: 16px; }
+        .addon-img { width: 50px; height: 50px; object-fit: contain; }
+        .addon-text h4 { font-size: 15px; margin: 0 0 4px 0; }
+        .addon-text span { font-size: 13px; color: var(--accent); font-weight: 700; }
+        .addon-checkbox { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .addon-card.active .addon-checkbox { background: var(--accent); border-color: var(--accent); color: #000; }
       `}} />
 
       <div className="container">
@@ -79,8 +119,28 @@ export default function OdemePage() {
           <form onSubmit={handleSubmit}>
             <h2 style={{fontSize: '28px', marginBottom: '32px'}}>Ödeme Bilgileri</h2>
             
+            <div className="checkout-card" style={{marginBottom: '24px'}}>
+              <h3 style={{fontSize: '18px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '8px'}}>
+                <i className="ph-fill ph-plugs-connected" style={{color: 'var(--accent)'}}></i> Eklentiler (İsteğe Bağlı)
+              </h3>
+              <p style={{fontSize: '13px', color: 'var(--text2)', marginBottom: '20px'}}>Ana cihazınıza ek olarak sisteminizi güçlendirecek çevre birimlerini siparişinize dahil edebilirsiniz.</p>
+              
+              {addons.map(addon => (
+                <div key={addon.id} className={`addon-card ${addon.state ? 'active' : ''}`} onClick={() => addon.setter(!addon.state)}>
+                  <div className="addon-info">
+                    <img src={addon.img} alt={addon.name} className="addon-img" />
+                    <div className="addon-text">
+                      <h4>{addon.name}</h4>
+                      <span>+ {addon.price.toLocaleString('tr-TR')}₺</span>
+                    </div>
+                  </div>
+                  <div className="addon-checkbox">
+                    {addon.state && <i className="ph-bold ph-check"></i>}
+                  </div>
+                </div>
+              ))}
+            </div>
 
-            
             <div className="checkout-card">
               <h3 style={{fontSize: '18px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '8px'}}>
                 <i className="ph-fill ph-credit-card" style={{color: 'var(--accent)'}}></i> Kart Bilgileri
@@ -185,17 +245,30 @@ export default function OdemePage() {
               <div style={{display: 'flex', gap: '16px', marginBottom: '24px', paddingBottom: '24px', borderBottom: '1px solid rgba(255,255,255,0.05)'}}>
                 <img src="/assets/images/devices/GREG.png" alt="Preditech Seçim" style={{width: '80px', height: '80px', objectFit: 'contain'}} />
                 <div>
-                  <h4 style={{fontSize: '16px', marginBottom: '4px'}}>Preditech</h4>
+                  <h4 style={{fontSize: '16px', marginBottom: '4px'}}>{baseDevice}</h4>
                   <p style={{fontSize: '12px', color: 'var(--text2)'}}>Erken Erişim Sürümü</p>
                 </div>
               </div>
               
               <div className="summary-item">
-                <span>Ara Toplam</span>
-                <strong>Hesaplanıyor...</strong>
+                <span>Ana Cihaz ({baseDevice})</span>
+                <strong>{basePriceStr}</strong>
               </div>
+              
+              {addons.map(addon => addon.state && (
+                <div className="summary-item" key={'sum-'+addon.id}>
+                  <span>{addon.name}</span>
+                  <strong>{addon.price.toLocaleString('tr-TR')}₺</strong>
+                </div>
+              ))}
+
               <div className="summary-item">
-                <span>Kargo Ücreti</span>
+                <span>1 Yıllık Uygulama Aboneliği</span>
+                <strong style={{color: 'var(--accent)'}}>Hediye</strong>
+              </div>
+
+              <div className="summary-item">
+                <span>Kargo (Haziran 2026)</span>
                 <strong style={{color: '#22c55e'}}>Ücretsiz</strong>
               </div>
               <div className="summary-item">
@@ -205,7 +278,9 @@ export default function OdemePage() {
               
               <div style={{display: 'flex', justifyContent: 'space-between', margin: '24px 0', paddingTop: '24px', borderTop: '1px dashed rgba(255,255,255,0.1)', fontSize: '18px', fontWeight: 700}}>
                 <span>Genel Toplam</span>
-                <span style={{color: 'var(--accent)', fontFamily: 'monospace', fontSize: '24px'}}>Güvenli Ödeme</span>
+                <span style={{color: 'var(--accent)', fontFamily: 'monospace', fontSize: '24px'}}>
+                  {grandTotal === 0 && !isCustom ? 'Ücretsiz' : grandTotal.toLocaleString('tr-TR') + '₺'}
+                </span>
               </div>
               
               <button onClick={handleSubmit} type="button" className="btn btn-primary sporty-btn" style={{width: '100%', justifyContent: 'center', background: 'var(--accent)', color: '#000', fontWeight: 800, padding: '20px', fontSize: '16px'}}>
