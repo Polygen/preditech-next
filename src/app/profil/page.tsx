@@ -11,7 +11,7 @@ export default function Page() {
       <style dangerouslySetInnerHTML={{ __html: `
   body { background: var(--bg); color: var(--text); overflow-x: hidden; }
   
-  .dashboard-wrapper { display: block; }
+  .dashboard-wrapper { display: block; padding-top: 80px; }
   
   /* Sidebar */
   .sidebar { width: 280px; background: var(--surface); border-left: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); padding: 32px 24px; display: flex; flex-direction: column; gap: 8px; }
