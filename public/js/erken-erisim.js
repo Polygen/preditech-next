@@ -9,6 +9,22 @@ const giftContainer = document.getElementById('giftPackageContainer');
 const budgetInput = document.getElementById('customBudgetInput');
 const summaryDevice = document.getElementById('summaryDevice');
 const summaryPrice = document.getElementById('summaryPrice');
+const submitBtn = document.getElementById('submitBtn');
+const preorderForm = document.getElementById('preorderForm');
+
+let currentDevice = 'GO'; // default active
+
+if (preorderForm) {
+  preorderForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (currentDevice === 'WISHLIST') {
+      alert('İstek listenize eklendi! Çıkış yapıldığında size haber vereceğiz.');
+      window.location.href = '/';
+    } else {
+      window.location.href = '/odeme';
+    }
+  });
+}
 
 document.querySelectorAll('.device-card').forEach(card => {
   card.addEventListener('click', () => {
@@ -24,9 +40,13 @@ document.querySelectorAll('.device-card').forEach(card => {
       budgetInput.value = '';
       summaryDevice.innerText = 'Ücretsiz İstek Listesi Kaydı';
       summaryPrice.innerText = 'Ücretsiz';
+      if(submitBtn) submitBtn.innerText = 'İstek Listene Ekle';
+      currentDevice = 'WISHLIST';
     } else if(device === 'CUSTOM') {
       customContainer.style.display = 'block';
       giftContainer.style.display = 'block'; // Always visible for Custom
+      if(submitBtn) submitBtn.innerText = 'Ödeme Sayfasına Geç';
+      currentDevice = 'CUSTOM';
       
       let val = parseInt(budgetInput.value) || 0;
       
@@ -59,6 +79,8 @@ document.querySelectorAll('.device-card').forEach(card => {
       budgetInput.value = '';
       summaryDevice.innerText = 'Preditech ' + device;
       summaryPrice.innerText = price;
+      if(submitBtn) submitBtn.innerText = 'Ödeme Sayfasına Geç';
+      currentDevice = device;
     }
   });
 });

@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ScriptLoader } from "@/components/ScriptLoader";
+import FloatingPreorderBtn from "@/components/FloatingPreorderBtn";
 
 const DASHBOARD_PATHS = ['/filo-profil', '/ekspertiz'];
 
@@ -27,6 +28,7 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
       {children}
       <Footer />
       <ScriptLoader />
+      <FloatingPreorderBtn />
     </>
   );
 }

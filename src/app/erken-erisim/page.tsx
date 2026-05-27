@@ -89,7 +89,7 @@ export default function Page() {
 </div>
 
 <h3 style="font-size:24px;margin-bottom:24px;margin-top:40px">2. Teslimat Bilgileri</h3>
-<form onsubmit="event.preventDefault();alert('Ön sipariş talebiniz alınmıştır!');window.location='index.html'">
+<form id="preorderForm">
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
 <div class="form-group"><label>Ad</label><input type="text" required></div>
 <div class="form-group"><label>Soyad</label><input type="text" required></div>
@@ -97,7 +97,7 @@ export default function Page() {
 <div class="form-group" style="margin-bottom:20px"><label>E-posta</label><input type="email" required></div>
 <div class="form-group" style="margin-bottom:20px"><label>Telefon</label><input type="tel" required></div>
 <div class="form-group" style="margin-bottom:20px"><label>Teslimat Adresi</label><textarea rows="3" required></textarea></div>
-<button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:16px;font-size:16px">Ön Siparişi Tamamla</button>
+<button id="submitBtn" type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:16px;font-size:16px">Ödeme Sayfasına Geç</button>
 </form>
 </div>
 <div class="checkout-summary">
