@@ -1,10 +1,18 @@
-// @ts-nocheck
 'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
+  const router = useRouter();
+  const [showToast, setShowToast] = useState(false);
+
+  const handleJoinWaitlist = () => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
+
   return (
     <>
 
@@ -514,7 +522,7 @@ export default function Page() {
   <h2 style={{ textAlign: 'center', marginBottom: '60px',  }}>Daha Fazlasını İsteyenlere.</h2>
   
   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: '32px',  }}>
-    <div className="extra-device-card" style={{ cursor: 'pointer',  }} onClick={() => { window.location.href='racebox' }}>
+    <div className="extra-device-card" style={{ cursor: 'pointer',  }} onClick={() => { router.push('racebox') }}>
       <img src="/assets/images/devices/preditech racebox.png" alt="Racebox" style={{ objectFit: 'contain',  }} />
       <div className="extra-info">
         <h4><Link href="/racebox" style={{ color: 'inherit', textDecoration: 'none',  }}>RACEBOX</Link> <span className="hub-tag">EKLENTİ</span></h4>
@@ -522,7 +530,7 @@ export default function Page() {
         <div style={{ fontWeight: '700', color: 'var(--text)', marginTop: '8px', fontSize: '16px',  }}>3.500₺</div>
       </div>
     </div>
-    <div className="extra-device-card" style={{ cursor: 'pointer',  }} onClick={() => { window.location.href='sentinel' }}>
+    <div className="extra-device-card" style={{ cursor: 'pointer',  }} onClick={() => { router.push('sentinel') }}>
       <img src="/assets/images/devices/preditech sentinel.png" alt="Sentinel" style={{ objectFit: 'contain',  }} />
       <div className="extra-info">
         <h4><Link href="/sentinel" style={{ color: 'inherit', textDecoration: 'none',  }}>SENTINEL</Link> <span className="hub-tag">EKLENTİ</span></h4>
@@ -530,7 +538,7 @@ export default function Page() {
         <div style={{ fontWeight: '700', color: 'var(--text)', marginTop: '8px', fontSize: '16px',  }}>5.500₺</div>
       </div>
     </div>
-    <div className="extra-device-card" style={{ cursor: 'pointer',  }} onClick={() => { window.location.href='cursor' }}>
+    <div className="extra-device-card" style={{ cursor: 'pointer',  }} onClick={() => { router.push('cursor') }}>
       <img src="/assets/images/devices/preditech cursor.png" alt="Cursor" style={{ objectFit: 'contain',  }} />
       <div className="extra-info">
         <h4><Link href="/cursor" style={{ color: 'inherit', textDecoration: 'none',  }}>CURSOR</Link> <span className="hub-tag">EKLENTİ</span></h4>
@@ -584,12 +592,21 @@ export default function Page() {
       <p style={{ color: 'var(--text2)', marginBottom: '24px', fontSize: '15px',  }}>Şimdi sadece kayıt olun, resmi satışa çıktığımızda %40 özel indirim kuponunuzu e-posta adresinize gönderelim.</p>
       <div className="newsletter-box" style={{ margin: '0',  }}>
         <input type="email" placeholder="E-posta adresiniz" />
-        <button onClick={() => { alert('Bekleme listesine eklendiniz! %40 İndirim kodunuz çıkış tarihinde iletilecektir.') }}>Listeye Katıl</button>
+        <button onClick={handleJoinWaitlist}>Listeye Katıl</button>
       </div>
     </div>
   </div>
 </div>
 </section>
+{showToast && (
+        <div style={{
+          position: 'fixed', bottom: '24px', left: '50%', transform: 'translateX(-50%)',
+          background: 'var(--success)', color: '#000', padding: '12px 24px', borderRadius: '8px',
+          fontWeight: 600, zIndex: 9999, boxShadow: '0 4px 12px rgba(0,255,136,0.3)'
+        }}>
+          Bekleme listesine eklendiniz! %40 İndirim kodunuz çıkış tarihinde iletilecektir.
+        </div>
+      )}
 
 
 

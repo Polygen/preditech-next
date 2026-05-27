@@ -1,10 +1,27 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Footer() {
+  const [showToast, setShowToast] = useState(false);
+
+  const handleSubscribe = () => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
+
   return (
     <footer className="premium-footer">
+      {showToast && (
+        <div style={{
+          position: 'fixed', bottom: '24px', left: '50%', transform: 'translateX(-50%)',
+          background: 'var(--success)', color: '#000', padding: '12px 24px', borderRadius: '8px',
+          fontWeight: 600, zIndex: 9999, boxShadow: '0 4px 12px rgba(0,255,136,0.3)'
+        }}>
+          Aramıza hoş geldiniz!
+        </div>
+      )}
       <div className="container">
         <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(250px,1fr))',gap:'60px',marginBottom:'60px'}}>
           <div>
@@ -49,7 +66,7 @@ export default function Footer() {
             <p style={{color:'var(--text2)',fontSize:'14px',marginBottom:'16px'}}>Gelişmelerden ve erken erişim fırsatlarından anında haberdar olun.</p>
             <div className="newsletter-box">
               <input type="email" placeholder="E-posta adresiniz" />
-              <button onClick={() => { if (typeof window !== 'undefined') alert('Aramıza hoş geldiniz!'); }}>Kayıt Ol</button>
+              <button onClick={handleSubscribe}>Kayıt Ol</button>
             </div>
           </div>
         </div>

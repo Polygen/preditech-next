@@ -1,15 +1,18 @@
-// @ts-nocheck
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useState } from 'next/navigation';
 
 export default function BeklemeListesiPage() {
   const router = useRouter();
+  const [showToast, setShowToast] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Tebrikler! Bekleme listesine ve e-bültene başarıyla katıldınız.');
-    router.push('/');
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+      router.push('/');
+    }, 2000);
   };
 
   return (
@@ -52,6 +55,15 @@ export default function BeklemeListesiPage() {
             </div>
             <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', padding: '16px', fontSize: '16px' }}>Ücretsiz Listeye Katıl</button>
           </form>
+          {showToast && (
+            <div style={{
+              position: 'fixed', bottom: '24px', left: '50%', transform: 'translateX(-50%)',
+              background: 'var(--success)', color: '#000', padding: '12px 24px', borderRadius: '8px',
+              fontWeight: 600, zIndex: 9999, boxShadow: '0 4px 12px rgba(0,255,136,0.3)'
+            }}>
+              Tebrikler! Bekleme listesine başarıyla katıldınız.
+            </div>
+          )}
         </div>
       </section>
     </>

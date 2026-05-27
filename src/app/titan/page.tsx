@@ -1,10 +1,12 @@
-// @ts-nocheck
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function TitanPage() {
+  const router = useRouter();
+  const [showToast, setShowToast] = useState(false);
   const buyBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -17,6 +19,11 @@ export default function TitanPage() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleJoinWaitlist = () => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
 
   return (
     <>
@@ -66,14 +73,14 @@ export default function TitanPage() {
           <h2 style={{textAlign:'center',marginBottom:'60px'}}>Tam Güvenlik ve Kontrol.</h2>
 
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(350px,1fr))',gap:'32px'}}>
-            <div className="extra-device-card" style={{cursor:'pointer'}} onClick={() => { if (typeof window !== 'undefined') window.location.href = '/gate'; }}>
+            <div className="extra-device-card" style={{cursor:'pointer'}} onClick={() => { if (typeof window !== 'undefined') router.push('/gate'); }}>
               <img src="/assets/images/devices/preditech gate.png" alt="Gate" style={{objectFit:'contain',height:'200px'}} />
               <div className="extra-info">
                 <h4><Link href="/gate" style={{color:'inherit',textDecoration:'none'}}>GATE</Link> <span className="hub-tag">EKLENTİ</span></h4>
                 <p>Lojistik araçları için kapı ve dorse sensörü.</p>
               </div>
             </div>
-            <div className="extra-device-card" style={{cursor:'pointer'}} onClick={() => { if (typeof window !== 'undefined') window.location.href = '/signal'; }}>
+            <div className="extra-device-card" style={{cursor:'pointer'}} onClick={() => { if (typeof window !== 'undefined') router.push('/signal'); }}>
               <img src="/assets/images/devices/preditech signal.png" alt="Signal" style={{objectFit:'contain',height:'200px'}} />
               <div className="extra-info">
                 <h4><Link href="/signal" style={{color:'inherit',textDecoration:'none'}}>SIGNAL</Link> <span className="hub-tag">EKLENTİ</span></h4>
@@ -118,12 +125,21 @@ export default function TitanPage() {
               <p style={{color:'var(--text2)', marginBottom:'24px', fontSize:'15px'}}>Şimdi sadece kayıt olun, resmi satışa çıktığımızda %40 özel indirim kuponunuzu e-posta adresinize gönderelim.</p>
               <div className="newsletter-box" style={{margin:0}}>
                 <input type="email" placeholder="E-posta adresiniz" />
-                <button onClick={() => alert('Bekleme listesine eklendiniz! %40 İndirim kodunuz çıkış tarihinde iletilecektir.')}>Listeye Katıl</button>
+                <button onClick={handleJoinWaitlist}>Listeye Katıl</button>
               </div>
             </div>
           </div>
         </div>
       </section>
+      {showToast && (
+        <div style={{
+          position: 'fixed', bottom: '24px', left: '50%', transform: 'translateX(-50%)',
+          background: 'var(--success)', color: '#000', padding: '12px 24px', borderRadius: '8px',
+          fontWeight: 600, zIndex: 9999, boxShadow: '0 4px 12px rgba(0,255,136,0.3)'
+        }}>
+          Bekleme listesine eklendiniz! %40 İndirim kodunuz çıkış tarihinde iletilecektir.
+        </div>
+      )}
     </>
   );
 }

@@ -1,10 +1,16 @@
-// @ts-nocheck
 'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Page() {
+  const [showToast, setShowToast] = useState(false);
+
+  const handleJoinWaitlist = () => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
+
   return (
     <>
 
@@ -85,12 +91,21 @@ export default function Page() {
       <p style={{ color: 'var(--text2)', marginBottom: '24px', fontSize: '15px',  }}>Şimdi sadece kayıt olun, resmi satışa çıktığımızda %40 özel indirim kuponunuzu e-posta adresinize gönderelim.</p>
       <div className="newsletter-box" style={{ margin: '0',  }}>
         <input type="email" placeholder="E-posta adresiniz" />
-        <button onClick={() => { alert('Bekleme listesine eklendiniz! %40 İndirim kodunuz çıkış tarihinde iletilecektir.') }}>Listeye Katıl</button>
+        <button onClick={handleJoinWaitlist}>Listeye Katıl</button>
       </div>
     </div>
   </div>
 </div>
 </section>
+{showToast && (
+        <div style={{
+          position: 'fixed', bottom: '24px', left: '50%', transform: 'translateX(-50%)',
+          background: 'var(--success)', color: '#000', padding: '12px 24px', borderRadius: '8px',
+          fontWeight: 600, zIndex: 9999, boxShadow: '0 4px 12px rgba(0,255,136,0.3)'
+        }}>
+          Bekleme listesine eklendiniz! %40 İndirim kodunuz çıkış tarihinde iletilecektir.
+        </div>
+      )}
 
 
 

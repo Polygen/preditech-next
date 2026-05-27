@@ -1,10 +1,11 @@
-// @ts-nocheck
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function HomePage() {
+  const router = useRouter();
   const [, setMessageCount] = useState(0);
   const chatBodyRef = useRef<HTMLDivElement>(null);
   const chatInputRef = useRef<HTMLInputElement>(null);
@@ -298,14 +299,14 @@ export default function HomePage() {
             <div className="hero-visual">
               <div style={{position:'relative',display:'flex',alignItems:'center',justifyContent:'center',height:'600px',width:'100%'}}>
                 <div className="device-deck">
-                  <img src="/assets/images/devices/FB.png" alt="Preditech GO" className="dev-go hero-interactive" onClick={() => window.location.href='/go'} data-title="Maliyeti Düşürün, Kontrolü Artırın." data-desc="GO ile standart bir sürüşü akıllı ve tasarruflu bir deneyime dönüştürün." />
-                  <img src="/assets/images/devices/GREG.png" alt="Preditech PRO" className="dev-pro hero-interactive" onClick={() => window.location.href='/pro'} data-title="Geleceği Bugünden Yakalayın." data-desc="PRO ile profesyonel seviyede araç analitiği ve detaylı performans verileri elinizin altında." />
-                  <img src="/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png" alt="Preditech GT" className="dev-gt hero-interactive" onClick={() => window.location.href='/gt'} data-title="Pistlerin Yeni Hakimi." data-desc="Saniyenin onda biri fark yaratır. GT ile sınırları zorlayın ve aracınızın maksimum potansiyeline ulaşın." />
+                  <img src="/assets/images/devices/FB.png" alt="Preditech GO" className="dev-go hero-interactive" onClick={() => router.push('/go')} data-title="Maliyeti Düşürün, Kontrolü Artırın." data-desc="GO ile standart bir sürüşü akıllı ve tasarruflu bir deneyime dönüştürün." />
+                  <img src="/assets/images/devices/GREG.png" alt="Preditech PRO" className="dev-pro hero-interactive" onClick={() => router.push('/pro')} data-title="Geleceği Bugünden Yakalayın." data-desc="PRO ile profesyonel seviyede araç analitiği ve detaylı performans verileri elinizin altında." />
+                  <img src="/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png" alt="Preditech GT" className="dev-gt hero-interactive" onClick={() => router.push('/gt')} data-title="Pistlerin Yeni Hakimi." data-desc="Saniyenin onda biri fark yaratır. GT ile sınırları zorlayın ve aracınızın maksimum potansiyeline ulaşın." />
                 </div>
                 <div className="phone-deck">
-                  <img src="/assets/images/app/ana ekran.png" alt="Preditech App - Ana Ekran" className="phone-1 hero-interactive" onClick={() => window.location.href='/app'} data-title="Predicto AI Cebinizde." data-desc="Yapay zeka asistanı Predicto ile tüm veriler elinizin altında." />
-                  <img src="/assets/images/app/pist yaris oncesi.png" alt="Preditech App - Pist" className="phone-2 hero-interactive" onClick={() => window.location.href='/app'} data-title="Predicto AI Cebinizde." data-desc="Yapay zeka asistanı Predicto ile tüm veriler elinizin altında." />
-                  <img src="/assets/images/app/harita.png" alt="Preditech App - Harita" className="phone-3 hero-interactive" onClick={() => window.location.href='/app'} data-title="Predicto AI Cebinizde." data-desc="Yapay zeka asistanı Predicto ile tüm veriler elinizin altında." />
+                  <img src="/assets/images/app/ana ekran.png" alt="Preditech App - Ana Ekran" className="phone-1 hero-interactive" onClick={() => router.push('/app')} data-title="Predicto AI Cebinizde." data-desc="Yapay zeka asistanı Predicto ile tüm veriler elinizin altında." />
+                  <img src="/assets/images/app/pist yaris oncesi.png" alt="Preditech App - Pist" className="phone-2 hero-interactive" onClick={() => router.push('/app')} data-title="Predicto AI Cebinizde." data-desc="Yapay zeka asistanı Predicto ile tüm veriler elinizin altında." />
+                  <img src="/assets/images/app/harita.png" alt="Preditech App - Harita" className="phone-3 hero-interactive" onClick={() => router.push('/app')} data-title="Predicto AI Cebinizde." data-desc="Yapay zeka asistanı Predicto ile tüm veriler elinizin altında." />
                 </div>
               </div>
             </div>
@@ -555,7 +556,7 @@ export default function HomePage() {
                 { quote: '"Özellikle uzun yola çıkmadan önce Preditech\'in risk haritasını kontrol etmek büyük bir lüks. Geçen ay potansiyel bir triger kayışı sıkıntısını yola çıkmadan 2 gün önce tespit edip kurtardı bizi."', initials: 'SK', name: 'Selin K.', role: 'Ford Kuga Kullanıcısı' },
               ];
               const cards: React.ReactNode[] = [];
-              for (let cycle = 0; cycle < 5; cycle++) {
+              for (let cycle = 0; cycle < 2; cycle++) {
                 testimonials.forEach((t, i) => {
                   cards.push(
                     <div className="testimonial-card" key={`${cycle}-${i}`}>
@@ -596,7 +597,7 @@ export default function HomePage() {
           </div>
 
           <div className="news-grid">
-            <div className="news-card" onClick={() => window.location.href='/haber-1'} style={{cursor:'pointer'}}>
+            <div className="news-card" onClick={() => router.push('/haber-1')} style={{cursor:'pointer'}}>
               <img src="/assets/images/general/predB.png" className="news-img" alt="Haber 1" />
               <div className="news-content">
                 <span className="news-date">21 Mayıs 2026</span>
@@ -604,7 +605,7 @@ export default function HomePage() {
                 <p className="news-excerpt">Ar-Ge süreçlerimizi hızlandıracak olan yatırım...</p>
               </div>
             </div>
-            <div className="news-card" onClick={() => window.location.href='/haber-2'} style={{cursor:'pointer'}}>
+            <div className="news-card" onClick={() => router.push('/haber-2')} style={{cursor:'pointer'}}>
               <img src="/greg.png" className="news-img" alt="Haber 2" />
               <div className="news-content">
                 <span className="news-date">10 Nisan 2026</span>

@@ -1,12 +1,13 @@
-// @ts-nocheck
+
 'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
+  const router = useRouter();
   return (
-    <>
 
 
 <div className="container">
@@ -105,7 +106,7 @@ export default function Page() {
           <span style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: '24px',  }}>12.500₺</span>
         </div>
         
-        <button type="button" onClick={() => { window.location.href='siparis-takip' }} className="btn btn-primary sporty-btn" style={{ width: '100%', justifyContent: 'center', background: 'var(--accent)', color: '#000', fontWeight: '800', padding: '20px', fontSize: '16px',  }}>GÜVENLİ ÖDEME YAP</button>
+        <button type="button" onClick={() => { router.push('/siparis-takip') }} className="btn btn-primary sporty-btn" style={{ width: '100%', justifyContent: 'center', background: 'var(--accent)', color: '#000', fontWeight: '800', padding: '20px', fontSize: '16px',  }}>GÜVENLİ ÖDEME YAP</button>
         <p style={{ textAlign: 'center', marginTop: '16px', fontSize: '12px', color: 'var(--text2)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px',  }}>
           <i className="ph-fill ph-lock-key"></i> 256-bit SSL ile güvendesiniz.
         </p>

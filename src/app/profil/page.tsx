@@ -1,10 +1,21 @@
-// @ts-nocheck
+
 'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
+  const router = useRouter();
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
+  const showToastMessage = (msg: string) => {
+    setToastMessage(msg);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
+
   useEffect(() => {
 
   function switchTab(tabId, element) {
@@ -1024,7 +1035,7 @@ export default function Page() {
           <h2 className="section-title">Siparişlerim</h2>
           <p className="section-desc">Geçmiş satın alımlarınız</p>
         </div>
-        <div className="panel-card clickable-card" onClick={() => { window.location.href='siparis-takip' }} style={{ padding: '24px',  }}>
+        <div className="panel-card clickable-card" onClick={() => { router.push('/siparis-takip') }} style={{ padding: '24px',  }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center',  }}>
             <div style={{ display: 'flex', gap: '24px', alignItems: 'center',  }}>
               <img src="/assets/images/devices/GREG.png" style={{ width: '60px',  }} alt="PRO" />
@@ -1157,7 +1168,7 @@ export default function Page() {
         <i className="ph-bold ph-caret-right"></i>
       </button>
       
-      <button className="action-btn btn-red" style={{ width: '100%', textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px',  }} onClick={() => { alert('Cihaz kilitlendi ve konum bilgisi emniyete aktarıldı.') }}>
+      <button className="action-btn btn-red" style={{ width: '100%', textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px',  }} onClick={() => { showToastMessage('Cihaz kilitlendi ve konum bilgisi emniyete aktarıldı.') }}>
         <span><i className="ph-bold ph-warning" style={{ marginRight: '8px',  }}></i> Kayıp Bildir</span>
         <i className="ph-bold ph-lock-key"></i>
       </button>
@@ -1191,13 +1202,20 @@ export default function Page() {
     
     <div style={{ display: 'flex', gap: '16px',  }}>
       <button className="action-btn" style={{ flex: '1', background: 'var(--accent)', color: '#000', border: 'none',  }} onClick={() => { closeModal('cancel-sub-modal') }}>Vazgeç & İndirimi Al</button>
-      <button className="action-btn" style={{ flex: '1', background: 'transparent', border: '1px solid rgba(255,68,68,0.3)', color: '#FF4444',  }} onClick={() => { closeModal('cancel-sub-modal'); alert('Aboneliğiniz iptal edildi.'); }}>Yine de İptal Et</button>
+      <button className="action-btn" style={{ flex: '1', background: 'transparent', border: '1px solid rgba(255,68,68,0.3)', color: '#FF4444',  }} onClick={() => { closeModal('cancel-sub-modal'); showToastMessage('Aboneliğiniz iptal edildi.'); }}>Yine de İptal Et</button>
     </div>
   </div>
 </div>
 
-<script src="script.js"></script>
-
+{showToast && (
+        <div style={{
+          position: 'fixed', bottom: '24px', left: '50%', transform: 'translateX(-50%)',
+          background: 'var(--success)', color: '#000', padding: '12px 24px', borderRadius: '8px',
+          fontWeight: 600, zIndex: 9999, boxShadow: '0 4px 12px rgba(0,255,136,0.3)'
+        }}>
+          {toastMessage}
+        </div>
+      )}
 
     </>
   );

@@ -1,9 +1,13 @@
-// @ts-nocheck
 'use client';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+
+interface LoginFormElements {
+  email: HTMLInputElement;
+  pass: HTMLInputElement;
+}
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,15 +15,19 @@ export default function LoginPage() {
   const [pass, setPass] = useState('');
   const [errorVisible, setErrorVisible] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (email === 'a@a.com' && pass === 'a123') {
+    const form = e.currentTarget;
+    const emailValue = (form.elements.namedItem('email') as HTMLInputElement)?.value;
+    const passValue = (form.elements.namedItem('pass') as HTMLInputElement)?.value;
+
+    if (emailValue === 'a@a.com' && passValue === 'a123') {
       localStorage.setItem('preditech_isLoggedIn', 'true');
       router.push('/profil');
-    } else if (email === 'y@y.com' && pass === 'y123') {
+    } else if (emailValue === 'y@y.com' && passValue === 'y123') {
       localStorage.setItem('preditech_isLoggedIn', 'filo');
       router.push('/filo-profil');
-    } else if (email === 'x@x.com' && pass === 'x123') {
+    } else if (emailValue === 'x@x.com' && passValue === 'x123') {
       localStorage.setItem('preditech_isLoggedIn', 'true');
       router.push('/ekspertiz');
     } else {
@@ -66,6 +74,7 @@ export default function LoginPage() {
               <label style={{ display: 'block', marginBottom: '8px', fontSize: '12px', color: 'var(--text2)' }}>E-posta</label>
               <input
                 type="email"
+                name="email"
                 className="sporty-input"
                 style={{ width: '100%', boxSizing: 'border-box' }}
                 placeholder="ornek@email.com"
@@ -78,6 +87,7 @@ export default function LoginPage() {
               <label style={{ display: 'block', marginBottom: '8px', fontSize: '12px', color: 'var(--text2)' }}>Şifre</label>
               <input
                 type="password"
+                name="pass"
                 className="sporty-input"
                 style={{ width: '100%', boxSizing: 'border-box' }}
                 placeholder="••••••••"

@@ -2,9 +2,10 @@
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function Navbar() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(true);
   const [authState, setAuthState] = useState<string | null>(null);
@@ -135,7 +136,7 @@ export default function Navbar() {
   const renderAuth = () => {
     if (authState === 'filo') {
       return (
-        <div className="nav-profile" style={{display:'flex',alignItems:'center',gap:'12px',borderLeft:'1px solid rgba(255,255,255,0.1)',paddingLeft:'16px',cursor:'pointer'}} onClick={() => window.location.href='/filo-profil'}>
+        <div className="nav-profile" style={{display:'flex',alignItems:'center',gap:'12px',borderLeft:'1px solid rgba(255,255,255,0.1)',paddingLeft:'16px',cursor:'pointer'}} onClick={() => router.push('/filo-profil')}>
           <div style={{textAlign:'right',display:'flex',flexDirection:'column'}} className="profile-text">
             <span style={{fontSize:'13px',fontWeight:700,color:'#fff',lineHeight:1.2}}>Ahmet Y.</span>
             <span style={{fontSize:'10px',fontWeight:800,color:'var(--accent)',letterSpacing:'0.5px'}}>FİLO YÖNETİCİSİ</span>
@@ -147,7 +148,7 @@ export default function Navbar() {
       );
     } else if (authState === 'true') {
       return (
-        <div className="nav-profile" style={{display:'flex',alignItems:'center',gap:'12px',borderLeft:'1px solid rgba(255,255,255,0.1)',paddingLeft:'16px',cursor:'pointer'}} onClick={() => window.location.href='/profil'}>
+        <div className="nav-profile" style={{display:'flex',alignItems:'center',gap:'12px',borderLeft:'1px solid rgba(255,255,255,0.1)',paddingLeft:'16px',cursor:'pointer'}} onClick={() => router.push('/profil')}>
           <div style={{textAlign:'right',display:'flex',flexDirection:'column'}} className="profile-text">
             <span style={{fontSize:'13px',fontWeight:700,color:'#fff',lineHeight:1.2}}>Noyan S.</span>
             <span style={{fontSize:'10px',fontWeight:800,color:'var(--accent)',letterSpacing:'0.5px'}}>PRO ÜYE</span>

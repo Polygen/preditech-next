@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client';
 
 import { useState } from 'react';
@@ -73,9 +72,18 @@ export default function ErkenErisimPage() {
     }
   };
 
+  const [toastMessage, setToastMessage] = useState('');
+  const [showToast, setShowToast] = useState(false);
+
+  const showToastMessage = (msg: string) => {
+    setToastMessage(msg);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
+
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Ön sipariş talebiniz alınmıştır!');
+    showToastMessage('Ön sipariş talebiniz alınmıştır!');
     router.push('/');
   };
 
@@ -199,6 +207,16 @@ export default function ErkenErisimPage() {
           </div>
         </div>
       </section>
+    {/* Toast notification */}
+      {showToast && (
+        <div style={{
+          position: 'fixed', bottom: '24px', left: '50%', transform: 'translateX(-50%)',
+          background: 'var(--success)', color: '#000', padding: '12px 24px', borderRadius: '8px',
+          fontWeight: 600, zIndex: 9999, boxShadow: '0 4px 12px rgba(0,255,136,0.3)'
+        }}>
+          {toastMessage}
+        </div>
+      )}
     </>
   );
 }
