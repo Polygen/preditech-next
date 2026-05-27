@@ -1,4 +1,5 @@
 window.initgatejs = function() {
+{
 
 window.addEventListener('scroll', () => {
   const bar = document.getElementById('buyBar');
@@ -6,4 +7,5 @@ window.addEventListener('scroll', () => {
   else bar.classList.remove('visible');
 });
 
+}
 };

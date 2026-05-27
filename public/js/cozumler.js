@@ -1,4 +1,5 @@
 window.initcozumlerjs = function() {
+{
 
 const solutions = [
   {
@@ -717,4 +718,5 @@ window.addEventListener('scroll', () => {
   }
 });
 
+}
 };

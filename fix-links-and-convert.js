@@ -28,7 +28,7 @@ const filesToConvert = [
   'iletisim', 'cozumler', 'cihazlar', 'filo', 'destek', 'doc', 
   'haberler', 'haber-1', 'haber-2', 'haber-3', 'karsilastir', 'app',
   'go', 'gt', 'pro', 'titan', 'haul', 'watchdog', 'cursor', 'gate', 'racebox', 'sentinel', 'signal',
-  'odeme', 'siparis-takip', 'login', 'register', 'bekleme-listesi', 'erken-erisim', 'erken-erisim-kurumsal', 'kurumsal-satis', 'profil'
+  'odeme', 'siparis-takip', 'login', 'register', 'bekleme-listesi', 'erken-erisim', 'erken-erisim-kurumsal', 'kurumsal-satis', 'profil', 'teknoloji', 'filo-profil', 'ekspertiz'
 ];
 
 function processHtml(sourceHtml, targetTsx, jsName) {
@@ -46,14 +46,17 @@ function processHtml(sourceHtml, targetTsx, jsName) {
   if (!fs.existsSync(jsDir)) fs.mkdirSync(jsDir, { recursive: true });
   const jsPath = path.join(jsDir, jsName);
   
-  let finalJs = allScripts.join('\n\n')
+  let processedScripts = allScripts.map(s => {
+    if (s.includes('DOMContentLoaded')) {
+      s = s.replace(/document\.addEventListener\('DOMContentLoaded',\s*\(\)\s*=>\s*\{/g, '');
+      s = s.replace(/\}\);\s*$/g, '');
+    }
+    return '{\n' + s + '\n}';
+  });
+  
+  let finalJs = processedScripts.join('\n\n')
     .replace(/['"]assets\//g, "'/assets/")
     .replace(/url\(['"]?assets\//g, "url('/assets/");
-    
-  if (finalJs.includes('DOMContentLoaded')) {
-    finalJs = finalJs.replace(/document\.addEventListener\('DOMContentLoaded',\s*\(\)\s*=>\s*\{/g, '');
-    finalJs = finalJs.replace(/\}\);\s*$/g, '');
-  }
   
   let safeName = jsName.replace(/[^a-zA-Z0-9]/g, '');
   finalJs = 'window.init' + safeName + ' = function() {\n' + finalJs + '\n};\n';
@@ -88,8 +91,15 @@ function processHtml(sourceHtml, targetTsx, jsName) {
 'use client';
 
 import Script from 'next/script';
+import { useEffect } from 'react';
 
 export default function Page() {
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window['init' + '${safeName}']) {
+      window['init' + '${safeName}']();
+    }
+  }, []);
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: \`${combinedStyles}\` }} />

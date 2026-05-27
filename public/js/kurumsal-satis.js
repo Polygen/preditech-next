@@ -1,4 +1,5 @@
 window.initkurumsalsatisjs = function() {
+{
 
 // Get device from URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -37,4 +38,5 @@ input.addEventListener('input', (e) => {
 // Initial trigger
 input.dispatchEvent(new Event('input'));
 
+}
 };

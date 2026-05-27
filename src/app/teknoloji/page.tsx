@@ -2,8 +2,15 @@
 'use client';
 
 import Script from 'next/script';
+import { useEffect } from 'react';
 
 export default function Page() {
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window['init' + 'teknolojijs']) {
+      window['init' + 'teknolojijs']();
+    }
+  }, []);
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: `
@@ -22,55 +29,7 @@ export default function Page() {
       <div dangerouslySetInnerHTML={{ __html: `
 
 <!-- NAVBAR -->
-<nav class="navbar scrolled">
-<div class="container">
-<a href="/" class="logo"><img src="/assets/images/general/preditechlogo.png" alt="Preditech" style="height:22px; object-fit:contain;"></a>
-<ul class="nav-links">
-<li class="dropdown">
-  <a href="#" class="nav-cihazlar">Cihazlar <i class="ph ph-caret-down"></i></a>
-  <ul class="dropdown-menu mega-menu">
-    <div class="mega-col">
-      <h4>Bireysel Kullanıcılar</h4>
-      <li><a href="/go">Preditech GO</a></li>
-      <li><a href="/pro">Preditech PRO</a></li>
-      <li><a href="/gt">Preditech GT</a></li>
-    </div>
-    <div class="mega-col">
-      <h4>Kurumsal Kullanıcılar</h4>
-      <li><a href="/watchdog">Watchdog (Filo)</a></li>
-      <li><a href="/titan">Titan (Tır)</a></li>
-      <li><a href="/haul">Haul (İş Makinesi)</a></li>
-      <li><a href="/doc">Doc</a></li>
-      <li><a href="/ekspertiz">Xper (Ekspertiz)</a></li>
-    </div>
-    <div class="mega-col">
-      <h4>Yardımcı Cihazlar</h4>
-      <li><a href="/sentinel">Sentinel</a></li>
-      <li><a href="/racebox">Racebox</a></li>
-      <li><a href="/cursor">Cursor</a></li>
-      <li><a href="/gate">Gate</a></li>
-      <li><a href="/signal">Signal</a></li>
-    </div>
-  </ul>
-</li>
-<li><a href="/cozumler" class="nav-cozumler">Çözümler</a></li>
-<li class="dropdown">
-  <a href="#" class="nav-teknoloji">Teknoloji <i class="ph ph-caret-down"></i></a>
-  <ul class="dropdown-menu">
-    <li><a href="/teknoloji">Hibrit Veri Füzyonu</a></li>
-    <li><a href="/app">Predicto AI & App</a></li>
-  </ul>
-</li>
-<li><a href="/haberler" class="nav-haberler">Haberler</a></li>
-<li><a href="/destek" class="nav-destek">Destek</a></li>
-<li><a href="/iletisim" class="nav-hakkimizda">Hakkımızda</a></li>
-</ul>
-<div style="display:flex; align-items:center; gap:16px;" id="nav-auth-container">
-  <!-- Auth JS renders here -->
-</div>
-<button class="mobile-menu-btn" aria-label="Menü"><i class="ph ph-list" style="font-size:24px"></i></button>
-</div>
-</nav>
+
 
 <div class="page-header" style="padding-top:120px;padding-bottom:40px">
 <div class="particles"></div>
@@ -590,67 +549,12 @@ export default function Page() {
 </section>
 
 <!-- FOOTER -->
-<footer class="premium-footer">
-<div class="container">
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:60px;margin-bottom:60px">
-    <div>
-      <img src="/assets/images/general/preditechlogo.png" alt="Preditech" style="height:28px;margin-bottom:24px">
-      <p style="color:var(--text2);font-size:15px;line-height:1.6">Kestirimci bakımın geleceği. Yapay zeka ve donanımın gücüyle araçlarınızın arızalarını haftalar öncesinden hissedin.</p>
-            <div style="margin: 24px 0 16px 0;">
-        <img src="/assets/images/general/acc-ing-26.png" alt="İTÜ Çekirdek Acceleration Startup" style="height:auto; max-height:40px; max-width:100%;">
-        <div style="font-size: 10px; color: var(--text2); letter-spacing: 1px; margin-top: 8px; font-weight: 700;">● İTÜ ÇEKİRDEK ACCELERATION STARTUP</div>
-      </div>
-      <div class="social-icons">
-        <a href="https://instagram.com/preditech" target="_blank" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
-        <a href="https://linkedin.com/company/preditech" target="_blank" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-        <a href="https://youtube.com/@preditech" target="_blank" aria-label="YouTube"><i class="ph ph-youtube-logo"></i></a>
-        <a href="https://tiktok.com/@preditech" target="_blank" aria-label="TikTok"><i class="ph ph-tiktok-logo"></i></a>
-        <a href="https://x.com/preditech" target="_blank" aria-label="X (Twitter)"><i class="ph ph-x-logo"></i></a>
-      </div>
-    </div>
-    
-    <div>
-      <h3>Cihazlar</h3>
-      <ul class="footer-links-premium">
-        <li><a href="/go">Preditech GO</a></li>
-        <li><a href="/pro">Preditech PRO</a></li>
-        <li><a href="/gt">Preditech GT</a></li>
-        <li><a href="/doc">Preditech DOC</a></li>
-        <li><a href="/watchdog">Watchdog (Filo)</a></li>
-        <li><a href="/titan">Titan (Tır)</a></li>
-      </ul>
-    </div>
 
-    <div>
-      <h3>Şirket</h3>
-      <ul class="footer-links-premium">
-        <li><a href="/iletisim">Hakkımızda</a></li>
-        <li><a href="/cozumler">Çözümler</a></li>
-        <li><a href="/haberler">Haberler</a></li>
-        <li><a href="/destek">Destek Merkezi</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <h3>Bültene Katılın</h3>
-      <p style="color:var(--text2);font-size:14px;margin-bottom:16px">Gelişmelerden ve erken erişim fırsatlarından anında haberdar olun.</p>
-      <div class="newsletter-box">
-        <input type="email" placeholder="E-posta adresiniz">
-        <button onclick="alert('Aramıza hoş geldiniz!')">Kayıt Ol</button>
-      </div>
-    </div>
-  </div>
-  
-  <div style="border-top:1px solid rgba(255,215,0,0.1);padding:24px 0;text-align:center;color:var(--text2);font-size:14px">
-    © 2026 Preditech. Tüm hakları saklıdır.
-  </div>
-</div>
-</footer>
 
 
 ` }} />
       
-      <Script src="/js/teknoloji.js" strategy="lazyOnload" onLoad={() => { if(window.initTeknoloji) window.initTeknoloji(); }} />
+      <Script src="/js/teknoloji.js" strategy="lazyOnload" onLoad={() => { if(window['init' + 'teknolojijs']) window['init' + 'teknolojijs'](); }} />
     </>
   );
 }

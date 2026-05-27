@@ -1,4 +1,5 @@
 window.initerkenerisimkurumsaljs = function() {
+{
 
 // Device Selection Logic
 const customContainer = document.getElementById('customBudgetContainer');
@@ -102,4 +103,5 @@ budgetInput.addEventListener('input', (e) => {
     summaryDevice.innerText = 'Özel Destek';
   }
 
+}
 };

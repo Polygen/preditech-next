@@ -1,4 +1,5 @@
 window.inithaber3js = function() {
+{
 
 // Simulator Logic
 document.getElementById('simForm')?.addEventListener('submit', function(e) {
@@ -35,4 +36,5 @@ document.getElementById('simForm')?.addEventListener('submit', function(e) {
   }, 3500);
 });
 
+}
 };

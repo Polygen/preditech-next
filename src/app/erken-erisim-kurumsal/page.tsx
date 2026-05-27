@@ -2,8 +2,15 @@
 'use client';
 
 import Script from 'next/script';
+import { useEffect } from 'react';
 
 export default function Page() {
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window['init' + 'erkenerisimkurumsaljs']) {
+      window['init' + 'erkenerisimkurumsaljs']();
+    }
+  }, []);
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: `` }} />

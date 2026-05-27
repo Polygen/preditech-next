@@ -1,4 +1,5 @@
 window.initerkenerisimjs = function() {
+{
 
 // Device Selection Logic
 const customContainer = document.getElementById('customBudgetContainer');
@@ -87,4 +88,5 @@ budgetInput.addEventListener('input', (e) => {
   }
 });
 
+}
 };

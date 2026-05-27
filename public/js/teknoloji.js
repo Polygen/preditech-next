@@ -1,4 +1,5 @@
-window.initTeknoloji = function() {
+window.initteknolojijs = function() {
+{
 
 
 
@@ -529,9 +530,10 @@ function render() {
 
 requestAnimationFrame(render);
 
-});
 
+}
 
+{
 
 // Cinematic Animation Sequence
 const visuals = document.getElementById('cineVisuals');
@@ -695,4 +697,5 @@ function runSequence() {
 
 setTimeout(runSequence, 500);
 
+}
 };
