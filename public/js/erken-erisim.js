@@ -1,4 +1,6 @@
 window.initerkenerisimjs = function() {
+  if(window["initDoneerkenerisimjs"]) return;
+  window["initDoneerkenerisimjs"] = true;
 {
 
 // Device Selection Logic

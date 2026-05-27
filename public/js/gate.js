@@ -1,4 +1,6 @@
 window.initgatejs = function() {
+  if(window["initDonegatejs"]) return;
+  window["initDonegatejs"] = true;
 {
 
 window.addEventListener('scroll', () => {

@@ -1,4 +1,6 @@
 window.initerkenerisimkurumsaljs = function() {
+  if(window["initDoneerkenerisimkurumsaljs"]) return;
+  window["initDoneerkenerisimkurumsaljs"] = true;
 {
 
 // Device Selection Logic

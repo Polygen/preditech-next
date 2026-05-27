@@ -1,4 +1,6 @@
 window.initraceboxjs = function() {
+  if(window["initDoneraceboxjs"]) return;
+  window["initDoneraceboxjs"] = true;
 {
 
 window.addEventListener('scroll', () => {

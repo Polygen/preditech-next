@@ -1,4 +1,6 @@
 window.initkurumsalsatisjs = function() {
+  if(window["initDonekurumsalsatisjs"]) return;
+  window["initDonekurumsalsatisjs"] = true;
 {
 
 // Get device from URL

@@ -5,11 +5,6 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 
 export default function Page() {
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window['init' + 'ekspertizjs']) {
-      window['init' + 'ekspertizjs']();
-    }
-  }, []);
 
   return (
     <>
@@ -581,7 +576,7 @@ export default function Page() {
 
 ` }} />
       
-      <Script src="/js/ekspertiz.js" strategy="lazyOnload" onLoad={() => { if(window['init' + 'ekspertizjs']) window['init' + 'ekspertizjs'](); }} />
+      <Script src="/js/ekspertiz.js" strategy="lazyOnload" />
     </>
   );
 }

@@ -1,4 +1,6 @@
 window.initteknolojijs = function() {
+  if(window["initDoneteknolojijs"]) return;
+  window["initDoneteknolojijs"] = true;
 {
 
 

@@ -1,4 +1,6 @@
 window.initsentineljs = function() {
+  if(window["initDonesentineljs"]) return;
+  window["initDonesentineljs"] = true;
 {
 
 window.addEventListener('scroll', () => {

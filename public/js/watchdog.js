@@ -1,4 +1,6 @@
 window.initwatchdogjs = function() {
+  if(window["initDonewatchdogjs"]) return;
+  window["initDonewatchdogjs"] = true;
 {
 
 window.addEventListener('scroll', () => {

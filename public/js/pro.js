@@ -1,4 +1,6 @@
 window.initprojs = function() {
+  if(window["initDoneprojs"]) return;
+  window["initDoneprojs"] = true;
 {
 
 window.addEventListener('scroll', () => {

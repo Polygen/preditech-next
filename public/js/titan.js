@@ -1,4 +1,6 @@
 window.inittitanjs = function() {
+  if(window["initDonetitanjs"]) return;
+  window["initDonetitanjs"] = true;
 {
 
 window.addEventListener('scroll', () => {

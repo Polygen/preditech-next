@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export function ScriptLoader() {
+  const pathname = usePathname();
   useEffect(() => {
     // Interactive Background Effect (mouse position CSS variables)
     const handleMouseMove = (e: MouseEvent) => {
@@ -169,6 +171,54 @@ export function ScriptLoader() {
     };
     if (buyBar) window.addEventListener('scroll', handleBuyBarScroll);
 
+    // Pipeline Container Animation
+    const pipelines = document.querySelectorAll('.pipeline-container');
+    const handlePipelineScroll = () => {
+      pipelines.forEach(pipeline => {
+        // Find closest parent section or use pipeline itself as reference
+        const section = pipeline.closest('section') || pipeline.parentElement || pipeline;
+        const progress = pipeline.querySelector('.pipeline-progress') as HTMLElement;
+        const dot = pipeline.querySelector('.pipeline-dot') as HTMLElement;
+        const cards = pipeline.querySelectorAll('.step-card');
+        
+        if (!progress || !dot || cards.length === 0) return;
+
+        const rect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        let percentage = 0;
+        if(rect.top <= 0) {
+          const totalScroll = Math.max(1, rect.height - windowHeight);
+          const currentScroll = -rect.top;
+          percentage = Math.min(100, Math.max(0, (currentScroll / totalScroll) * 100));
+        } else if (rect.top > 0) {
+          percentage = 0;
+        }
+        
+        if(rect.bottom < windowHeight) {
+            percentage = 100;
+        }
+
+        progress.style.width = percentage + '%';
+        dot.style.left = percentage + '%';
+
+        cards.forEach((card, index) => {
+          const threshold = (index / (cards.length - 1)) * 100;
+          if (percentage >= threshold - 10) {
+            card.classList.add('active');
+          } else {
+            card.classList.remove('active');
+          }
+        });
+      });
+    };
+    
+    if (pipelines.length > 0) {
+      window.addEventListener('scroll', handlePipelineScroll);
+      // Run once on load
+      handlePipelineScroll();
+    }
+
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       observer.disconnect();
@@ -178,8 +228,9 @@ export function ScriptLoader() {
       gforceAnimIds.forEach(id => cancelAnimationFrame(id));
       if (overlay) overlay.removeEventListener('click', handleOverlayClick);
       if (buyBar) window.removeEventListener('scroll', handleBuyBarScroll);
+      if (pipelines.length > 0) window.removeEventListener('scroll', handlePipelineScroll);
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }

@@ -1,4 +1,6 @@
 window.initcursorjs = function() {
+  if(window["initDonecursorjs"]) return;
+  window["initDonecursorjs"] = true;
 {
 
 window.addEventListener('scroll', () => {

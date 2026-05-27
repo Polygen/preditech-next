@@ -51,6 +51,10 @@ function processHtml(sourceHtml, targetTsx, jsName) {
       s = s.replace(/document\.addEventListener\('DOMContentLoaded',\s*\(\)\s*=>\s*\{/g, '');
       s = s.replace(/\}\);\s*$/g, '');
     }
+    let safe = jsName.replace(/[^a-zA-Z0-9]/g, '');
+    if (['filoprofiljs', 'profiljs', 'ekspertizjs'].includes(safe)) {
+      return s; // No block scope for global handlers
+    }
     return '{\n' + s + '\n}';
   });
   
@@ -59,7 +63,11 @@ function processHtml(sourceHtml, targetTsx, jsName) {
     .replace(/url\(['"]?assets\//g, "url('/assets/");
   
   let safeName = jsName.replace(/[^a-zA-Z0-9]/g, '');
-  finalJs = 'window.init' + safeName + ' = function() {\n' + finalJs + '\n};\n';
+  if (['filoprofiljs', 'profiljs', 'ekspertizjs'].includes(safeName)) {
+    finalJs = finalJs; // Keep them global for onclick handlers
+  } else {
+    finalJs = 'window.init' + safeName + ' = function() {\n  if(window["initDone' + safeName + '"]) return;\n  window["initDone' + safeName + '"] = true;\n' + finalJs + '\n};\n';
+  }
   
   fs.writeFileSync(jsPath, finalJs);
 
@@ -87,25 +95,32 @@ function processHtml(sourceHtml, targetTsx, jsName) {
   let combinedStyles = allStyles.join('\n').replace(/url\(['"]?assets\//g, "url('/assets/");
   combinedStyles = combinedStyles.replace(/`/g, '\\`').replace(/\$/g, '\\$');
 
+  let useEffectCode = '';
+  let onLoadCode = '';
+  if (!['filoprofiljs', 'profiljs', 'ekspertizjs'].includes(safeName)) {
+    useEffectCode = `
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window['init' + '${safeName}']) {
+      window['init' + '${safeName}']();
+    }
+  }, []);`;
+    onLoadCode = ` onLoad={() => { if(window['init' + '${safeName}']) window['init' + '${safeName}'](); }}`;
+  }
+
   const tsxCode = `// @ts-nocheck
 'use client';
 
 import Script from 'next/script';
 import { useEffect } from 'react';
 
-export default function Page() {
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window['init' + '${safeName}']) {
-      window['init' + '${safeName}']();
-    }
-  }, []);
+export default function Page() {${useEffectCode}
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: \`${combinedStyles}\` }} />
       <div dangerouslySetInnerHTML={{ __html: \`${bodyContent}\` }} />
       
-      <Script src="/js/${jsName}" strategy="lazyOnload" onLoad={() => { if(window['init' + '${safeName}']) window['init' + '${safeName}'](); }} />
+      <Script src="/js/${jsName}" strategy="lazyOnload"${onLoadCode} />
     </>
   );
 }

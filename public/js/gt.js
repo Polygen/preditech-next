@@ -1,4 +1,6 @@
 window.initgtjs = function() {
+  if(window["initDonegtjs"]) return;
+  window["initDonegtjs"] = true;
 {
 
 window.addEventListener('scroll', () => {

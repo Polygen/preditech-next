@@ -1,5 +1,3 @@
-window.initekspertizjs = function() {
-{
 
   let currentPaintMode = 'cp-orijinal';
   function setPaintMode(modeClass, element) {
@@ -75,6 +73,3 @@ window.initekspertizjs = function() {
   function closeDeviceMenu() {
     document.getElementById('deviceMenuModal').style.display = 'none';
   }
-
-}
-};

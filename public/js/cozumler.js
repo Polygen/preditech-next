@@ -1,4 +1,6 @@
 window.initcozumlerjs = function() {
+  if(window["initDonecozumlerjs"]) return;
+  window["initDonecozumlerjs"] = true;
 {
 
 const solutions = [

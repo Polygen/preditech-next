@@ -5,11 +5,6 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 
 export default function Page() {
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window['init' + 'profiljs']) {
-      window['init' + 'profiljs']();
-    }
-  }, []);
 
   return (
     <>
@@ -1141,7 +1136,7 @@ export default function Page() {
 
 ` }} />
       
-      <Script src="/js/profil.js" strategy="lazyOnload" onLoad={() => { if(window['init' + 'profiljs']) window['init' + 'profiljs'](); }} />
+      <Script src="/js/profil.js" strategy="lazyOnload" />
     </>
   );
 }

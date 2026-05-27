@@ -1,4 +1,6 @@
 window.initsignaljs = function() {
+  if(window["initDonesignaljs"]) return;
+  window["initDonesignaljs"] = true;
 {
 
 window.addEventListener('scroll', () => {

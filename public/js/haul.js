@@ -1,4 +1,6 @@
 window.inithauljs = function() {
+  if(window["initDonehauljs"]) return;
+  window["initDonehauljs"] = true;
 {
 
 window.addEventListener('scroll', () => {

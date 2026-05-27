@@ -1,4 +1,6 @@
 window.initgojs = function() {
+  if(window["initDonegojs"]) return;
+  window["initDonegojs"] = true;
 {
 
 window.addEventListener('scroll', () => {

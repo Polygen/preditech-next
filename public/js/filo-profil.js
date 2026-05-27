@@ -1,5 +1,3 @@
-window.initfiloprofiljs = function() {
-{
 
   function openModal(id) { document.getElementById(id).classList.add('active'); }
   function closeModal(id) { document.getElementById(id).classList.remove('active'); }
@@ -459,5 +457,3 @@ window.initfiloprofiljs = function() {
     // Set initial custom prop
     window._advChartType = 'line';
   
-}
-};

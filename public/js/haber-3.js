@@ -1,4 +1,6 @@
 window.inithaber3js = function() {
+  if(window["initDonehaber3js"]) return;
+  window["initDonehaber3js"] = true;
 {
 
 // Simulator Logic
