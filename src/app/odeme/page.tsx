@@ -79,38 +79,7 @@ export default function OdemePage() {
           <form onSubmit={handleSubmit}>
             <h2 style={{fontSize: '28px', marginBottom: '32px'}}>Ödeme Bilgileri</h2>
             
-            <div className="checkout-card" style={{marginBottom: '24px'}}>
-              <h3 style={{fontSize: '18px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '8px'}}>
-                <i className="ph-fill ph-map-pin" style={{color: 'var(--accent)'}}></i> Teslimat Adresi
-              </h3>
-              
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Ad</label>
-                  <input type="text" className="sporty-input" style={{width:'100%', boxSizing:'border-box'}} placeholder="Adınız" required />
-                </div>
-                <div className="form-group">
-                  <label>Soyad</label>
-                  <input type="text" className="sporty-input" style={{width:'100%', boxSizing:'border-box'}} placeholder="Soyadınız" required />
-                </div>
-              </div>
-              
-              <div className="form-group" style={{marginBottom: '16px'}}>
-                <label>Açık Adres</label>
-                <textarea className="sporty-input" style={{width:'100%', boxSizing:'border-box', height: '80px', resize: 'none'}} placeholder="Mahalle, sokak, bina no..." required></textarea>
-              </div>
-              
-              <div className="form-row">
-                <div className="form-group">
-                  <label>İl</label>
-                  <input type="text" className="sporty-input" style={{width:'100%', boxSizing:'border-box'}} placeholder="İl" required />
-                </div>
-                <div className="form-group">
-                  <label>İlçe</label>
-                  <input type="text" className="sporty-input" style={{width:'100%', boxSizing:'border-box'}} placeholder="İlçe" required />
-                </div>
-              </div>
-            </div>
+
             
             <div className="checkout-card">
               <h3 style={{fontSize: '18px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '8px'}}>

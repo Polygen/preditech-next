@@ -1,45 +1,8 @@
 const fs = require('fs');
-const path = require('path');
-
-function walk(dir, callback) {
-  fs.readdirSync(dir).forEach(f => {
-    let dirPath = path.join(dir, f);
-    let isDirectory = fs.statSync(dirPath).isDirectory();
-    isDirectory ? walk(dirPath, callback) : callback(path.join(dir, f));
-  });
-}
-
-walk(path.join(__dirname, 'src', 'app'), (filePath) => {
-  if (!filePath.endsWith('.tsx')) return;
-  let content = fs.readFileSync(filePath, 'utf-8');
-  let originalContent = content;
-
-  // Fix <Link> ... </a> -> <Link> ... </Link>
-  // This is tricky with regex, but since we know all <Link> tags should end with </Link>
-  // Let's just do a naive approach where we replace </a> with </Link> IF the file imports Link and we see <Link
-  if (content.includes('<Link')) {
-    // A simple parser to match <Link and </a>
-    let parts = content.split('<Link');
-    for (let i = 1; i < parts.length; i++) {
-      // Find the first </a> after this <Link
-      // This might be nested, but for our simple HTML it's mostly flat
-      let closeIdx = parts[i].indexOf('</a>');
-      if (closeIdx !== -1) {
-        // Also check if there's an </a> before another <a
-        let aIdx = parts[i].indexOf('<a ');
-        if (aIdx === -1 || closeIdx < aIdx) {
-           parts[i] = parts[i].substring(0, closeIdx) + '</Link>' + parts[i].substring(closeIdx + 4);
-        }
-      }
-    }
-    content = parts.join('<Link');
-  }
-  
-  // A safer approach for <Link> ... </a>
-  // Let's replace any </a> that follows a <Link tag within the same block.
-  // Actually, since I ran a regex that replaced <a href="*.html"> with <Link, I can just replace </a> with </Link> manually in the files that failed.
-  
-  if (content !== originalContent) {
-    fs.writeFileSync(filePath, content);
-  }
-});
+let c = fs.readFileSync('src/app/erken-erisim/page.tsx', 'utf8');
+c = c.replace('<div class="form-group"><label>Ad</label><input type="text" required></div>', '<div class="form-group"><label>Ad</label><input type="text" class="sporty-input" style="width:100%;box-sizing:border-box" required></div>');
+c = c.replace('<div class="form-group"><label>Soyad</label><input type="text" required></div>', '<div class="form-group"><label>Soyad</label><input type="text" class="sporty-input" style="width:100%;box-sizing:border-box" required></div>');
+c = c.replace('<div class="form-group" style="margin-bottom:20px"><label>E-posta</label><input type="email" required></div>', '<div class="form-group" style="margin-bottom:20px"><label>E-posta</label><input type="email" class="sporty-input" style="width:100%;box-sizing:border-box" required></div>');
+c = c.replace('<div class="form-group" style="margin-bottom:20px"><label>Telefon</label><input type="tel" required></div>', '<div class="form-group" style="margin-bottom:20px"><label>Telefon</label><div style="display:flex;gap:12px"><div class="sporty-input" style="display:flex;align-items:center;background:var(--surface2);padding:0 16px;font-weight:700">+90</div><input type="tel" class="sporty-input" style="flex:1;box-sizing:border-box" placeholder="5XX XXX XX XX" required></div></div>');
+c = c.replace('<div class="form-group" style="margin-bottom:20px"><label>Teslimat Adresi</label><textarea rows="3" required></textarea></div>', '<div class="form-group" style="margin-bottom:20px"><label>Teslimat Adresi</label><textarea class="sporty-input" style="width:100%;box-sizing:border-box;resize:none" rows="3" required></textarea></div>');
+fs.writeFileSync('src/app/erken-erisim/page.tsx', c);

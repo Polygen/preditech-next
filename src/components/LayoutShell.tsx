@@ -25,7 +25,9 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
   return (
     <>
       <Navbar />
-      {children}
+      <div key={pathname}>
+        {children}
+      </div>
       <Footer />
       <ScriptLoader />
       <FloatingPreorderBtn />
