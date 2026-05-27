@@ -31,39 +31,39 @@ export default function Page() {
   <ul class="dropdown-menu mega-menu">
     <div class="mega-col">
       <h4>Bireysel Kullanıcılar</h4>
-      <li><a href="go.html">Preditech GO</a></li>
-      <li><a href="pro.html">Preditech PRO</a></li>
-      <li><a href="gt.html">Preditech GT</a></li>
+      <li><a href="/go">Preditech GO</a></li>
+      <li><a href="/pro">Preditech PRO</a></li>
+      <li><a href="/gt">Preditech GT</a></li>
     </div>
     <div class="mega-col">
       <h4>Kurumsal Kullanıcılar</h4>
-      <li><a href="watchdog.html">Watchdog (Filo)</a></li>
-      <li><a href="titan.html">Titan (Tır)</a></li>
-      <li><a href="haul.html">Haul (İş Makinesi)</a></li>
-      <li><a href="doc.html">Doc</a></li>
-      <li><a href="ekspertiz.html">Xper (Ekspertiz)</a></li>
+      <li><a href="/watchdog">Watchdog (Filo)</a></li>
+      <li><a href="/titan">Titan (Tır)</a></li>
+      <li><a href="/haul">Haul (İş Makinesi)</a></li>
+      <li><a href="/doc">Doc</a></li>
+      <li><a href="/ekspertiz">Xper (Ekspertiz)</a></li>
     </div>
     <div class="mega-col">
       <h4>Yardımcı Cihazlar</h4>
-      <li><a href="sentinel.html">Sentinel</a></li>
-      <li><a href="racebox.html">Racebox</a></li>
-      <li><a href="cursor.html">Cursor</a></li>
-      <li><a href="gate.html">Gate</a></li>
-      <li><a href="signal.html">Signal</a></li>
+      <li><a href="/sentinel">Sentinel</a></li>
+      <li><a href="/racebox">Racebox</a></li>
+      <li><a href="/cursor">Cursor</a></li>
+      <li><a href="/gate">Gate</a></li>
+      <li><a href="/signal">Signal</a></li>
     </div>
   </ul>
 </li>
-<li><a href="cozumler.html" class="nav-cozumler">Çözümler</a></li>
+<li><a href="/cozumler" class="nav-cozumler">Çözümler</a></li>
 <li class="dropdown">
   <a href="#" class="nav-teknoloji">Teknoloji <i class="ph ph-caret-down"></i></a>
   <ul class="dropdown-menu">
-    <li><a href="teknoloji.html">Hibrit Veri Füzyonu</a></li>
-    <li><a href="app.html">Predicto AI & App</a></li>
+    <li><a href="/teknoloji">Hibrit Veri Füzyonu</a></li>
+    <li><a href="/app">Predicto AI & App</a></li>
   </ul>
 </li>
-<li><a href="haberler.html" class="nav-haberler">Haberler</a></li>
-<li><a href="destek.html" class="nav-destek">Destek</a></li>
-<li><a href="iletisim.html" class="nav-hakkimizda">Hakkımızda</a></li>
+<li><a href="/haberler" class="nav-haberler">Haberler</a></li>
+<li><a href="/destek" class="nav-destek">Destek</a></li>
+<li><a href="/iletisim" class="nav-hakkimizda">Hakkımızda</a></li>
 </ul>
 <div style="display:flex; align-items:center; gap:16px;" id="nav-auth-container">
   <!-- Auth JS renders here -->
@@ -612,22 +612,22 @@ export default function Page() {
     <div>
       <h3>Cihazlar</h3>
       <ul class="footer-links-premium">
-        <li><a href="go.html">Preditech GO</a></li>
-        <li><a href="pro.html">Preditech PRO</a></li>
-        <li><a href="gt.html">Preditech GT</a></li>
-        <li><a href="doc.html">Preditech DOC</a></li>
-        <li><a href="watchdog.html">Watchdog (Filo)</a></li>
-        <li><a href="titan.html">Titan (Tır)</a></li>
+        <li><a href="/go">Preditech GO</a></li>
+        <li><a href="/pro">Preditech PRO</a></li>
+        <li><a href="/gt">Preditech GT</a></li>
+        <li><a href="/doc">Preditech DOC</a></li>
+        <li><a href="/watchdog">Watchdog (Filo)</a></li>
+        <li><a href="/titan">Titan (Tır)</a></li>
       </ul>
     </div>
 
     <div>
       <h3>Şirket</h3>
       <ul class="footer-links-premium">
-        <li><a href="iletisim.html">Hakkımızda</a></li>
-        <li><a href="cozumler.html">Çözümler</a></li>
-        <li><a href="haberler.html">Haberler</a></li>
-        <li><a href="destek.html">Destek Merkezi</a></li>
+        <li><a href="/iletisim">Hakkımızda</a></li>
+        <li><a href="/cozumler">Çözümler</a></li>
+        <li><a href="/haberler">Haberler</a></li>
+        <li><a href="/destek">Destek Merkezi</a></li>
       </ul>
     </div>
 
@@ -650,7 +650,7 @@ export default function Page() {
 
 ` }} />
       
-      <Script src="/js/teknoloji.js" strategy="lazyOnload" />
+      <Script src="/js/teknoloji.js" strategy="lazyOnload" onLoad={() => { if(window.initTeknoloji) window.initTeknoloji(); }} />
     </>
   );
 }

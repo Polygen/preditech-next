@@ -1,3 +1,4 @@
+window.initprofiljs = function() {
 
   function switchTab(tabId, element) {
     document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.remove('active'));
@@ -13,3 +14,5 @@
   function closeModal(id) {
     document.getElementById(id).classList.remove('active');
   }
+
+};

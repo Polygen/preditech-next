@@ -1,204 +1,120 @@
 // @ts-nocheck
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import Script from 'next/script';
 
-interface DeviceOption {
-  key: string;
-  label: string;
-  price: string;
-  shimmer?: boolean;
-  giftBadge?: string;
-}
-
-const devices: DeviceOption[] = [
-  { key: 'WISHLIST', label: 'İstek Listesi', price: 'Ücretsiz Katıl' },
-  { key: 'GO', label: 'GO', price: '950₺' },
-  { key: 'PRO', label: 'PRO', price: '2.500₺' },
-  { key: 'GT', label: 'GT', price: '9.800₺' },
-  { key: 'CUSTOM', label: 'Destek Olmak İstiyorum', price: 'Özel Bütçe', shimmer: true, giftBadge: 'Seni hediye bekliyor!' },
-];
-
-export default function ErkenErisimPage() {
-  const router = useRouter();
-  const [activeDevice, setActiveDevice] = useState('GO');
-  const [customBudget, setCustomBudget] = useState('');
-  const [summaryDevice, setSummaryDevice] = useState('Preditech GO');
-  const [summaryDeviceHtml, setSummaryDeviceHtml] = useState('');
-  const [summaryPrice, setSummaryPrice] = useState('950₺');
-
-  const budgetValue = parseInt(customBudget) || 0;
-
-  const handleDeviceClick = (device: DeviceOption) => {
-    setActiveDevice(device.key);
-
-    if (device.key === 'WISHLIST') {
-      setCustomBudget('');
-      setSummaryDevice('Ücretsiz İstek Listesi Kaydı');
-      setSummaryDeviceHtml('');
-      setSummaryPrice('Ücretsiz');
-    } else if (device.key === 'CUSTOM') {
-      const val = parseInt(customBudget) || 0;
-      if (val >= 40000) {
-        setSummaryDeviceHtml('Özel Destek <br><small style="color:var(--success);font-size:12px">+ Özel Üretim Cihaz &amp; Full Hediye Paketi</small>');
-        setSummaryDevice('');
-      } else {
-        setSummaryDevice('Özel Destek');
-        setSummaryDeviceHtml('');
-      }
-      setSummaryPrice(customBudget ? customBudget + '₺' : device.price);
-    } else {
-      setCustomBudget('');
-      setSummaryDevice('Preditech ' + device.key);
-      setSummaryDeviceHtml('');
-      setSummaryPrice(device.price);
-    }
-  };
-
-  const handleBudgetChange = (value: string) => {
-    setCustomBudget(value);
-    const numVal = parseInt(value) || 0;
-    setSummaryPrice(numVal + '₺');
-
-    if (numVal >= 40000) {
-      setSummaryDeviceHtml('Özel Destek <br><small style="color:var(--success);font-size:12px">+ Özel Üretim Cihaz &amp; Full Hediye Paketi</small>');
-      setSummaryDevice('');
-    } else if (numVal >= 10000) {
-      setSummaryDeviceHtml('Özel Destek <br><small style="color:var(--accent);font-size:12px">+ GT &amp; Racebox &amp; Cursor Hediye</small>');
-      setSummaryDevice('');
-    } else {
-      setSummaryDevice('Özel Destek');
-      setSummaryDeviceHtml('');
-    }
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert('Ön sipariş talebiniz alınmıştır!');
-    router.push('/');
-  };
-
-  // Derived state for gift/custom sections
-  const showCustomBudget = activeDevice === 'CUSTOM';
-  const showGiftPackage = activeDevice === 'CUSTOM';
-  const showSpecialDevice = activeDevice === 'CUSTOM' && budgetValue >= 40000;
-  const giftUnlocked = activeDevice === 'CUSTOM' && budgetValue >= 10000;
-
+export default function Page() {
   return (
     <>
-      <div className="page-header" style={{ paddingTop: '120px', paddingBottom: '40px' }}>
-        <div className="particles"></div>
-        <div className="container">
-          <h1 style={{ fontSize: 'clamp(32px,4vw,48px)' }}>Geleceğe <span>İlk Adımı</span> Atın.</h1>
-          <p style={{ fontSize: '15px' }}>Sınırlı sayıdaki MVP cihazlarımız için ön sipariş vererek, ürüne herkesten önce sahip olun ve test ekibimizin bir parçası olun.</p>
-        </div>
-      </div>
+      <style dangerouslySetInnerHTML={{ __html: `` }} />
+      <div dangerouslySetInnerHTML={{ __html: `
 
-      <section className="section" style={{ paddingTop: 0 }}>
-        <div className="container">
-          <div className="checkout-grid reveal" style={{ alignItems: 'start' }}>
-            <div className="checkout-form">
-              <h3 style={{ fontSize: '24px', marginBottom: '24px' }}>1. Cihazınızı Seçin</h3>
+<!-- NAVBAR -->
 
-              <div className="device-select-grid" id="deviceSelect">
-                {devices.map((d) => (
-                  <div
-                    key={d.key}
-                    className={`device-card${d.shimmer ? ' shimmer-effect' : ''}${activeDevice === d.key ? ' active' : ''}`}
-                    onClick={() => handleDeviceClick(d)}
-                  >
-                    {d.giftBadge && <div className="gift-badge">{d.giftBadge}</div>}
-                    <h4>{d.label}</h4>
-                    <span>{d.price}</span>
-                  </div>
-                ))}
-              </div>
 
-              {showCustomBudget && (
-                <div style={{ marginTop: '20px' }}>
-                  <div className="form-group">
-                    <label style={{ color: 'var(--accent)' }}>Destek olmak istediğiniz bütçeyi seçin (₺)</label>
-                    <input
-                      type="number"
-                      placeholder="Örn: 15000"
-                      className="sporty-input"
-                      style={{ fontSize: '24px', fontWeight: 800, textAlign: 'center' }}
-                      value={customBudget}
-                      onChange={(e) => handleBudgetChange(e.target.value)}
-                    />
-                  </div>
-                </div>
-              )}
+<div class="page-header" style="padding-top:120px;padding-bottom:40px">
+<div class="particles"></div>
+<div class="container">
+<h1 style="font-size:clamp(32px,4vw,48px)">Geleceğe <span>İlk Adımı</span> Atın.</h1>
+<p style="font-size:15px">Sınırlı sayıdaki MVP cihazlarımız için ön sipariş vererek, ürüne herkesten önce sahip olun ve test ekibimizin bir parçası olun.</p>
+</div>
+</div>
 
-              {showGiftPackage && (
-                <div style={{ marginTop: '24px', padding: '24px', background: 'linear-gradient(145deg, rgba(255,215,0,0.1), transparent)', border: `1px solid ${giftUnlocked ? 'var(--success)' : 'var(--accent)'}`, borderRadius: '16px', textAlign: 'center' }}>
-                  <h4 style={{ color: 'var(--accent)', fontSize: '20px', marginBottom: '16px' }}>
-                    {giftUnlocked ? '🎁 Hediyeniz Eklendi!' : '🎁 10.000₺ Üzeri Desteklere Özel Hediye Paketiniz!'}
-                  </h4>
-                  {giftUnlocked ? (
-                    <p style={{ color: 'var(--text2)', fontSize: '14px', marginBottom: '24px' }}>Piyasa değeri 20.800₺ olan muazzam paket sepetinize dahil edildi.</p>
-                  ) : (
-                    <p style={{ color: 'var(--text2)', fontSize: '14px', marginBottom: '24px' }}>Piyasa değeri <strong style={{ color: 'var(--text)' }}>20.800₺</strong> olan bu muazzam pakete, 10.000₺ ve üzeri desteklerinizde anında sahip olun!</p>
-                  )}
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
-                    <div style={{ background: 'var(--card)', borderRadius: '12px', padding: '12px', border: '1px solid var(--border)' }}>
-                      <img src="/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png" alt="GT" style={{ height: '80px', objectFit: 'contain' }} />
-                      <div style={{ fontSize: '12px', fontWeight: 700, marginTop: '8px' }}>GT</div>
-                    </div>
-                    <i className="ph ph-plus" style={{ fontSize: '24px', color: 'var(--text2)' }}></i>
-                    <div style={{ background: 'var(--card)', borderRadius: '12px', padding: '12px', border: '1px solid var(--border)' }}>
-                      <img src="/assets/images/devices/preditech racebox.png" alt="Racebox" style={{ height: '80px', objectFit: 'contain' }} />
-                      <div style={{ fontSize: '12px', fontWeight: 700, marginTop: '8px' }}>Racebox</div>
-                    </div>
-                    <i className="ph ph-plus" style={{ fontSize: '24px', color: 'var(--text2)' }}></i>
-                    <div style={{ background: 'var(--card)', borderRadius: '12px', padding: '12px', border: '1px solid var(--border)' }}>
-                      <img src="/assets/images/devices/preditech cursor.png" alt="Cursor" style={{ height: '80px', objectFit: 'contain' }} />
-                      <div style={{ fontSize: '12px', fontWeight: 700, marginTop: '8px' }}>Cursor</div>
-                    </div>
-                  </div>
-                </div>
-              )}
+<section class="section" style="padding-top:0">
+<div class="container">
+<div class="checkout-grid reveal" style="align-items:start">
+<div class="checkout-form">
+<h3 style="font-size:24px;margin-bottom:24px">1. Cihazınızı Seçin</h3>
 
-              {showSpecialDevice && (
-                <div style={{ marginTop: '24px', padding: '24px', background: 'linear-gradient(145deg, rgba(0,255,136,0.1), transparent)', border: '1px solid var(--success)', borderRadius: '16px', textAlign: 'center' }}>
-                  <h4 style={{ color: 'var(--success)', fontSize: '20px', marginBottom: '16px' }}>🏆 İnanılmaz Desteğiniz İçin Sonsuz Teşekkürler!</h4>
-                  <p style={{ color: 'var(--text2)', fontSize: '14px', marginBottom: 0 }}>40.000₺ ve üzeri bu eşsiz katkınız onuruna, sadece size özel, isminize kayıtlı tamamen <strong>ÖZEL ÜRETİM</strong> bir Preditech cihazı tasarlanıp adresinize gönderilecektir.</p>
-                </div>
-              )}
+<div class="device-select-grid" id="deviceSelect">
+  <div class="device-card" data-device="WISHLIST" data-price="Ücretsiz">
+    <h4>İstek Listesi</h4>
+    <span>Ücretsiz Katıl</span>
+  </div>
+  <div class="device-card active" data-device="GO" data-price="950₺">
+    <h4>GO</h4>
+    <span>950₺</span>
+  </div>
+  <div class="device-card" data-device="PRO" data-price="2.500₺">
+    <h4>PRO</h4>
+    <span>2.500₺</span>
+  </div>
+  <div class="device-card" data-device="GT" data-price="9.800₺">
+    <h4>GT</h4>
+    <span>9.800₺</span>
+  </div>
+  <div class="device-card shimmer-effect" data-device="CUSTOM" data-price="Özel Teklif">
+    <div class="gift-badge">Seni hediye bekliyor!</div>
+    <h4>Destek Olmak İstiyorum</h4>
+    <span>Özel Bütçe</span>
+  </div>
+</div>
+<div id="customBudgetContainer" style="display:none; margin-top:20px;">
+  <div class="form-group">
+    <label style="color:var(--accent)">Destek olmak istediğiniz bütçeyi seçin (₺)</label>
+    <input type="number" id="customBudgetInput" placeholder="Örn: 15000" class="sporty-input" style="font-size:24px; font-weight:800; text-align:center;">
+  </div>
+</div>
+<div id="giftPackageContainer" style="display:none; margin-top:24px; padding:24px; background:linear-gradient(145deg, rgba(255,215,0,0.1), transparent); border:1px solid var(--accent); border-radius:16px; text-align:center;">
+  <h4 style="color:var(--accent); font-size:20px; margin-bottom:16px;" id="giftPackageTitle">🎁 10.000₺ Üzeri Desteklere Özel Hediye Paketiniz!</h4>
+  <p style="color:var(--text2); font-size:14px; margin-bottom:24px;" id="giftPackageDesc">Piyasa değeri <strong style="color:var(--text);">20.800₺</strong> olan bu muazzam pakete, 10.000₺ ve üzeri desteklerinizde anında sahip olun!</p>
+  <div style="display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;">
+    <div style="background:var(--card); border-radius:12px; padding:12px; border:1px solid var(--border);">
+      <img src="/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png" alt="GT" style="height:80px; object-fit:contain;">
+      <div style="font-size:12px; font-weight:700; margin-top:8px;">GT</div>
+    </div>
+    <i class="ph ph-plus" style="font-size:24px; color:var(--text2);"></i>
+    <div style="background:var(--card); border-radius:12px; padding:12px; border:1px solid var(--border);">
+      <img src="/assets/images/devices/preditech racebox.png" alt="Racebox" style="height:80px; object-fit:contain;">
+      <div style="font-size:12px; font-weight:700; margin-top:8px;">Racebox</div>
+    </div>
+    <i class="ph ph-plus" style="font-size:24px; color:var(--text2);"></i>
+    <div style="background:var(--card); border-radius:12px; padding:12px; border:1px solid var(--border);">
+      <img src="/assets/images/devices/preditech cursor.png" alt="Cursor" style="height:80px; object-fit:contain;">
+      <div style="font-size:12px; font-weight:700; margin-top:8px;">Cursor</div>
+    </div>
+  </div>
+</div>
 
-              <h3 style={{ fontSize: '24px', marginBottom: '24px', marginTop: '40px' }}>2. Teslimat Bilgileri</h3>
-              <form onSubmit={handleFormSubmit}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
-                  <div className="form-group"><label>Ad</label><input type="text" required /></div>
-                  <div className="form-group"><label>Soyad</label><input type="text" required /></div>
-                </div>
-                <div className="form-group" style={{ marginBottom: '20px' }}><label>E-posta</label><input type="email" required /></div>
-                <div className="form-group" style={{ marginBottom: '20px' }}><label>Telefon</label><input type="tel" required /></div>
-                <div className="form-group" style={{ marginBottom: '20px' }}><label>Teslimat Adresi</label><textarea rows={3} required></textarea></div>
-                <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', padding: '16px', fontSize: '16px' }}>Ön Siparişi Tamamla</button>
-              </form>
-            </div>
+<div id="specialDeviceNotice" style="display:none; margin-top:24px; padding:24px; background:linear-gradient(145deg, rgba(0,255,136,0.1), transparent); border:1px solid var(--success); border-radius:16px; text-align:center;">
+  <h4 style="color:var(--success); font-size:20px; margin-bottom:16px;">🏆 İnanılmaz Desteğiniz İçin Sonsuz Teşekkürler!</h4>
+  <p style="color:var(--text2); font-size:14px; margin-bottom:0;">40.000₺ ve üzeri bu eşsiz katkınız onuruna, sadece size özel, isminize kayıtlı tamamen <strong>ÖZEL ÜRETİM</strong> bir Preditech cihazı tasarlanıp adresinize gönderilecektir.</p>
+</div>
 
-            <div className="checkout-summary">
-              <h3 style={{ fontSize: '24px', marginBottom: '24px' }}>Sipariş Özeti</h3>
-              <div className="summary-row">
-                <span>Cihaz</span>
-                {summaryDeviceHtml ? (
-                  <span dangerouslySetInnerHTML={{ __html: summaryDeviceHtml }} />
-                ) : (
-                  <span>{summaryDevice}</span>
-                )}
-              </div>
-              <div className="summary-row"><span>1 Yıllık Uygulama Aboneliği</span><span>Hediye</span></div>
-              <div className="summary-row"><span>Kargo (Haziran 2026)</span><span>Ücretsiz</span></div>
-              <div className="summary-total"><span>Toplam</span><span>{summaryPrice}</span></div>
-              <p style={{ fontSize: '12px', color: 'var(--text2)', marginTop: '24px', lineHeight: 1.6 }}>* Erken erişim siparişleri sıraya alınır. Teslimatlar 2026 3. çeyrekte başlayacaktır. Ödeme şu an alınmayacaktır.</p>
-              <p style={{ fontSize: '12px', color: 'var(--accent)', marginTop: '8px', lineHeight: 1.6, fontWeight: 700 }}>* DİKKAT: Bu cihazların erken sipariş/istek alımı, cihazın resmi çıkışıyla birlikte tamamen kapanacak ve bir daha sipariş alınmayacaktır.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+<h3 style="font-size:24px;margin-bottom:24px;margin-top:40px">2. Teslimat Bilgileri</h3>
+<form onsubmit="event.preventDefault();alert('Ön sipariş talebiniz alınmıştır!');window.location='index.html'">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+<div class="form-group"><label>Ad</label><input type="text" required></div>
+<div class="form-group"><label>Soyad</label><input type="text" required></div>
+</div>
+<div class="form-group" style="margin-bottom:20px"><label>E-posta</label><input type="email" required></div>
+<div class="form-group" style="margin-bottom:20px"><label>Telefon</label><input type="tel" required></div>
+<div class="form-group" style="margin-bottom:20px"><label>Teslimat Adresi</label><textarea rows="3" required></textarea></div>
+<button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:16px;font-size:16px">Ön Siparişi Tamamla</button>
+</form>
+</div>
+<div class="checkout-summary">
+<h3 style="font-size:24px;margin-bottom:24px">Sipariş Özeti</h3>
+<div class="summary-row"><span>Cihaz</span><span id="summaryDevice">Preditech PRO</span></div>
+<div class="summary-row"><span>1 Yıllık Uygulama Aboneliği</span><span>Hediye</span></div>
+<div class="summary-row"><span>Kargo (Haziran 2026)</span><span>Ücretsiz</span></div>
+<div class="summary-total"><span>Toplam</span><span id="summaryPrice">950₺</span></div>
+<p style="font-size:12px;color:var(--text2);margin-top:24px;line-height:1.6">* Erken erişim siparişleri sıraya alınır. Teslimatlar 2026 3. çeyrekte başlayacaktır. Ödeme şu an alınmayacaktır.</p>
+<p style="font-size:12px;color:var(--accent);margin-top:8px;line-height:1.6;font-weight:700;">* DİKKAT: Bu cihazların erken sipariş/istek alımı, cihazın resmi çıkışıyla birlikte tamamen kapanacak ve bir daha sipariş alınmayacaktır.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<!-- FOOTER -->
+
+
+
+
+` }} />
+      
+      <Script src="/js/erken-erisim.js" strategy="lazyOnload" onLoad={() => { if(window['init' + 'erkenerisimjs']) window['init' + 'erkenerisimjs'](); }} />
     </>
   );
 }

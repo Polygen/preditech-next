@@ -141,55 +141,7 @@ export default function Page() {
 ` }} />
       <div dangerouslySetInnerHTML={{ __html: `
 
-<nav class="navbar" style="position:static; border-bottom: 1px solid rgba(255,255,255,0.05);">
-<div class="container">
-<a href="/" class="logo"><img src="/assets/images/general/preditechlogo.png" alt="Preditech" style="height:22px; object-fit:contain;"></a>
-<ul class="nav-links">
-<li class="dropdown">
-  <a href="#" class="nav-cihazlar">Cihazlar <i class="ph ph-caret-down"></i></a>
-  <ul class="dropdown-menu mega-menu">
-    <div class="mega-col">
-      <h4>Bireysel Kullanıcılar</h4>
-      <li><a href="go.html">Preditech GO</a></li>
-      <li><a href="pro.html">Preditech PRO</a></li>
-      <li><a href="gt.html">Preditech GT</a></li>
-    </div>
-    <div class="mega-col">
-      <h4>Kurumsal Kullanıcılar</h4>
-      <li><a href="watchdog.html">Watchdog (Filo)</a></li>
-      <li><a href="titan.html">Titan (Tır)</a></li>
-      <li><a href="haul.html">Haul (İş Makinesi)</a></li>
-      <li><a href="doc.html">Doc</a></li>
-      <li><a href="ekspertiz.html">Xper (Ekspertiz)</a></li>
-    </div>
-    <div class="mega-col">
-      <h4>Yardımcı Cihazlar</h4>
-      <li><a href="sentinel.html">Sentinel</a></li>
-      <li><a href="racebox.html">Racebox</a></li>
-      <li><a href="cursor.html">Cursor</a></li>
-      <li><a href="gate.html">Gate</a></li>
-      <li><a href="signal.html">Signal</a></li>
-    </div>
-  </ul>
-</li>
-<li><a href="cozumler.html" class="nav-cozumler">Çözümler</a></li>
-<li class="dropdown">
-  <a href="#" class="nav-teknoloji">Teknoloji <i class="ph ph-caret-down"></i></a>
-  <ul class="dropdown-menu">
-    <li><a href="teknoloji.html">Hibrit Veri Füzyonu</a></li>
-    <li><a href="app.html">Predicto AI & App</a></li>
-  </ul>
-</li>
-<li><a href="haberler.html" class="nav-haberler">Haberler</a></li>
-<li><a href="destek.html" class="nav-destek">Destek</a></li>
-<li><a href="iletisim.html" class="nav-hakkimizda">Hakkımızda</a></li>
-</ul>
-<div style="display:flex; align-items:center; gap:16px;" id="nav-auth-container">
-  <!-- Auth JS renders here -->
-</div>
-<button class="mobile-menu-btn" aria-label="Menü"><i class="ph ph-list" style="font-size:24px"></i></button>
-</div>
-</nav>
+
 
 <div class="dashboard-wrapper">
   <div class="container" style="display: flex; min-height: calc(100vh - 80px); width: 100%; padding: 0;">
@@ -1006,7 +958,7 @@ export default function Page() {
           <h2 class="section-title">Siparişlerim</h2>
           <p class="section-desc">Geçmiş satın alımlarınız</p>
         </div>
-        <div class="panel-card clickable-card" onclick="window.location.href='siparis-takip.html'" style="padding: 24px;">
+        <div class="panel-card clickable-card" onclick="window.location.href="/siparis-takip"" style="padding: 24px;">
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <div style="display: flex; gap: 24px; align-items: center;">
               <img src="/assets/images/devices/GREG.png" style="width: 60px;" alt="PRO">
@@ -1182,7 +1134,7 @@ export default function Page() {
 
 ` }} />
       
-      <Script src="/js/profil.js" strategy="lazyOnload" />
+      <Script src="/js/profil.js" strategy="lazyOnload" onLoad={() => { if(window['init' + 'profiljs']) window['init' + 'profiljs'](); }} />
     </>
   );
 }

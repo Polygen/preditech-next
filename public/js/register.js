@@ -1,0 +1,3 @@
+window.initregisterjs = function() {
+
+};

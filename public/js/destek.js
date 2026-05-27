@@ -1,0 +1,3 @@
+window.initdestekjs = function() {
+
+};

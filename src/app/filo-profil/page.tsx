@@ -2138,7 +2138,7 @@ export default function Page() {
 
 ` }} />
       
-      <Script src="/js/filo-profil.js" strategy="lazyOnload" />
+      <Script src="/js/filo-profil.js" strategy="lazyOnload" onLoad={() => { if(window.initfiloprofil) window.initfiloprofil(); }} />
     </>
   );
 }

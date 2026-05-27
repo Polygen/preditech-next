@@ -1,5 +1,6 @@
+window.initTeknoloji = function() {
 
-document.addEventListener('DOMContentLoaded', () => {
+
 
 function genSine(amp, period, length, yOffset) {
   let d = 'M 0 ' + yOffset;
@@ -693,3 +694,5 @@ function runSequence() {
 }
 
 setTimeout(runSequence, 500);
+
+};

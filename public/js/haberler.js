@@ -1,0 +1,3 @@
+window.inithaberlerjs = function() {
+
+};

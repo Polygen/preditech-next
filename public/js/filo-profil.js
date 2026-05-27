@@ -443,7 +443,7 @@
   }
   
   // Make the checkboxes from initial HTML have the class so they trigger redraw
-  document.addEventListener('DOMContentLoaded', () => {
+  window.initfiloprofil = function() {
     document.querySelectorAll('#adv-table-body input[type=checkbox]').forEach(cb => {
       cb.classList.add('adv-row-checkbox');
       const colorDiv = cb.nextElementSibling;
@@ -456,5 +456,4 @@
     });
     // Set initial custom prop
     window._advChartType = 'line';
-  });
-
+  };
