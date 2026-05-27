@@ -1,26 +1,25 @@
 window.initcozumlerjs = function() {
-  if(window["initDonecozumlerjs"]) return;
-  window["initDonecozumlerjs"] = true;
-{
+  const grid = document.getElementById('solGrid');
+  if(grid) {
+    grid.innerHTML = ''; // Clear before appending to prevent duplicates
+    window.solutions.forEach((s, index) => {
+      grid.innerHTML += `<div class="sol-card" onclick="window.openCozumModal(${index})">
+        <div class="sol-icon">${s.i}</div>
+        <div class="sol-title">${s.t}</div>
+        <div class="sol-desc">${s.d}</div>
+      </div>`;
+    });
+  }
+};
 
-const solutions = [
+window.solutions = [
   {
     "t": "Takograf Çözümü",
     "d": "Yasal sürüş sürelerini merkeze otomatik aktarır, sürücü ihlallerini anlık tespit ederek cezai riskleri sıfıra indirir.",
     "i": "<i class='ph ph-timer'></i>",
     "links": [
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      },
-      {
-        "name": "Titan",
-        "url": "titan.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech titan.png"
-      }
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" },
+      { "name": "Titan", "url": "/titan", "type": "Kurumsal", "img": "/assets/images/devices/preditech titan.png" }
     ]
   },
   {
@@ -28,18 +27,8 @@ const solutions = [
     "d": "Araç kullanım senaryolarına ve sensör verilerine dayanarak motor yıpranmasını hesaplar, en uygun bakım zamanını öngörür.",
     "i": "<i class='ph ph-wrench'></i>",
     "links": [
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      },
-      {
-        "name": "Doc",
-        "url": "doc.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      }
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" },
+      { "name": "Doc", "url": "/doc", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" }
     ]
   },
   {
@@ -47,30 +36,10 @@ const solutions = [
     "d": "Gecikme süresi olmaksızın araçların konum, hız, kontak ve rota bilgilerini anlık olarak izleyin.",
     "i": "<i class='ph ph-map-pin-line'></i>",
     "links": [
-      {
-        "name": "GO",
-        "url": "go.html",
-        "type": "Bireysel",
-        "img": '/assets/images/general/preditechlogo.png"
-      },
-      {
-        "name": "PRO",
-        "url": "pro.html",
-        "type": "Bireysel",
-        "img": '/assets/images/general/preditechlogo.png"
-      },
-      {
-        "name": "GT",
-        "url": "gt.html",
-        "type": "Bireysel",
-        "img": '/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png"
-      },
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      }
+      { "name": "GO", "url": "/go", "type": "Bireysel", "img": "/assets/images/general/preditechlogo.png" },
+      { "name": "PRO", "url": "/pro", "type": "Bireysel", "img": "/assets/images/general/preditechlogo.png" },
+      { "name": "GT", "url": "/gt", "type": "Bireysel", "img": "/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png" },
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" }
     ]
   },
   {
@@ -78,18 +47,8 @@ const solutions = [
     "d": "Bölge bazlı veya araca özel hız limitleri tanımlayın, aşım durumunda riskli davranışları anlık puanlayın.",
     "i": "<i class='ph ph-speedometer'></i>",
     "links": [
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      },
-      {
-        "name": "Titan",
-        "url": "titan.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech titan.png"
-      }
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" },
+      { "name": "Titan", "url": "/titan", "type": "Kurumsal", "img": "/assets/images/devices/preditech titan.png" }
     ]
   },
   {
@@ -97,18 +56,8 @@ const solutions = [
     "d": "Kontağı açan kişinin yetkili sürücü olup olmadığını RFID veya iButton ile anında doğrulayın.",
     "i": "<i class='ph ph-identification-card'></i>",
     "links": [
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      },
-      {
-        "name": "Titan",
-        "url": "titan.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech titan.png"
-      }
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" },
+      { "name": "Titan", "url": "/titan", "type": "Kurumsal", "img": "/assets/images/devices/preditech titan.png" }
     ]
   },
   {
@@ -116,18 +65,8 @@ const solutions = [
     "d": "Sanal sınırlar çizin (Geofence). Rotadan çıkıldığında veya yasaklı bölgeye girildiğinde anında uyarı alın.",
     "i": "<i class='ph ph-path'></i>",
     "links": [
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      },
-      {
-        "name": "Haul",
-        "url": "haul.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech haul.png"
-      }
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" },
+      { "name": "Haul", "url": "/haul", "type": "Kurumsal", "img": "/assets/images/devices/preditech haul.png" }
     ]
   },
   {
@@ -135,18 +74,8 @@ const solutions = [
     "d": "Depo seviyesi, anlık tüketim ve rölanti yakıtı CANbus üzerinden okunarak kuruşu kuruşuna raporlanır.",
     "i": "<i class='ph ph-gas-pump'></i>",
     "links": [
-      {
-        "name": "Titan",
-        "url": "titan.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech titan.png"
-      },
-      {
-        "name": "Haul",
-        "url": "haul.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech haul.png"
-      }
+      { "name": "Titan", "url": "/titan", "type": "Kurumsal", "img": "/assets/images/devices/preditech titan.png" },
+      { "name": "Haul", "url": "/haul", "type": "Kurumsal", "img": "/assets/images/devices/preditech haul.png" }
     ]
   },
   {
@@ -154,12 +83,7 @@ const solutions = [
     "d": "Gıda ve medikal taşımacılıkta dorse içi ısı anlık izlenir. Tolerans aşıldığında mallar bozulmadan uyarı gider.",
     "i": "<i class='ph ph-thermometer'></i>",
     "links": [
-      {
-        "name": "Haul",
-        "url": "haul.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech haul.png"
-      }
+      { "name": "Haul", "url": "/haul", "type": "Kurumsal", "img": "/assets/images/devices/preditech haul.png" }
     ]
   },
   {
@@ -167,12 +91,7 @@ const solutions = [
     "d": "Sürücünün yola odaklanıp odaklanmadığını, esneme veya telefon kullanımını ADAS ve DSM kameralarıyla saniye saniye analiz eder.",
     "i": "<i class='ph ph-video-camera'></i>",
     "links": [
-      {
-        "name": "Sentinel",
-        "url": "sentinel.html",
-        "type": "Ek Cihaz",
-        "img": '/assets/images/devices/preditech sentinel.png"
-      }
+      { "name": "Sentinel", "url": "/sentinel", "type": "Ek Cihaz", "img": "/assets/images/devices/preditech sentinel.png" }
     ]
   },
   {
@@ -180,24 +99,9 @@ const solutions = [
     "d": "Ani fren, sert viraj gibi metrikleri izleyerek yakıt tasarrufunu artırır ve kaza riskini azaltır.",
     "i": "<i class='ph ph-leaf'></i>",
     "links": [
-      {
-        "name": "PRO",
-        "url": "pro.html",
-        "type": "Bireysel",
-        "img": '/assets/images/general/preditechlogo.png"
-      },
-      {
-        "name": "GT",
-        "url": "gt.html",
-        "type": "Bireysel",
-        "img": '/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png"
-      },
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      }
+      { "name": "PRO", "url": "/pro", "type": "Bireysel", "img": "/assets/images/general/preditechlogo.png" },
+      { "name": "GT", "url": "/gt", "type": "Bireysel", "img": "/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png" },
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" }
     ]
   },
   {
@@ -205,18 +109,8 @@ const solutions = [
     "d": "G-sensörleri ile toplanan verilerle sürücülere bir 'Güvenlik Skoru' atanır.",
     "i": "<i class='ph ph-chart-line-up'></i>",
     "links": [
-      {
-        "name": "GO",
-        "url": "go.html",
-        "type": "Bireysel",
-        "img": '/assets/images/general/preditechlogo.png"
-      },
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      }
+      { "name": "GO", "url": "/go", "type": "Bireysel", "img": "/assets/images/general/preditechlogo.png" },
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" }
     ]
   },
   {
@@ -224,12 +118,7 @@ const solutions = [
     "d": "Çalıntı veya acil tehdit durumunda, merkezin komutuyla motor güvenli hıza düşünce kalıcı olarak bloke edilir.",
     "i": "<i class='ph ph-engine'></i>",
     "links": [
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      }
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" }
     ]
   },
   {
@@ -237,18 +126,8 @@ const solutions = [
     "d": "Sürücünün tehlike altında hissettiği anlarda gizli SOS butonuna basmasıyla, koordinatlar anında iletilir.",
     "i": "<i class='ph ph-warning-circle'></i>",
     "links": [
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      },
-      {
-        "name": "Signal",
-        "url": "signal.html",
-        "type": "Ek Cihaz",
-        "img": '/assets/images/devices/preditech signal.png"
-      }
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" },
+      { "name": "Signal", "url": "/signal", "type": "Ek Cihaz", "img": "/assets/images/devices/preditech signal.png" }
     ]
   },
   {
@@ -256,12 +135,7 @@ const solutions = [
     "d": "Aracın depo kapağının izinsiz açıldığı her an, sistem konumu ile birlikte sabotaj kaydı geçer.",
     "i": "<i class='ph ph-lock'></i>",
     "links": [
-      {
-        "name": "Haul",
-        "url": "haul.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech haul.png"
-      }
+      { "name": "Haul", "url": "/haul", "type": "Kurumsal", "img": "/assets/images/devices/preditech haul.png" }
     ]
   },
   {
@@ -269,12 +143,7 @@ const solutions = [
     "d": "Çekici ile dorsenin doğru eşleşip eşleşmediğini Bluetooth Beacon ile denetler. Yanlış dorsede hareket engellenir.",
     "i": "<i class='ph ph-truck'></i>",
     "links": [
-      {
-        "name": "Haul",
-        "url": "haul.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech haul.png"
-      }
+      { "name": "Haul", "url": "/haul", "type": "Kurumsal", "img": "/assets/images/devices/preditech haul.png" }
     ]
   },
   {
@@ -282,18 +151,8 @@ const solutions = [
     "d": "Değerli kargo taşımacılığında kapıların yalnızca varış noktasında yetkili kişi tarafından açıldığını garanti eden sistem.",
     "i": "<i class='ph ph-door'></i>",
     "links": [
-      {
-        "name": "Haul",
-        "url": "haul.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech haul.png"
-      },
-      {
-        "name": "Gate",
-        "url": "gate.html",
-        "type": "Ek Cihaz",
-        "img": '/assets/images/devices/preditech gate.png"
-      }
+      { "name": "Haul", "url": "/haul", "type": "Kurumsal", "img": "/assets/images/devices/preditech haul.png" },
+      { "name": "Gate", "url": "/gate", "type": "Ek Cihaz", "img": "/assets/images/devices/preditech gate.png" }
     ]
   },
   {
@@ -301,12 +160,7 @@ const solutions = [
     "d": "Damperin istenmeyen veya yasaklı alanlarda kaldırılmasını denetleyerek olası iş kazalarını önler.",
     "i": "<i class='ph ph-arrow-up-right'></i>",
     "links": [
-      {
-        "name": "Haul",
-        "url": "haul.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech haul.png"
-      }
+      { "name": "Haul", "url": "/haul", "type": "Kurumsal", "img": "/assets/images/devices/preditech haul.png" }
     ]
   },
   {
@@ -314,18 +168,8 @@ const solutions = [
     "d": "Hatalı bir sürücü davranışında, merkezden müdahaleye gerek kalmadan araç içi buzzer ile anlık ikaz verilir.",
     "i": "<i class='ph ph-speaker-high'></i>",
     "links": [
-      {
-        "name": "Titan",
-        "url": "titan.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech titan.png"
-      },
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      }
+      { "name": "Titan", "url": "/titan", "type": "Kurumsal", "img": "/assets/images/devices/preditech titan.png" },
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" }
     ]
   },
   {
@@ -333,18 +177,8 @@ const solutions = [
     "d": "Devir sayısı, motor torku, şanzıman ısısı gibi telemetri verilerini aracın beyninden kayıpsız merkeze çeker.",
     "i": "<i class='ph ph-plugs-connected'></i>",
     "links": [
-      {
-        "name": "Doc",
-        "url": "doc.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      },
-      {
-        "name": "Titan",
-        "url": "titan.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech titan.png"
-      }
+      { "name": "Doc", "url": "/doc", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" },
+      { "name": "Titan", "url": "/titan", "type": "Kurumsal", "img": "/assets/images/devices/preditech titan.png" }
     ]
   },
   {
@@ -352,12 +186,7 @@ const solutions = [
     "d": "Hassas kimyasal taşımacılığında sızıntı, ani sarsıntı ve devrilme gibi anomalileri anlık bildirir.",
     "i": "<i class='ph ph-warning'></i>",
     "links": [
-      {
-        "name": "Haul",
-        "url": "haul.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech haul.png"
-      }
+      { "name": "Haul", "url": "/haul", "type": "Kurumsal", "img": "/assets/images/devices/preditech haul.png" }
     ]
   },
   {
@@ -365,12 +194,7 @@ const solutions = [
     "d": "Sınır kapılarında ve gümrüklü alanlarda aracın bekleme sürelerini ve yetkisiz müdahaleleri denetler.",
     "i": "<i class='ph ph-globe'></i>",
     "links": [
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      }
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" }
     ]
   },
   {
@@ -378,18 +202,8 @@ const solutions = [
     "d": "Gereksiz yere çalışır durumda bekleyen araçların filoya olan gizli maliyetini hesaplar.",
     "i": "<i class='ph ph-clock'></i>",
     "links": [
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      },
-      {
-        "name": "Titan",
-        "url": "titan.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech titan.png"
-      }
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" },
+      { "name": "Titan", "url": "/titan", "type": "Kurumsal", "img": "/assets/images/devices/preditech titan.png" }
     ]
   },
   {
@@ -397,18 +211,8 @@ const solutions = [
     "d": "Aracınızın kalkış ve hızlanma performansını GPS ve ivmeölçer verileriyle saniyenin onda biri hassasiyetinde ölçün.",
     "i": "<i class='ph ph-flag-checkered'></i>",
     "links": [
-      {
-        "name": "GT",
-        "url": "gt.html",
-        "type": "Bireysel",
-        "img": '/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png"
-      },
-      {
-        "name": "Racebox",
-        "url": "racebox.html",
-        "type": "Ek Cihaz",
-        "img": '/assets/images/devices/preditech racebox.png"
-      }
+      { "name": "GT", "url": "/gt", "type": "Bireysel", "img": "/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png" },
+      { "name": "Racebox", "url": "/racebox", "type": "Ek Cihaz", "img": "/assets/images/devices/preditech racebox.png" }
     ]
   },
   {
@@ -416,18 +220,8 @@ const solutions = [
     "d": "Drag yarışları için özel olarak tasarlanmış çeyrek mil ve 100-200 km/s ara hızlanma telemetrisi.",
     "i": "<i class='ph ph-road-horizon'></i>",
     "links": [
-      {
-        "name": "GT",
-        "url": "gt.html",
-        "type": "Bireysel",
-        "img": '/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png"
-      },
-      {
-        "name": "Racebox",
-        "url": "racebox.html",
-        "type": "Ek Cihaz",
-        "img": '/assets/images/devices/preditech racebox.png"
-      }
+      { "name": "GT", "url": "/gt", "type": "Bireysel", "img": "/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png" },
+      { "name": "Racebox", "url": "/racebox", "type": "Ek Cihaz", "img": "/assets/images/devices/preditech racebox.png" }
     ]
   },
   {
@@ -435,18 +229,8 @@ const solutions = [
     "d": "Pistteki her turunuzu sanal başlangıç/bitiş çizgileriyle kaydederek sektör zamanlarınızı detaylı analiz edin.",
     "i": "<i class='ph ph-timer'></i>",
     "links": [
-      {
-        "name": "GT",
-        "url": "gt.html",
-        "type": "Bireysel",
-        "img": '/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png"
-      },
-      {
-        "name": "Racebox",
-        "url": "racebox.html",
-        "type": "Ek Cihaz",
-        "img": '/assets/images/devices/preditech racebox.png"
-      }
+      { "name": "GT", "url": "/gt", "type": "Bireysel", "img": "/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png" },
+      { "name": "Racebox", "url": "/racebox", "type": "Ek Cihaz", "img": "/assets/images/devices/preditech racebox.png" }
     ]
   },
   {
@@ -454,18 +238,8 @@ const solutions = [
     "d": "Viraj giriş, apex ve çıkış anlarındaki yanal G kuvvetini izleyerek sürüş dinamiklerinizi mükemmelleştirin.",
     "i": "<i class='ph ph-intersect'></i>",
     "links": [
-      {
-        "name": "GT",
-        "url": "gt.html",
-        "type": "Bireysel",
-        "img": '/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png"
-      },
-      {
-        "name": "Racebox",
-        "url": "racebox.html",
-        "type": "Ek Cihaz",
-        "img": '/assets/images/devices/preditech racebox.png"
-      }
+      { "name": "GT", "url": "/gt", "type": "Bireysel", "img": "/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png" },
+      { "name": "Racebox", "url": "/racebox", "type": "Ek Cihaz", "img": "/assets/images/devices/preditech racebox.png" }
     ]
   },
   {
@@ -473,18 +247,8 @@ const solutions = [
     "d": "Motorun anlık yükü ve tekerleğe aktarılan gücü (HP/Tork) hesaplayarak aracınızın performans kayıplarını görün.",
     "i": "<i class='ph ph-lightning'></i>",
     "links": [
-      {
-        "name": "GT",
-        "url": "gt.html",
-        "type": "Bireysel",
-        "img": '/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png"
-      },
-      {
-        "name": "Racebox",
-        "url": "racebox.html",
-        "type": "Ek Cihaz",
-        "img": '/assets/images/devices/preditech racebox.png"
-      }
+      { "name": "GT", "url": "/gt", "type": "Bireysel", "img": "/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158 2.png" },
+      { "name": "Racebox", "url": "/racebox", "type": "Ek Cihaz", "img": "/assets/images/devices/preditech racebox.png" }
     ]
   },
   {
@@ -492,24 +256,9 @@ const solutions = [
     "d": "Akü voltajındaki dalgalanmaları marş anında analiz ederek yolda kalmadan önce akü ömrünün bittiğini tespit edin.",
     "i": "<i class='ph ph-battery-warning'></i>",
     "links": [
-      {
-        "name": "GO",
-        "url": "go.html",
-        "type": "Bireysel",
-        "img": '/assets/images/general/preditechlogo.png"
-      },
-      {
-        "name": "PRO",
-        "url": "pro.html",
-        "type": "Bireysel",
-        "img": '/assets/images/general/preditechlogo.png"
-      },
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      }
+      { "name": "GO", "url": "/go", "type": "Bireysel", "img": "/assets/images/general/preditechlogo.png" },
+      { "name": "PRO", "url": "/pro", "type": "Bireysel", "img": "/assets/images/general/preditechlogo.png" },
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" }
     ]
   },
   {
@@ -517,24 +266,9 @@ const solutions = [
     "d": "Motor suyu sıcaklığı (Coolant Temp) kritik seviyeye yaklaşmadan sizi uyararak conta yakma riskini önler.",
     "i": "<i class='ph ph-drop'></i>",
     "links": [
-      {
-        "name": "GO",
-        "url": "go.html",
-        "type": "Bireysel",
-        "img": '/assets/images/general/preditechlogo.png"
-      },
-      {
-        "name": "PRO",
-        "url": "pro.html",
-        "type": "Bireysel",
-        "img": '/assets/images/general/preditechlogo.png"
-      },
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      }
+      { "name": "GO", "url": "/go", "type": "Bireysel", "img": "/assets/images/general/preditechlogo.png" },
+      { "name": "PRO", "url": "/pro", "type": "Bireysel", "img": "/assets/images/general/preditechlogo.png" },
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" }
     ]
   },
   {
@@ -542,24 +276,9 @@ const solutions = [
     "d": "Motor ışığı (Check Engine) yandığında arızanın tam nedenini ve ciddiyet seviyesini teknik terimler olmadan görün.",
     "i": "<i class='ph ph-stethoscope'></i>",
     "links": [
-      {
-        "name": "GO",
-        "url": "go.html",
-        "type": "Bireysel",
-        "img": '/assets/images/general/preditechlogo.png"
-      },
-      {
-        "name": "Xper",
-        "url": "ekspertiz.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      },
-      {
-        "name": "Doc",
-        "url": "doc.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      }
+      { "name": "GO", "url": "/go", "type": "Bireysel", "img": "/assets/images/general/preditechlogo.png" },
+      { "name": "Xper", "url": "/ekspertiz", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" },
+      { "name": "Doc", "url": "/doc", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" }
     ]
   },
   {
@@ -567,24 +286,9 @@ const solutions = [
     "d": "G-Sensörü üzerinden şiddetli çarpışma algılandığında sistem otomatik kaza raporu oluşturur ve merkeze iletir.",
     "i": "<i class='ph ph-shield-warning'></i>",
     "links": [
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      },
-      {
-        "name": "Titan",
-        "url": "titan.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech titan.png"
-      },
-      {
-        "name": "Signal",
-        "url": "signal.html",
-        "type": "Ek Cihaz",
-        "img": '/assets/images/devices/preditech signal.png"
-      }
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" },
+      { "name": "Titan", "url": "/titan", "type": "Kurumsal", "img": "/assets/images/devices/preditech titan.png" },
+      { "name": "Signal", "url": "/signal", "type": "Ek Cihaz", "img": "/assets/images/devices/preditech signal.png" }
     ]
   },
   {
@@ -592,18 +296,8 @@ const solutions = [
     "d": "Filonuzun yaydığı sera gazı ve CO2 emisyonlarını uluslararası standartlarda analiz ederek sürdürülebilirlik raporu alın.",
     "i": "<i class='ph ph-plant'></i>",
     "links": [
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      },
-      {
-        "name": "Titan",
-        "url": "titan.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech titan.png"
-      }
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" },
+      { "name": "Titan", "url": "/titan", "type": "Kurumsal", "img": "/assets/images/devices/preditech titan.png" }
     ]
   },
   {
@@ -611,18 +305,8 @@ const solutions = [
     "d": "Treyler bağlantılarındaki stres yükünü ve motorun çektiği ekstra ağırlık torkunu hesaplayarak aşınmaları denetler.",
     "i": "<i class='ph ph-scales'></i>",
     "links": [
-      {
-        "name": "Titan",
-        "url": "titan.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech titan.png"
-      },
-      {
-        "name": "Haul",
-        "url": "haul.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech haul.png"
-      }
+      { "name": "Titan", "url": "/titan", "type": "Kurumsal", "img": "/assets/images/devices/preditech titan.png" },
+      { "name": "Haul", "url": "/haul", "type": "Kurumsal", "img": "/assets/images/devices/preditech haul.png" }
     ]
   },
   {
@@ -630,24 +314,9 @@ const solutions = [
     "d": "Trafik, araç yükü ve eğim verilerini kullanarak yakıt tasarrufunu maksimize edecek en verimli rotayı çizer.",
     "i": "<i class='ph ph-map-trifold'></i>",
     "links": [
-      {
-        "name": "Watchdog",
-        "url": "watchdog.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      },
-      {
-        "name": "Titan",
-        "url": "titan.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech titan.png"
-      },
-      {
-        "name": "Haul",
-        "url": "haul.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech haul.png"
-      }
+      { "name": "Watchdog", "url": "/watchdog", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" },
+      { "name": "Titan", "url": "/titan", "type": "Kurumsal", "img": "/assets/images/devices/preditech titan.png" },
+      { "name": "Haul", "url": "/haul", "type": "Kurumsal", "img": "/assets/images/devices/preditech haul.png" }
     ]
   },
   {
@@ -655,29 +324,13 @@ const solutions = [
     "d": "Kilometre manipülasyonu, silinmiş hata kodları ve şanzıman yıpranmalarını tek tuşla yetkili raporu kalitesinde sunar.",
     "i": "<i class='ph ph-file-magnifying-glass'></i>",
     "links": [
-      {
-        "name": "Xper",
-        "url": "ekspertiz.html",
-        "type": "Kurumsal",
-        "img": '/assets/images/devices/preditech watchdog.png"
-      }
+      { "name": "Xper", "url": "/ekspertiz", "type": "Kurumsal", "img": "/assets/images/devices/preditech watchdog.png" }
     ]
   }
 ];
 
-const grid = document.getElementById('solGrid');
-if(grid) {
-  solutions.forEach((s, index) => {
-    grid.innerHTML += `<div class="sol-card" onclick="openModal(${index})">
-      <div class="sol-icon">${s.i}</div>
-      <div class="sol-title">${s.t}</div>
-      <div class="sol-desc">${s.d}</div>
-    </div>`;
-  });
-}
-
-function openModal(index) {
-  const s = solutions[index];
+window.openCozumModal = function(index) {
+  const s = window.solutions[index];
   document.getElementById('mIcon').innerHTML = s.i;
   document.getElementById('mTitle').innerText = s.t;
   
@@ -706,19 +359,8 @@ function openModal(index) {
   }
   
   document.getElementById('solModal').classList.add('active');
-}
+};
 
-function closeModal() {
+window.closeCozumModal = function() {
   document.getElementById('solModal').classList.remove('active');
-}
-
-window.addEventListener('scroll', () => {
-  const bar = document.getElementById('buyBar');
-  if(bar) {
-    if(window.scrollY > 300) bar.classList.add('visible');
-    else bar.classList.remove('visible');
-  }
-});
-
-}
 };

@@ -30,7 +30,7 @@ export default function Page() {
 <!-- Modal -->
 <div class="modal-overlay" id="solModal">
   <div class="modal-content">
-    <button class="modal-close" onclick="closeModal()">✕</button>
+    <button class="modal-close" onclick="window.closeCozumModal()">✕</button>
     <div class="sol-icon" id="mIcon"></div>
     <div class="modal-title" id="mTitle"></div>
     <div class="modal-desc" id="mDesc"></div>
