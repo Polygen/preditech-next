@@ -5,7 +5,7 @@
       "cron": "*/2 * * * *",
       "prompt": "sorunları tespit etip düzeltmeye devam et - preditech-next projesinde görünümü bozmadan altyapı ve kod kalitesi iyileştirmeleri yap",
       "createdAt": 1779877174252,
-      "lastFiredAt": 1779877755993,
+      "lastFiredAt": 1779877955138,
       "recurring": true,
       "createdBySessionId": "969e5faf-eb05-43ee-935c-56f2531c07d3",
       "createdByPid": 8123,
