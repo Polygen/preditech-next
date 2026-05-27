@@ -45,10 +45,10 @@ export default function Page() {
   }
 
   const carPhotos = {
-    'egea': 'assets/images/general/car_egea.png',
-    'clio': 'assets/images/general/car_clio.png',
-    'megane': 'assets/images/general/car_megane.png',
-    'corolla': 'assets/images/general/car_corolla.png'
+    'egea': '/assets/images/general/car_egea.png',
+    'clio': '/assets/images/general/car_clio.png',
+    'megane': '/assets/images/general/car_megane.png',
+    'corolla': '/assets/images/general/car_corolla.png'
   };
 
   const vehicles = {
@@ -288,7 +288,7 @@ export default function Page() {
   function openVehicleDetail(type, name, plate, driver, status, speed, fuel, temp, rpm) {
     document.getElementById('vd-name').innerText = name;
     document.getElementById('vd-plate').innerText = plate;
-    document.getElementById('vd-photo').src = carPhotos[type] || 'assets/images/general/car_egea.png';
+    document.getElementById('vd-photo').src = carPhotos[type] || '/assets/images/general/car_egea.png';
     document.getElementById('vd-rpm').innerText = rpm || '2.450';
     document.getElementById('vd-temp').innerText = (temp || '88') + '°C';
     document.getElementById('vd-speed').innerText = speed || '0';
@@ -1163,7 +1163,7 @@ export default function Page() {
         <div style="flex:1; display:flex; flex-direction:column; gap:16px;">
           <!-- Video Oynatıcı -->
           <div style="flex:1; background:#000; border-radius:12px; position:relative; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.05);">
-            <div style="position:absolute; inset:0; background:url('assets/images/general/car_egea.png') center/cover opacity:0.3; filter:blur(4px);"></div>
+            <div style="position:absolute; inset:0; background:url('/assets/images/general/car_egea.png') center/cover opacity:0.3; filter:blur(4px);"></div>
             <i class="ph ph-play-circle" style="font-size:64px; color:rgba(255,255,255,0.8); cursor:pointer; position:relative; z-index:2;"></i>
             <div style="position:absolute; top:16px; right:16px; font-family:monospace; background:rgba(0,0,0,0.5); padding:4px 8px; border-radius:4px; font-size:12px; z-index:2;">2026-05-26 14:32:45</div>
           </div>
@@ -1819,7 +1819,7 @@ export default function Page() {
                 </div>
               </div>
               
-              <div style="flex:1; background:url('assets/images/general/istanbul_map.png') center/cover; border-radius:12px; position:relative; overflow:hidden; border: 1px solid rgba(255,255,255,0.05);">
+              <div style="flex:1; background:url('/assets/images/general/istanbul_map.png') center/cover; border-radius:12px; position:relative; overflow:hidden; border: 1px solid rgba(255,255,255,0.05);">
                   <div style="position:absolute; inset:0; background:rgba(0,0,0,0.3); border-radius:12px;"></div>
                   <div class="map-marker" onclick="showMapDetail('egea1')" style="position:absolute; top:45%; left:48%; cursor:pointer;"><div style="width:16px; height:16px; background:var(--accent); border-radius:50%; border:2px solid #000; box-shadow:0 0 10px var(--accent);"></div></div>
                   <div class="map-marker" onclick="showMapDetail('egea2')" style="position:absolute; top:35%; left:55%; cursor:pointer;"><div style="width:12px; height:12px; background:var(--accent); border-radius:50%; border:2px solid #000;"></div></div>
@@ -2526,7 +2526,7 @@ export default function Page() {
           <div style="flex:1; display:flex; flex-direction:column; gap:24px;">
             <!-- Video Oynatıcı -->
             <div style="width:100%; aspect-ratio:16/9; max-height:60vh; background:#000; border-radius:12px; position:relative; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.05); overflow:hidden;">
-              <div style="position:absolute; inset:0; background:url('assets/images/general/car_egea.png') center/cover opacity:0.4; filter:blur(4px);"></div>
+              <div style="position:absolute; inset:0; background:url('/assets/images/general/car_egea.png') center/cover opacity:0.4; filter:blur(4px);"></div>
               <i class="ph-fill ph-play-circle" style="font-size:80px; color:rgba(255,255,255,0.8); cursor:pointer; position:relative; z-index:2; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"></i>
               <div style="position:absolute; top:20px; right:20px; font-family:monospace; background:rgba(0,0,0,0.7); padding:6px 12px; border-radius:6px; font-size:14px; font-weight:700; z-index:2; border:1px solid rgba(255,255,255,0.1);">2026-05-26 14:32:45</div>
               <div style="position:absolute; top:20px; left:20px; font-family:monospace; background:rgba(255,68,68,0.2); color:var(--danger); border:1px solid rgba(255,68,68,0.5); padding:6px 12px; border-radius:6px; font-size:12px; font-weight:700; z-index:2; display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:var(--danger); border-radius:50%; box-shadow:0 0 6px var(--danger);"></div> REC</div>

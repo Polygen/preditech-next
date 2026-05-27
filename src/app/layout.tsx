@@ -2,9 +2,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import { ScriptLoader } from "@/components/ScriptLoader";
+import LayoutShell from "@/components/LayoutShell";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,10 +34,7 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.variable} style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
-        <Navbar />
-        {children}
-        <Footer />
-        <ScriptLoader />
+        <LayoutShell>{children}</LayoutShell>
       </body>
     </html>
   );
