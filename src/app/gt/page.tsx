@@ -103,6 +103,10 @@ export default function Page() {
 <p class="massive-hero-sub">Dahili 100Hz GNSS/GPS, süre ölçümleri, sektör zamanları ve liderlik tablosu ile profesyonel telemetri cebinizde.</p>
 <div style="font-size:160px;font-weight:900;color:var(--text2);opacity:0.1;position:absolute;top:30%;left:50%;transform:translate(-50%, -50%)">GT</div>
 <img src="/assets/images/devices/Gemini_Generated_Image_2158ap2158ap2158%202.png" alt="Preditech GT" class="massive-device-img" style="max-width: 400px;">
+<div class="hero-price-badge">
+  <div class="hero-price-badge-icon"><i class="ph-fill ph-tag"></i></div>
+  <div class="hero-price-badge-val">9.800₺ <small>1 aylık abonelik dahil</small></div>
+</div>
 </div>
 </section>
 
@@ -589,28 +593,28 @@ export default function Page() {
   <h2 style="text-align:center;margin-bottom:60px">Daha Fazlasını İsteyenlere.</h2>
   
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px">
-    <div class="extra-device-card" style="cursor:pointer;" onclick="window.location='racebox.html'">
+    <div class="extra-device-card" style="cursor:pointer;" onclick="window.location.href='/racebox'">
       <img src="/assets/images/devices/preditech racebox.png" alt="Racebox" style="object-fit:contain;">
       <div class="extra-info">
         <h4><a href="/racebox" style="color:inherit;text-decoration:none">RACEBOX</a> <span class="hub-tag">EKLENTİ</span></h4>
         <p>Sensör okumalarınızı tek ekranda toplayan performans HUB'ı. Type-C ile bağlanır.</p>
-        <div style="font-weight:700; color:var(--text); margin-top:8px; font-size:16px;">3.500₺</div>
+        <p style="font-weight:700; color:var(--text); margin-top:8px; font-size:16px;">3.500₺</p>
       </div>
     </div>
-    <div class="extra-device-card" style="cursor:pointer;" onclick="window.location='sentinel.html'">
+    <div class="extra-device-card" style="cursor:pointer;" onclick="window.location.href='/sentinel'">
       <img src="/assets/images/devices/preditech sentinel.png" alt="Sentinel" style="object-fit:contain;">
       <div class="extra-info">
         <h4><a href="/sentinel" style="color:inherit;text-decoration:none">SENTINEL</a> <span class="hub-tag">EKLENTİ</span></h4>
         <p>OBD verilerini video üzerine yazan 4K akıllı Dashcam.</p>
-        <div style="font-weight:700; color:var(--text); margin-top:8px; font-size:16px;">5.500₺</div>
+        <p style="font-weight:700; color:var(--text); margin-top:8px; font-size:16px;">5.500₺</p>
       </div>
     </div>
-    <div class="extra-device-card" style="cursor:pointer;" onclick="window.location='cursor.html'">
+    <div class="extra-device-card" style="cursor:pointer;" onclick="window.location.href='/cursor'">
       <img src="/assets/images/devices/preditech cursor.png" alt="Cursor" style="object-fit:contain;">
       <div class="extra-info">
         <h4><a href="/cursor" style="color:inherit;text-decoration:none">CURSOR</a> <span class="hub-tag">EKLENTİ</span></h4>
         <p>AFR ve EGR verilerini dijital olarak gösteren akıllı gösterge (Gauge).</p>
-        <div style="font-weight:700; color:var(--text); margin-top:8px; font-size:16px;">2.200₺</div>
+        <p style="font-weight:700; color:var(--text); margin-top:8px; font-size:16px;">2.200₺</p>
       </div>
     </div>
   </div>
@@ -649,7 +653,7 @@ export default function Page() {
 <div class="container">
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:40px;align-items:center;">
     <div class="card" style="background:rgba(255,215,0,0.05); border-color:var(--accent);">
-      <h3 style="font-size:24px; color:var(--accent); margin-bottom:12px;">Premium Deneyim</h3>
+      <h3 style="font-size:24px; color:var(--accent); margin-bottom:12px;">Ön Sipariş Et</h3>
       <p style="color:var(--text2); margin-bottom:24px; font-size:15px;">Öncelikli teslimat avantajından yararlanın. Erken sipariş vererek Preditech ekosistemine ilk adımı atın.</p>
       <a href="/erken-erisim" class="btn btn-primary" style="width:100%; justify-content:center;">Erken Erişime Katıl</a>
     </div>

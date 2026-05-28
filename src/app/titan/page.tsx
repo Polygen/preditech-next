@@ -108,9 +108,9 @@ export default function Page() {
 <div class="container">
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:40px;align-items:center;">
     <div class="card" style="background:rgba(255,215,0,0.05); border-color:var(--accent);">
-      <h3 style="font-size:24px; color:var(--accent); margin-bottom:12px;">Premium Deneyim</h3>
+      <h3 style="font-size:24px; color:var(--accent); margin-bottom:12px;">Ön Sipariş Et</h3>
       <p style="color:var(--text2); margin-bottom:24px; font-size:15px;">Öncelikli teslimat avantajından yararlanın. Erken sipariş vererek Preditech ekosistemine ilk adımı atın.</p>
-      <a href="kurumsal-satis.html?device=titan" class="btn btn-primary" style="width:100%; justify-content:center;">Toplu Satış Teklifi Al (Adet: 6.000₺)</a>
+      <a href="/kurumsal-satis?device=titan" class="btn btn-primary" style="width:100%; justify-content:center;">Toplu Satış Teklifi Al (Adet: 6.000₺)</a>
     </div>
     
     <div class="card" style="background:var(--surface2);">

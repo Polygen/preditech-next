@@ -15,15 +15,15 @@ export default function Page() {
     <>
       <style dangerouslySetInnerHTML={{ __html: `
   body { background: var(--bg); color: var(--text); padding-bottom: 100px; }
-  .order-container { max-width: 700px; margin: 60px auto 0; text-align: center; }
+  .order-container { max-width: 700px; margin: 160px auto 0; text-align: center; }
   .order-pill { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 24px; }
   .order-card { background: #111; border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 40px; text-align: left; margin-top: 48px; }
   
   .status-pill { background: rgba(255, 215, 0, 0.1); color: var(--accent); padding: 8px 16px; border-radius: 20px; font-size: 11px; font-weight: 800; letter-spacing: 1px; }
   
   .timeline { display: flex; justify-content: space-between; align-items: flex-start; position: relative; margin: 48px 0; }
-  .timeline::before { content: ''; position: absolute; top: 20px; left: 40px; right: 40px; height: 1px; background: rgba(255,255,255,0.1); z-index: 1; }
-  .timeline::after { content: ''; position: absolute; top: 20px; left: 40px; width: 33%; height: 1px; background: var(--accent); z-index: 1; }
+  .timeline::before { content: ''; position: absolute; top: 20px; left: 12.5%; right: 12.5%; height: 1px; background: rgba(255,255,255,0.1); z-index: 1; }
+  .timeline::after { content: ''; position: absolute; top: 19px; left: 12.5%; width: 25%; height: 3px; background: linear-gradient(to right, #00FF88, var(--accent)); z-index: 1; border-radius: 2px; }
   
   .tl-item { position: relative; z-index: 2; text-align: center; flex: 1; }
   .tl-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 20px; color: #fff; background: #222; }
@@ -56,29 +56,29 @@ export default function Page() {
     </p>
     
     <div class="order-card">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h3 style="font-size: 18px; font-weight: 800;">Sipariş Durumu</h3>
-        <div class="status-pill">HAZIRLANIYOR</div>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap:wrap; gap:12px;">
+        <h3 style="font-size: 18px; font-weight: 800;">Teşekkürler</h3>
+        <div class="status-pill" style="white-space:nowrap;">DESTEĞİNİZLE GELİŞTİRİYORUZ</div>
       </div>
       
       <div class="timeline">
         <div class="tl-item completed">
-          <div class="tl-icon"><i class="ph-bold ph-check"></i></div>
+          <div class="tl-icon"><i class="ph-fill ph-check-circle"></i></div>
           <div class="tl-title">Sipariş Alındı</div>
           <div class="tl-sub">12 Mayıs 2026, 14:32</div>
         </div>
         <div class="tl-item active">
-          <div class="tl-icon"><i class="ph-bold ph-package"></i></div>
-          <div class="tl-title">Hazırlanıyor</div>
-          <div class="tl-sub">Erken erişim kutusu hazırlanıyor</div>
+          <div class="tl-icon"><i class="ph-fill ph-hand-heart"></i></div>
+          <div class="tl-title">Teşekkürler</div>
+          <div class="tl-sub">Desteğinizle Birlikte Cihazı Geliştiriyoruz</div>
         </div>
         <div class="tl-item">
-          <div class="tl-icon"><i class="ph-bold ph-truck"></i></div>
+          <div class="tl-icon"><i class="ph-fill ph-truck"></i></div>
           <div class="tl-title">Kargoya Verildi</div>
-          <div class="tl-sub">Tahmini: 15 Mayıs 2026</div>
+          <div class="tl-sub">Tahmini: Aralık 2026</div>
         </div>
         <div class="tl-item">
-          <div class="tl-icon"><i class="ph-bold ph-house"></i></div>
+          <div class="tl-icon"><i class="ph-fill ph-house"></i></div>
           <div class="tl-title">Teslim Edildi</div>
           <div class="tl-sub">Bekleniyor</div>
         </div>
@@ -90,21 +90,21 @@ export default function Page() {
       
       <div class="item-card">
         <div style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background: #000; border-radius: 12px;">
-          <img src="/assets/images/devices/GREG.png" alt="Preditech PRO" style="width: 50px;">
+          <img id="st-device-img" src="/assets/images/devices/GREG.png" alt="Cihaz" style="height:50px; object-fit:contain;" />
         </div>
         <div style="flex: 1;">
-          <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">Preditech PRO</h4>
-          <p style="font-size: 12px; color: var(--text2); margin-bottom: 8px;">Erken Erişim Kurucu Sürümü • 1 Yıllık AI Aboneliği Dahil</p>
+          <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 4px;" id="st-device">Preditech Cihazı</h4>
+          <p style="font-size: 12px; color: var(--text2); margin-bottom: 8px;">Erken Erişim Kurucu Sürümü • 1 Aylık AI Aboneliği Dahil</p>
           <div style="display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.05); border-radius: 12px; font-size: 11px; color: var(--text2);">Adet: 1</div>
         </div>
-        <div style="font-size: 18px; font-weight: 800; color: var(--accent);">12.500₺</div>
+        <div style="font-size: 18px; font-weight: 800; color: var(--accent);" id="st-price">950₺</div>
       </div>
       
       <div class="divider"></div>
       
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <h3 style="font-size: 16px; font-weight: 800;">Genel Toplam</h3>
-        <div style="font-size: 20px; font-weight: 900; color: var(--accent);">12.500₺</div>
+        <div style="font-size: 20px; font-weight: 900; color: var(--accent);" id="st-total-price">950₺</div>
       </div>
       
     </div>

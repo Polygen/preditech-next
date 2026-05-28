@@ -1140,7 +1140,7 @@ export default function Page() {
     <!-- SIDEBAR -->
     <aside class="sidebar" style="display: flex; flex-direction: column; width: 240px; min-width: 240px; max-width: 240px; padding: 24px 16px;">
       <div style="margin-bottom: 40px; padding: 0 20px;">
-        <a href="/index" style="display:block; margin-bottom:16px;">
+        <a href="#" onclick="switchFiloTab(event, 'anasayfa'); return false;" style="display:block; margin-bottom:16px;">
           <img src="/assets/images/general/preditechlogo.png" alt="Preditech" style="height:24px; object-fit:contain;">
         </a>
         <div style="font-size: 11px; color: var(--text2); letter-spacing: 1.5px; font-weight: 700; display:flex; align-items:center; gap:8px;">

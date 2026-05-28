@@ -144,7 +144,7 @@ export default function Page() {
     <!-- SIDEBAR -->
     <aside class="sidebar" style="display: flex; flex-direction: column; width: 320px; min-width: 320px; max-width: 320px; padding: 32px 24px;">
       <div style="margin-bottom: 40px; padding: 0 20px;">
-        <a href="/index" style="display:block; margin-bottom:16px;">
+        <a href="#" onclick="switchXperView(\'list\'); return false;" style="display:block; margin-bottom:16px;">
           <img src="/assets/images/general/preditechlogo.png" alt="Preditech" style="height:28px; object-fit:contain;">
         </a>
         <div style="font-size: 12px; color: var(--text-muted); letter-spacing: 1.5px; font-weight: 800; display:flex; align-items:center; gap:8px;">
@@ -576,7 +576,7 @@ export default function Page() {
 
 ` }} />
       
-      <Script src="/js/ekspertiz.js" strategy="lazyOnload" />
+      <Script src="/js/ekspertiz.js" strategy="beforeInteractive" />
     </>
   );
 }

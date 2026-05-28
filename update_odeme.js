@@ -1,4 +1,6 @@
-'use client';
+const fs = require('fs');
+
+const content = `'use client';
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -50,8 +52,8 @@ export default function OdemePage() {
 
   // Formatting helpers
   const formatCardNumber = (val: string) => {
-    const v = val.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-    const matches = v.match(/\d{4,16}/g);
+    const v = val.replace(/\\s+/g, '').replace(/[^0-9]/gi, '');
+    const matches = v.match(/\\d{4,16}/g);
     const match = matches && matches[0] || '';
     const parts = [];
     for (let i = 0, len = match.length; i < len; i += 4) {
@@ -62,8 +64,8 @@ export default function OdemePage() {
   };
 
   const formatExpiry = (val: string) => {
-    const v = val.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-    if (v.length >= 3) return `${v.substring(0, 2)}/${v.substring(2, 4)}`;
+    const v = val.replace(/\\s+/g, '').replace(/[^0-9]/gi, '');
+    if (v.length >= 3) return \`\${v.substring(0, 2)}/\${v.substring(2, 4)}\`;
     return v;
   };
 
@@ -74,7 +76,7 @@ export default function OdemePage() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{ __html: \`
         .checkout-container { max-width: 1200px; margin: 120px auto 80px; display: grid; grid-template-columns: 1fr 400px; gap: 40px; }
         .checkout-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px; }
         .form-row { display: flex; gap: 16px; margin-bottom: 16px; }
@@ -105,7 +107,7 @@ export default function OdemePage() {
         .card-detail-col { display: flex; flex-direction: column; }
         .card-detail-label { font-size: 10px; color: var(--text2); text-transform: uppercase; margin-bottom: 4px; }
         .card-detail-value { font-family: 'SF Mono', monospace; font-size: 14px; color: #fff; text-transform: uppercase; min-height: 20px; }
-      `}} />
+      \`}} />
 
       <div className="container">
         <div className="checkout-container reveal">
@@ -120,7 +122,7 @@ export default function OdemePage() {
               
               {/* Animated Card */}
               <div className="card-perspective">
-                <div className={`card-inner ${isFlipped ? 'is-flipped' : ''}`}>
+                <div className={\`card-inner \${isFlipped ? 'is-flipped' : ''}\`}>
                   <div className="card-front">
                     <div className="card-chip"></div>
                     <div className="card-number-display">
@@ -215,7 +217,7 @@ export default function OdemePage() {
               <h3 style={{fontSize: '18px', marginBottom: '24px'}}>Sipariş Özeti</h3>
               
               <div style={{display: 'flex', gap: '16px', marginBottom: '24px', paddingBottom: '24px', borderBottom: '1px solid rgba(255,255,255,0.05)'}}>
-                <img src="/assets/images/devices/GREG.png" alt="Preditech Seçim" style={{width: '120px', height: '120px', objectFit: 'contain'}} />
+                <img src="/assets/images/devices/GREG.png" alt="Preditech Seçim" style={{width: '80px', height: '80px', objectFit: 'contain'}} />
                 <div>
                   <h4 style={{fontSize: '16px', marginBottom: '4px'}}>{baseDevice}</h4>
                   <p style={{fontSize: '12px', color: 'var(--text2)'}}>Erken Erişim Sürümü</p>
@@ -235,7 +237,7 @@ export default function OdemePage() {
               ))}
 
               <div className="summary-item">
-                <span>1 Aylık Uygulama Aboneliği</span>
+                <span>1 Yıllık Uygulama Aboneliği</span>
                 <strong style={{color: 'var(--accent)'}}>Hediye</strong>
               </div>
 
@@ -269,3 +271,7 @@ export default function OdemePage() {
     </>
   );
 }
+`;
+
+fs.writeFileSync('src/app/odeme/page.tsx', content);
+console.log("Rewrote odeme/page.tsx");

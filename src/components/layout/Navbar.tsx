@@ -59,6 +59,14 @@ export default function Navbar() {
     const items = navLinks.querySelectorAll(':scope > li > a');
     let activeItem: HTMLElement | null = null;
 
+    // Reset all items first
+    items.forEach(item => {
+      const el = item as HTMLElement;
+      el.classList.remove('active');
+      el.style.color = '';
+      if (el.parentElement) el.parentElement.classList.remove('active');
+    });
+
     items.forEach(item => {
       const el = item as HTMLElement;
       const href = el.getAttribute('href') || '';
@@ -164,10 +172,16 @@ export default function Navbar() {
     }
   };
 
+  const getLogoHref = () => {
+    if (pathname && pathname.startsWith('/filo')) return '/filo-profil';
+    if (pathname && pathname.startsWith('/ekspertiz')) return '/ekspertiz-raporlar';
+    return '/';
+  };
+
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
-        <Link href="/" className="logo">
+        <Link href={getLogoHref()} className="logo">
           <img src="/assets/images/general/preditechlogo.png" alt="Preditech" style={{height:'22px',objectFit:'contain'}} />
         </Link>
         <ul className={`nav-links ${isOpen ? 'open' : ''}`} ref={navLinksRef}>
@@ -186,7 +200,7 @@ export default function Navbar() {
                 <li><Link href="/titan" onClick={closeMenu}>Titan (Tır)</Link></li>
                 <li><Link href="/haul" onClick={closeMenu}>Haul (İş Makinesi)</Link></li>
                 <li><Link href="/doc" onClick={closeMenu}>Doc</Link></li>
-                <li><Link href="/ekspertiz" onClick={closeMenu}>Xper (Ekspertiz)</Link></li>
+                <li><Link href="/xper" onClick={closeMenu}>Xper (Ekspertiz)</Link></li>
               </div>
               <div className="mega-col">
                 <h4>Yardımcı Cihazlar</h4>

@@ -137,37 +137,70 @@ export default function HomePage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Predicto AI scroll interaction + chatbot
+    // Predicto AI scroll interaction + chatbot
   useEffect(() => {
     const simulator = document.getElementById('simulator');
     const chatBody = chatBodyRef.current;
     if (!simulator || !chatBody) return;
 
+    // Clear initial content to control flow
+    chatBody.innerHTML = '';
+
     let triggered = false;
 
-    const appendBotMessageAuto = (html: string) => {
-      const msg = document.createElement('div');
-      msg.className = 'chat-msg bot-msg';
-      msg.style.cssText = 'align-self: flex-start; max-width: 85%; background: #1a1a1a; padding: 12px 16px; border-radius: 12px 12px 12px 0; color: #fff; font-size: 14px; line-height: 1.5; border: 1px solid rgba(255,255,255,0.05); opacity: 0; transform: translateY(10px); transition: all 0.3s ease; margin-bottom: 8px;';
-      msg.innerHTML = html;
-      chatBody.appendChild(msg);
+    const appendBotMessageAuto = (html, delay) => {
       setTimeout(() => {
-        msg.style.opacity = '1';
-        msg.style.transform = 'translateY(0)';
+        const msg = document.createElement('div');
+        msg.className = 'chat-msg bot-msg';
+        msg.style.cssText = 'align-self: flex-start; max-width: 85%; background: #1a1a1a; padding: 12px 16px; border-radius: 12px 12px 12px 0; color: #fff; font-size: 14px; line-height: 1.5; border: 1px solid rgba(255,255,255,0.05); opacity: 0; transform: translateY(10px); transition: all 0.3s ease; margin-bottom: 8px;';
+        msg.innerHTML = html;
+        chatBody.appendChild(msg);
+        setTimeout(() => {
+          msg.style.opacity = '1';
+          msg.style.transform = 'translateY(0)';
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }, 50);
+      }, delay);
+    };
+
+    const showChips = (delay) => {
+      setTimeout(() => {
+        const chips = document.createElement('div');
+        chips.className = 'quick-reply-chips';
+        chips.style.cssText = 'display: flex; flex-direction: column; gap: 8px; margin-top: 8px; animation: fadeInBtn 0.5s ease forwards; align-items: flex-start; width: 100%; padding-bottom: 16px;';
+        
+        const chip1 = document.createElement('div');
+        chip1.className = 'quick-reply-chip';
+        chip1.style.cssText = 'background: rgba(255, 215, 0, 0.05); border: 1px solid rgba(255, 215, 0, 0.2); padding: 10px 14px; border-radius: 16px; color: var(--accent); font-size: 13px; cursor: pointer; transition: all 0.3s; max-width: 90%; word-wrap: break-word;';
+        chip1.textContent = 'Araba alacağım, öneri istiyorum';
+        chip1.onclick = () => {
+          const input = document.getElementById('ai-chat-input');
+          if(input) { input.value = 'Araba alacağım, öneri istiyorum'; document.getElementById('ai-chat-send').click(); }
+        };
+
+        const chip2 = document.createElement('div');
+        chip2.className = 'quick-reply-chip';
+        chip2.style.cssText = 'background: rgba(255, 215, 0, 0.05); border: 1px solid rgba(255, 215, 0, 0.2); padding: 10px 14px; border-radius: 16px; color: var(--accent); font-size: 13px; cursor: pointer; transition: all 0.3s; max-width: 90%; word-wrap: break-word;';
+        chip2.textContent = 'Aracımdaki arızayı bil';
+        chip2.onclick = () => {
+          const input = document.getElementById('ai-chat-input');
+          if(input) { input.value = 'Aracımdaki arızayı bil'; document.getElementById('ai-chat-send').click(); }
+        };
+
+        chips.appendChild(chip1);
+        chips.appendChild(chip2);
+        chatBody.appendChild(chips);
         chatBody.scrollTop = chatBody.scrollHeight;
-      }, 50);
+      }, delay);
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && !triggered) {
           triggered = true;
-          setTimeout(() => {
-            appendBotMessageAuto('Araban hakkında veya almak istediğin araba hakkında sorular sorabilirsin, piyasaya hakimim.');
-          }, 1000);
-          setTimeout(() => {
-            appendBotMessageAuto('Doğrudan senin arabanın verilerini 7/24 inceleyerek çalışmak için sabırsızlanıyorum.');
-          }, 4000);
+          appendBotMessageAuto('Preditech cihazlarının içinde ben varım. 7/24 aracınızı tarayarak her an arıza kontrolü yapmak için hazırım.', 500);
+          appendBotMessageAuto('Size ne konuda yardımcı olabilirim?', 1500);
+          showChips(2500);
         }
       });
     }, { threshold: 0.3 });
@@ -182,7 +215,7 @@ export default function HomePage() {
     if (!chatBody) return;
     const msg = document.createElement('div');
     msg.className = 'chat-msg user-msg';
-    msg.style.cssText = 'align-self: flex-end; max-width: 85%; background: var(--accent); padding: 12px 16px; border-radius: 12px 12px 0 12px; color: #000; font-size: 14px; line-height: 1.5; font-weight: 500;';
+    msg.style.cssText = 'align-self: flex-end; max-width: 85%; background: var(--accent); padding: 12px 16px; border-radius: 12px 12px 0 12px; color: #000; font-size: 14px; line-height: 1.5; font-weight: 500; word-break: break-word; white-space: normal;';
     msg.textContent = text;
     chatBody.appendChild(msg);
     chatBody.scrollTop = chatBody.scrollHeight;
@@ -392,7 +425,7 @@ export default function HomePage() {
               </div>
 
               <div style={{flex:1.2,minWidth:'350px'}} className="reveal">
-                <div className="simulator-card" style={{padding:'20px',display:'flex',flexDirection:'column',gap:'16px',background:'#0a0a0a',border:'1px solid rgba(255,255,255,0.05)',borderRadius:'24px',height:'450px',position:'relative',boxShadow:'0 10px 40px rgba(0,0,0,0.5)'}}>
+                <div className="simulator-card" style={{padding:'20px',display:'flex',flexDirection:'column',gap:'16px',background:'#0a0a0a',border:'1px solid rgba(255,255,255,0.05)',borderRadius:'24px',height:'500px',position:'relative',boxShadow:'0 10px 40px rgba(0,0,0,0.5)'}}>
                   {/* Chat Header */}
                   <div style={{display:'flex',alignItems:'center',gap:'12px',borderBottom:'1px solid rgba(255,255,255,0.1)',paddingBottom:'16px'}}>
                     <div style={{width:'40px',height:'40px',background:'var(--accent)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',color:'#000',fontSize:'24px'}}>
@@ -408,9 +441,8 @@ export default function HomePage() {
 
                   {/* Chat Body */}
                   <div ref={chatBodyRef} id="ai-chat-body" style={{flex:1,display:'flex',flexDirection:'column',gap:'16px',overflowY:'auto',paddingRight:'8px'}}>
-                    <div className="chat-msg bot-msg" style={{alignSelf:'flex-start',maxWidth:'85%',background:'#1a1a1a',padding:'12px 16px',borderRadius:'12px 12px 12px 0',color:'#fff',fontSize:'14px',lineHeight:1.5,border:'1px solid rgba(255,255,255,0.05)'}}>
-                      Bana arabanızı söyleyin ve almak mı istediğinizi veya olası arızaları öğrenin.
-                    </div>
+                    
+
                   </div>
 
                   {/* Chat Input */}
@@ -486,7 +518,7 @@ export default function HomePage() {
               <div className="timeline-content" style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:'32px'}}>
                 <div style={{flex:1}}>
                   <h3 style={{fontSize:'20px',color:'var(--text1)'}}>Preditech&apos;in Yakaladığı An (Arıza Doğmadan Önce)</h3>
-                  <p style={{fontSize:'14px',color:'var(--text2)'}}>Ateşleme bobininde henüz güç kaybı başlamadı, sadece mikro titreşimler var. Hata kodu yok, arıza lambası yanmıyor. Preditech IMU sensörleri ile bu rezonansı anında yakalar ve sizi uyarır. Tam %80&apos;e varan maliyet tasarrufu sağlarsınız.</p>
+                  <p style={{fontSize:'14px',color:'var(--text2)'}}>Ateşleme bobininde mikro titreşimler başladı. Arıza lambası yanmadan yapay zeka bu arızayı tespit eder ve sizi uyarır. Erken müdahale ile %80&apos;e varan tasarruf sağlarsınız.</p>
                 </div>
                 <div className="timeline-cost" style={{width:'280px',flexShrink:0,textAlign:'left',background:'#fdfdfd',fontFamily:'monospace',marginTop:0}}>
                   <div style={{display:'flex',justifyContent:'space-between',marginBottom:'4px',fontWeight:500,fontSize:'13px',color:'#444'}}><span>Arıza Tespiti</span><span>500₺</span></div>
@@ -503,7 +535,7 @@ export default function HomePage() {
               <div className="timeline-content" style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:'32px'}}>
                 <div style={{flex:1}}>
                   <h3 style={{fontSize:'20px',color:'var(--text1)'}}>Geç Kalınmış Teşhis: Motor Arıza Lambası Yandı</h3>
-                  <p style={{fontSize:'14px',color:'var(--text2)'}}>Standart OBD cihazları arızayı ancak bu aşamada (hata kodu düştüğünde) fark eder. Maalesef bu süreçte hatalı ateşleme yüzünden DPF ve EGR çoktan kurum bağlamaya başlamış, onarım maliyeti 3 katına çıkmıştır.</p>
+                  <p style={{fontSize:'14px',color:'var(--text2)'}}>Arıza lambası artık yandı. Hatalı ateşleme sebebiyle sistem kurum bağlamaya başladı. Hasar büyüdüğü için onarım maliyetiniz 3 katına çıktı.</p>
                 </div>
                 <div className="timeline-cost" style={{width:'280px',flexShrink:0,textAlign:'left',background:'#fdfdfd',fontFamily:'monospace',marginTop:0}}>
                   <div style={{display:'flex',justifyContent:'space-between',marginBottom:'4px',fontWeight:500,fontSize:'13px',color:'#444'}}><span>Detaylı Tespit</span><span>1.500₺</span></div>
@@ -521,7 +553,7 @@ export default function HomePage() {
               <div className="timeline-content" style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:'32px'}}>
                 <div style={{flex:1}}>
                   <h3 style={{fontSize:'20px',color:'var(--text1)'}}>Görmezden Gelmenin Gerçek Bedeli (Yolda Kalma)</h3>
-                  <p style={{fontSize:'14px',color:'var(--text2)'}}>&quot;Sesi duyunca ustaya giderim&quot; veya &quot;Arıza lambası yanana kadar devam edeyim&quot; diyen sürücünün karşılaştığı son. EGR tamamen tıkandı, DPF doldu ve araç yolda kaldı. Zamanında yapılmayan ufak bir müdahale devasa bir servet kaybına dönüştü.</p>
+                  <p style={{fontSize:'14px',color:'var(--text2)'}}>EGR tamamen tıkandı, DPF doldu ve araç yolda kaldı. Zamanında yapılmayan ufak bir müdahale devasa bir servet kaybına dönüştü.</p>
                 </div>
                 <div className="timeline-cost" style={{width:'280px',flexShrink:0,textAlign:'left',background:'#fdfdfd',fontFamily:'monospace',marginTop:0}}>
                   <div style={{display:'flex',justifyContent:'space-between',marginBottom:'4px',fontWeight:500,fontSize:'13px',color:'#444'}}><span>Ateşleme Bobini</span><span>1.500₺</span></div>

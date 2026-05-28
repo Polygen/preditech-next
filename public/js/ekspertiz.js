@@ -1,11 +1,11 @@
 
   let currentPaintMode = 'cp-orijinal';
-  function setPaintMode(modeClass, element) {
+  window.setPaintMode = function setPaintMode(modeClass, element) {
     currentPaintMode = modeClass;
     document.querySelectorAll('.cl-item').forEach(el => el.classList.remove('active'));
     element.classList.add('active');
   }
-  function paintPart(pathElement) {
+  window.paintPart = function paintPart(pathElement) {
     pathElement.classList.remove('cp-orijinal', 'cp-lokal', 'cp-boyali', 'cp-degisen');
     pathElement.classList.add(currentPaintMode);
   }
@@ -31,7 +31,7 @@
     })
     .catch(e => console.error("Araba.svg yuklenemedi", e));
 
-  function switchXperView(viewId, carId, hasPreviousReport) {
+  window.switchXperView = function switchXperView(viewId, carId, hasPreviousReport) {
     document.querySelectorAll('.xper-panel-content').forEach(el => el.classList.remove('active'));
     const targetView = document.getElementById('xper-' + viewId + '-view');
     if (targetView) targetView.classList.add('active');
@@ -66,10 +66,10 @@
     }
   }
 
-  function openDeviceMenu(deviceName) {
+  window.openDeviceMenu = function openDeviceMenu(deviceName) {
     document.getElementById('deviceMenuTitle').innerText = deviceName;
     document.getElementById('deviceMenuModal').style.display = 'flex';
   }
-  function closeDeviceMenu() {
+  window.closeDeviceMenu = function closeDeviceMenu() {
     document.getElementById('deviceMenuModal').style.display = 'none';
   }

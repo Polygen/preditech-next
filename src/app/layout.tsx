@@ -23,16 +23,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css"
-        />
-      </head>
       <body className={inter.variable} style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
         <LayoutShell>{children}</LayoutShell>
       </body>

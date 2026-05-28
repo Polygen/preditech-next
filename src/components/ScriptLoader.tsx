@@ -22,7 +22,9 @@ export function ScriptLoader() {
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    document.querySelectorAll('.reveal, .slide-in').forEach(el => observer.observe(el));
+    setTimeout(() => {
+      document.querySelectorAll('.reveal, .slide-in').forEach(el => observer.observe(el));
+    }, 100);
 
     // Counter animation
     const counterObserver = new IntersectionObserver((entries) => {
@@ -187,16 +189,11 @@ export function ScriptLoader() {
         const windowHeight = window.innerHeight;
         
         let percentage = 0;
-        if(rect.top <= 0) {
-          const totalScroll = Math.max(1, rect.height - windowHeight);
-          const currentScroll = -rect.top;
-          percentage = Math.min(100, Math.max(0, (currentScroll / totalScroll) * 100));
-        } else if (rect.top > 0) {
-          percentage = 0;
-        }
+        const center = windowHeight / 2;
         
-        if(rect.bottom < windowHeight) {
-            percentage = 100;
+        if (rect.top < windowHeight && rect.bottom > 0) {
+           const scrolled = center - rect.top;
+           percentage = Math.min(100, Math.max(0, (scrolled / rect.height) * 100));
         }
 
         progress.style.width = percentage + '%';
