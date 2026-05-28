@@ -18,20 +18,30 @@ export default function Page() {
 
   useEffect(() => {
 
-  function switchTab(tabId, element) {
+  function switchTab(tabId: string, element: HTMLElement) {
     document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    
+    document.getElementById(tabId)?.classList.add('active');
+
     document.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('active'));
     element.classList.add('active');
   }
-  
-  function openModal(id) {
-    document.getElementById(id).classList.add('active');
+
+  function openModal(id: string) {
+    document.getElementById(id)?.classList.add('active');
   }
-  function closeModal(id) {
-    document.getElementById(id).classList.remove('active');
+  function closeModal(id: string) {
+    document.getElementById(id)?.classList.remove('active');
   }
+
+  (window as any).switchTab = switchTab;
+  (window as any).openModal = openModal;
+  (window as any).closeModal = closeModal;
+
+  return () => {
+    delete (window as any).switchTab;
+    delete (window as any).openModal;
+    delete (window as any).closeModal;
+  };
 
   }, []);
 
@@ -228,26 +238,26 @@ export default function Page() {
         <div style={{ fontSize: '11px', color: 'var(--text2)', letterSpacing: '1px', fontWeight: '700', marginBottom: '12px',  }}>DASHBOARD</div>
       </div>
       
-      <a className="sidebar-link active" onClick={(event) => { switchTab('karsilama-ekrani', event.currentTarget) }}>
+      <a className="sidebar-link active" onClick={(e) => { (window as any).switchTab?.('karsilama-ekrani', e.currentTarget) }}>
         <i className="ph ph-house"></i> Anasayfa
       </a>
-      <a className="sidebar-link" onClick={(event) => { switchTab('arac-verilerim', event.currentTarget) }}>
+      <a className="sidebar-link" onClick={(e) => { (window as any).switchTab?.('arac-verilerim', e.currentTarget) }}>
         <i className="ph ph-steering-wheel"></i> Araç Verilerim
       </a>
-      <a className="sidebar-link" onClick={(event) => { switchTab('cihazlarim', event.currentTarget) }}>
+      <a className="sidebar-link" onClick={(e) => { (window as any).switchTab?.('cihazlarim', e.currentTarget) }}>
         <i className="ph ph-cpu"></i> Cihazlarım
       </a>
-      <a className="sidebar-link" onClick={(event) => { switchTab('abonelikler', event.currentTarget) }}>
+      <a className="sidebar-link" onClick={(event) => { (window as any).switchTab?.('abonelikler', event.currentTarget) }}>
         <i className="ph ph-star"></i> Aboneliklerim
       </a>
-      <a className="sidebar-link" onClick={(event) => { switchTab('siparisler', event.currentTarget) }}>
+      <a className="sidebar-link" onClick={(event) => { (window as any).switchTab?.('siparisler', event.currentTarget) }}>
         <i className="ph ph-package"></i> Siparişlerim
       </a>
       <div style={{ height: '1px', background: 'rgba(255,255,255,0.05)', margin: '16px 0',  }}></div>
-      <a className="sidebar-link" onClick={(event) => { switchTab('hesap-ayarlari', event.currentTarget) }}>
+      <a className="sidebar-link" onClick={(event) => { (window as any).switchTab?.('hesap-ayarlari', event.currentTarget) }}>
         <i className="ph ph-user-gear"></i> Hesap Ayarları
       </a>
-      <a href="javascript:void(0)" onClick={() => { handleLogout() }} className="sidebar-link" style={{ color: 'var(--danger)', marginTop: 'auto',  }}>
+      <a href="javascript:void(0)" onClick={() => { window.location.href='/' }} className="sidebar-link" style={{ color: 'var(--danger)', marginTop: 'auto',  }}>
         <i className="ph ph-sign-out"></i> Çıkış Yap
       </a>
     </aside>
@@ -267,9 +277,9 @@ export default function Page() {
             </div>
             <p style={{ fontSize: '16px', color: 'var(--text2)', maxWidth: '500px', lineHeight: '1.6', marginBottom: '24px',  }}>Ben <strong>Predicto</strong>. Aracının durumu şu an mükemmel görünüyor. Sana ne konuda yardımcı olabilirim?</p>
             <div style={{ display: 'flex', gap: '12px',  }}>
-              <button onClick={() => { document.querySelectorAll('.sidebar-link')[1].click() }} className="btn btn-primary" style={{ padding: '12px 24px', borderRadius: '12px', fontWeight: '700', fontSize: '14px',  }}><i className="ph ph-steering-wheel"></i> Son Sürüşümü İncele</button>
-              <button onClick={() => { document.querySelectorAll('.sidebar-link')[5].click() }} className="btn btn-ghost" style={{ padding: '12px 24px', borderRadius: '12px', fontWeight: '700', fontSize: '14px', border: '1px solid rgba(255,255,255,0.1)',  }}><i className="ph ph-user-gear"></i> Profilimi Düzenle</button>
-              <button onClick={() => { document.querySelectorAll('.sidebar-link')[2].click() }} className="btn btn-ghost" style={{ padding: '12px 24px', borderRadius: '12px', fontWeight: '700', fontSize: '14px', border: '1px solid rgba(255,255,255,0.1)',  }}><i className="ph ph-cpu"></i> Cihaz Ekle</button>
+              <button onClick={() => { (document.querySelectorAll('.sidebar-link')[1] as HTMLAnchorElement).click() }} className="btn btn-primary" style={{ padding: '12px 24px', borderRadius: '12px', fontWeight: '700', fontSize: '14px',  }}><i className="ph ph-steering-wheel"></i> Son Sürüşümü İncele</button>
+              <button onClick={() => { (document.querySelectorAll('.sidebar-link')[5] as HTMLAnchorElement).click() }} className="btn btn-ghost" style={{ padding: '12px 24px', borderRadius: '12px', fontWeight: '700', fontSize: '14px', border: '1px solid rgba(255,255,255,0.1)',  }}><i className="ph ph-user-gear"></i> Profilimi Düzenle</button>
+              <button onClick={() => { (document.querySelectorAll('.sidebar-link')[2] as HTMLAnchorElement).click() }} className="btn btn-ghost" style={{ padding: '12px 24px', borderRadius: '12px', fontWeight: '700', fontSize: '14px', border: '1px solid rgba(255,255,255,0.1)',  }}><i className="ph ph-cpu"></i> Cihaz Ekle</button>
             </div>
           </div>
           <i className="ph-fill ph-sparkle" style={{ position: 'absolute', right: '40px', top: '50%', transform: 'translateY(-50%)', fontSize: '180px', color: 'rgba(232, 255, 0, 0.05)', zIndex: '1',  }}></i>
@@ -377,7 +387,7 @@ export default function Page() {
                 <path id="arcLeft2" d="M 75,155 A 80,80 0 0,1 75,-5" />
                 <path id="arcRight2" d="M 75,155 A 80,80 0 0,0 75,-5" />
               </defs>
-              <text fill="rgba(255,255,255,0.35)" font-size="9" font-family="'Inter', sans-serif" font-weight="600" letter-spacing="2" text-anchor="middle">
+              <text fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="'Inter', sans-serif" fontWeight="600" letterSpacing="2" textAnchor="middle">
                 <textPath href="#arcTop2" startOffset="50%">YAVAŞLAMA</textPath>
                 <textPath href="#arcBottom2" startOffset="50%">HIZLANMA</textPath>
                 <textPath href="#arcLeft2" startOffset="50%">SAĞA DÖNÜŞ</textPath>
@@ -386,9 +396,9 @@ export default function Page() {
             </svg>
             
             <canvas className="gforce-radar-trail" width="150" height="150" style={{ position: 'absolute', top: '0', left: '0', pointerEvents: 'none', zIndex: '4',  }}></canvas>
-            <div className="gforce-radar-dot"></div>
+            <div className="gforce-radar-dot" suppressHydrationWarning></div>
             
-            <div className="gforce-radar-value">0.00 G</div>
+            <div className="gforce-radar-value" suppressHydrationWarning>0.00 G</div>
           </div>
         </div>
           </div>
@@ -443,10 +453,12 @@ export default function Page() {
             <div className="bc-header"><i className="ph-fill ph-cloud-sun bc-icon"></i><span>Pist Şartları</span></div>
             <div className="bc-title">Pist Hava Durumu</div>
             <table className="bc-table" style={{ marginTop: '4px',  }}>
+              <tbody>
               <tr><td style={{ padding: '10px 0',  }}><i className="ph-fill ph-drop" style={{ color: '#3388FF',  }}></i> Nem</td><td style={{ padding: '10px 0',  }}>% 70</td></tr>
               <tr><td style={{ padding: '10px 0',  }}><i className="ph-fill ph-wind" style={{ color: '#00FF88',  }}></i> Rüzgar</td><td style={{ padding: '10px 0',  }}>15 km/h</td></tr>
               <tr><td style={{ padding: '10px 0',  }}><i className="ph-fill ph-thermometer" style={{ color: 'var(--accent)',  }}></i> Sıcaklık</td><td style={{ padding: '10px 0',  }}>25 °C</td></tr>
               <tr><td style={{ padding: '10px 0', borderBottom: 'none',  }}><i className="ph-fill ph-mountains" style={{ color: '#aaa',  }}></i> Rakım</td><td style={{ padding: '10px 0', borderBottom: 'none',  }}>130 m</td></tr>
+              </tbody>
             </table>
           </div>
           <div className="flip-card-back">
@@ -750,7 +762,7 @@ export default function Page() {
                 <path id="arcLeft" d="M 75,155 A 80,80 0 0,1 75,-5" />
                 <path id="arcRight" d="M 75,155 A 80,80 0 0,0 75,-5" />
               </defs>
-              <text fill="rgba(255,255,255,0.35)" font-size="9" font-family="'Inter', sans-serif" font-weight="600" letter-spacing="2" text-anchor="middle">
+              <text fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="'Inter', sans-serif" fontWeight="600" letterSpacing="2" textAnchor="middle">
                 <textPath href="#arcTop" startOffset="50%">YAVAŞLAMA</textPath>
                 <textPath href="#arcBottom" startOffset="50%">HIZLANMA</textPath>
                 <textPath href="#arcLeft" startOffset="50%">SAĞA DÖNÜŞ</textPath>
@@ -759,9 +771,9 @@ export default function Page() {
             </svg>
             
             <canvas className="gforce-radar-trail" width="150" height="150" style={{ position: 'absolute', top: '0', left: '0', pointerEvents: 'none', zIndex: '4',  }}></canvas>
-            <div className="gforce-radar-dot"></div>
+            <div className="gforce-radar-dot" suppressHydrationWarning></div>
             
-            <div className="gforce-radar-value">0.00 G</div>
+            <div className="gforce-radar-value" suppressHydrationWarning>0.00 G</div>
           </div>
         </div>
           </div>
@@ -987,7 +999,7 @@ export default function Page() {
             <p style={{ color: 'var(--text2)', fontSize: '15px', marginBottom: '32px',  }}>Seri No: PRD-PRO-8492-X</p>
             
             <div style={{ display: 'flex', gap: '16px',  }}>
-              <button className="action-btn btn-white" onClick={() => { openModal('device-settings-modal') }}><i className="ph-bold ph-sliders"></i> Cihaz Ayarları</button>
+              <button className="action-btn btn-white" onClick={() => { (window as any).openModal?.('device-settings-modal') }}><i className="ph-bold ph-sliders"></i> Cihaz Ayarları</button>
             </div>
           </div>
         </div>
@@ -1020,7 +1032,7 @@ export default function Page() {
                 </div>
               </div>
               
-              <button className="action-btn" style={{ background: 'rgba(255,68,68,0.1)', color: '#FF4444', border: '1px solid rgba(255,68,68,0.3)', marginTop: '32px',  }} onClick={() => { openModal('cancel-sub-modal') }}>Aboneliği İptal Et</button>
+              <button className="action-btn" style={{ background: 'rgba(255,68,68,0.1)', color: '#FF4444', border: '1px solid rgba(255,68,68,0.3)', marginTop: '32px',  }} onClick={() => { (window as any).openModal?.('cancel-sub-modal') }}>Aboneliği İptal Et</button>
             </div>
             <div style={{ fontSize: '13px', fontWeight: '800', color: '#000', background: '#00FF88', padding: '8px 16px', borderRadius: '20px',  }}>
               AKTİF
@@ -1078,12 +1090,12 @@ export default function Page() {
             
             <div className="form-group" style={{ marginBottom: '20px',  }}>
               <label style={{ display: 'block', fontSize: '12px', color: 'var(--text2)', marginBottom: '8px', fontWeight: '600',  }}>Ad Soyad</label>
-              <input type="text" className="sporty-input" value="Noyan S." style={{ width: '100%', background: '#111', border: '1px solid rgba(255,255,255,0.1)', padding: '12px', color: '#fff', borderRadius: '8px',  }} />
+              <input type="text" className="sporty-input" defaultValue="Noyan S." readOnly style={{ width: '100%', background: '#111', border: '1px solid rgba(255,255,255,0.1)', padding: '12px', color: '#fff', borderRadius: '8px',  }} />
             </div>
             
             <div className="form-group" style={{ marginBottom: '20px',  }}>
               <label style={{ display: 'block', fontSize: '12px', color: 'var(--text2)', marginBottom: '8px', fontWeight: '600',  }}>E-posta Adresi</label>
-              <input type="email" className="sporty-input" value="noyan@ornek.com" style={{ width: '100%', background: '#111', border: '1px solid rgba(255,255,255,0.1)', padding: '12px', color: '#fff', borderRadius: '8px',  }} />
+              <input type="email" className="sporty-input" defaultValue="noyan@ornek.com" readOnly style={{ width: '100%', background: '#111', border: '1px solid rgba(255,255,255,0.1)', padding: '12px', color: '#fff', borderRadius: '8px',  }} />
             </div>
             
             <button className="action-btn" style={{ marginTop: '16px', width: '100%', background: 'var(--accent)', color: '#000', border: 'none',  }}>Değişiklikleri Kaydet</button>
@@ -1135,9 +1147,9 @@ export default function Page() {
 
 
 
-<div className="modal-overlay" id="device-settings-modal" onClick={(event) => { if(event.target===event.currentTarget) closeModal('device-settings-modal') }}>
+<div className="modal-overlay" id="device-settings-modal" onClick={(event) => { if(event.target===event.currentTarget) (window as any).closeModal?.('device-settings-modal') }}>
   <div className="modal-content">
-    <button className="modal-close" onClick={() => { closeModal('device-settings-modal') }}><i className="ph ph-x"></i></button>
+    <button className="modal-close" onClick={() => { (window as any).closeModal?.('device-settings-modal') }}><i className="ph ph-x"></i></button>
     <div style={{ textAlign: 'center', marginBottom: '32px',  }}>
       <i className="ph-fill ph-sliders" style={{ fontSize: '48px', color: 'var(--accent)', marginBottom: '16px',  }}></i>
       <h2 className="modal-title" style={{ marginBottom: '8px',  }}>Cihaz Ayarları</h2>
@@ -1168,7 +1180,7 @@ export default function Page() {
         <i className="ph-bold ph-caret-right"></i>
       </button>
       
-      <button className="action-btn btn-red" style={{ width: '100%', textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px',  }} onClick={() => { showToastMessage('Cihaz kilitlendi ve konum bilgisi emniyete aktarıldı.') }}>
+      <button className="action-btn btn-red" style={{ width: '100%', textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px',  }} onClick={() => { (window as any).showToastMessage?.('Cihaz kilitlendi ve konum bilgisi emniyete aktarıldı.') }}>
         <span><i className="ph-bold ph-warning" style={{ marginRight: '8px',  }}></i> Kayıp Bildir</span>
         <i className="ph-bold ph-lock-key"></i>
       </button>
@@ -1177,7 +1189,7 @@ export default function Page() {
 </div>
 
 
-<div className="modal-overlay" id="cancel-sub-modal" onClick={(event) => { if(event.target===event.currentTarget) closeModal('cancel-sub-modal') }}>
+<div className="modal-overlay" id="cancel-sub-modal" onClick={(event) => { if(event.target===event.currentTarget) (window as any).closeModal?.('cancel-sub-modal') }}>
   <div className="modal-content" style={{ textAlign: 'center',  }}>
     <i className="ph-fill ph-warning-circle" style={{ fontSize: '64px', color: 'var(--accent)', marginBottom: '24px',  }}></i>
     <h2 className="modal-title" style={{ marginBottom: '16px',  }}>Abonelik İptali</h2>
@@ -1201,8 +1213,8 @@ export default function Page() {
     </div>
     
     <div style={{ display: 'flex', gap: '16px',  }}>
-      <button className="action-btn" style={{ flex: '1', background: 'var(--accent)', color: '#000', border: 'none',  }} onClick={() => { closeModal('cancel-sub-modal') }}>Vazgeç & İndirimi Al</button>
-      <button className="action-btn" style={{ flex: '1', background: 'transparent', border: '1px solid rgba(255,68,68,0.3)', color: '#FF4444',  }} onClick={() => { closeModal('cancel-sub-modal'); showToastMessage('Aboneliğiniz iptal edildi.'); }}>Yine de İptal Et</button>
+      <button className="action-btn" style={{ flex: '1', background: 'var(--accent)', color: '#000', border: 'none',  }} onClick={() => { (window as any).closeModal?.('cancel-sub-modal') }}>Vazgeç & İndirimi Al</button>
+      <button className="action-btn" style={{ flex: '1', background: 'transparent', border: '1px solid rgba(255,68,68,0.3)', color: '#FF4444',  }} onClick={() => { (window as any).closeModal?.('cancel-sub-modal'); (window as any).showToastMessage?.('Aboneliğiniz iptal edildi.'); }}>Yine de İptal Et</button>
     </div>
   </div>
 </div>

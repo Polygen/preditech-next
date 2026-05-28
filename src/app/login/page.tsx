@@ -49,7 +49,7 @@ export default function LoginPage() {
       `}} />
 
       <div className="container">
-        <div className="auth-container reveal">
+        <div className="auth-container reveal" suppressHydrationWarning>
           <img src="/assets/images/general/preditechlogo.png" alt="Preditech Emblem" className="auth-logo" style={{ width: '140px' }} />
           <h2 style={{ fontSize: '24px', marginBottom: '8px' }}>Hoş Geldiniz</h2>
           <p style={{ color: 'var(--text2)', fontSize: '14px', marginBottom: '32px' }}>Preditech hesabınıza giriş yapın</p>

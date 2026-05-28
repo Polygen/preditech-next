@@ -606,7 +606,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="news-card" onClick={() => router.push('/haber-2')} style={{cursor:'pointer'}}>
-              <img src="/greg.png" className="news-img" alt="Haber 2" />
+              <img src="/assets/images/devices/GREG.png" className="news-img" alt="Haber 2" />
               <div className="news-content">
                 <span className="news-date">10 Nisan 2026</span>
                 <h3 className="news-title">Yeni Titan Modeli Tanıtıldı</h3>

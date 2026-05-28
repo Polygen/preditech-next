@@ -23,22 +23,22 @@ export default function Page() {
 <section className="section" style={{ paddingTop: '40px',  }}>
 <div className="container">
 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px', marginBottom: '80px',  }}>
-<div className="sporty-card" style={{ textAlign: 'center', padding: '32px 24px', cursor: 'pointer',  }} onClick={() => { document.getElementById('cat-kurulum').scrollIntoView({behavior:'smooth', block:'start'}) }}>
+<div className="sporty-card" style={{ textAlign: 'center', padding: '32px 24px', cursor: 'pointer' }} onClick={() => { document.getElementById('cat-kurulum')?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }}>
 <div style={{ fontSize: '40px', marginBottom: '16px', color: 'var(--accent)',  }}><i className="ph ph-plug"></i></div>
 <h3 style={{ fontSize: '18px', marginBottom: '8px',  }}>Kurulum & Başlangıç</h3>
 <p style={{ color: 'var(--text2)', fontSize: '14px',  }}>Cihazı OBD portuna bağlama ve uygulama kurulumu adımları.</p>
 </div>
-<div className="sporty-card" style={{ textAlign: 'center', padding: '32px 24px', cursor: 'pointer',  }} onClick={() => { document.getElementById('cat-app').scrollIntoView({behavior:'smooth', block:'start'}) }}>
+<div className="sporty-card" style={{ textAlign: 'center', padding: '32px 24px', cursor: 'pointer' }} onClick={() => { document.getElementById('cat-app')?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }}>
 <div style={{ fontSize: '40px', marginBottom: '16px', color: 'var(--accent)',  }}><i className="ph ph-device-mobile"></i></div>
 <h3 style={{ fontSize: '18px', marginBottom: '8px',  }}>App & Eşleştirme</h3>
 <p style={{ color: 'var(--text2)', fontSize: '14px',  }}>Bluetooth eşleştirme sorunları ve uygulama içi navigasyon.</p>
 </div>
-<div className="sporty-card" style={{ textAlign: 'center', padding: '32px 24px', cursor: 'pointer',  }} onClick={() => { document.getElementById('cat-uyum').scrollIntoView({behavior:'smooth', block:'start'}) }}>
+<div className="sporty-card" style={{ textAlign: 'center', padding: '32px 24px', cursor: 'pointer' }} onClick={() => { document.getElementById('cat-uyum')?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }}>
 <div style={{ fontSize: '40px', marginBottom: '16px', color: 'var(--accent)',  }}><i className="ph ph-car-profile"></i></div>
 <h3 style={{ fontSize: '18px', marginBottom: '8px',  }}>Araç Uyumluluğu</h3>
 <p style={{ color: 'var(--text2)', fontSize: '14px',  }}>Aracınızın markası, modeli ve yılına göre uyumluluk durumları.</p>
 </div>
-<div className="sporty-card" style={{ textAlign: 'center', padding: '32px 24px', cursor: 'pointer',  }} onClick={() => { document.getElementById('cat-iade').scrollIntoView({behavior:'smooth', block:'start'}) }}>
+<div className="sporty-card" style={{ textAlign: 'center', padding: '32px 24px', cursor: 'pointer' }} onClick={() => { document.getElementById('cat-iade')?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }}>
 <div style={{ fontSize: '40px', marginBottom: '16px', color: 'var(--accent)',  }}><i className="ph ph-shield-check"></i></div>
 <h3 style={{ fontSize: '18px', marginBottom: '8px',  }}>Garanti & İadeler</h3>
 <p style={{ color: 'var(--text2)', fontSize: '14px',  }}>Cihaz garanti kapsamı ve 30 gün iade politikası detayları.</p>

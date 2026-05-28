@@ -285,7 +285,7 @@ export default function Page() {
                 <path id="arcLeft" d="M 75,155 A 80,80 0 0,1 75,-5" />
                 <path id="arcRight" d="M 75,155 A 80,80 0 0,0 75,-5" />
               </defs>
-              <text fill="rgba(255,255,255,0.35)" font-size="9" font-family="'Inter', sans-serif" font-weight="600" letter-spacing="2" text-anchor="middle">
+              <text fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="'Inter', sans-serif" fontWeight="600" letterSpacing="2" textAnchor="middle">
                 <textPath href="#arcTop" startOffset="50%">YAVAŞLAMA</textPath>
                 <textPath href="#arcBottom" startOffset="50%">HIZLANMA</textPath>
                 <textPath href="#arcLeft" startOffset="50%">SAĞA DÖNÜŞ</textPath>
@@ -294,9 +294,9 @@ export default function Page() {
             </svg>
             
             <canvas className="gforce-radar-trail" width="150" height="150" style={{ position: 'absolute', top: '0', left: '0', pointerEvents: 'none', zIndex: '4',  }}></canvas>
-            <div className="gforce-radar-dot"></div>
+            <div className="gforce-radar-dot" suppressHydrationWarning></div>
             
-            <div className="gforce-radar-value">0.00 G</div>
+            <div className="gforce-radar-value" suppressHydrationWarning>0.00 G</div>
           </div>
         </div>
           </div>

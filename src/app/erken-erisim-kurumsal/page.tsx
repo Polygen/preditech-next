@@ -98,7 +98,6 @@ function ErkenErisimKurumsalContent() {
   const [showToast, setShowToast] = useState(false);
 
   const showToastMessage = (msg: string) => {
-    setToastMessage(msg);
     setShowToast(true);
     setTimeout(() => setShowToast(false), 3000);
   };

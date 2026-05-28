@@ -34,8 +34,8 @@ export default function Page() {
 <div className="stat-card"><div style={{ fontSize: 'clamp(24px,4vw,32px)', fontWeight: '800', fontFamily: 'monospace', lineHeight: '1.2', padding: '16px 0',  }}>Made in<br /><span style={{ color: 'var(--accent)',  }}>Türkiye</span></div><div className="stat-label" style={{ fontSize: '14px', marginTop: '8px',  }}>Türkiye'de Geliştirilen Özel Donanım</div></div>
 </div>
 
-<div className="reveal" style={{ marginTop: '80px', textAlign: 'center',  }}>
-<img src="/assets/images/general/acc-ing-26.png" alt="İTÜ Çekirdek Acceleration Startup" style={{ maxWidth: '100%', width: '350px', borderRadius: '16px', margin: '0 auto', filter: 'grayscale(100%)', opacity: '0.8', transition: 'all 0.3s ease', border: '1px solid var(--border)',  }} onMouseOver="this.style.filter='grayscale(0%)'; this.style.opacity='1';" onMouseOut="this.style.filter='grayscale(100%)'; this.style.opacity='0.8';" />
+<div className="reveal" style={{ marginTop: '80px', textAlign: 'center' }}>
+<img src="/assets/images/general/acc-ing-26.png" alt="İTÜ Çekirdek Acceleration Startup" className="grayscale-img" style={{ maxWidth: '100%', width: '350px', borderRadius: '16px', margin: '0 auto', border: '1px solid var(--border)' }} />
 </div>
 </div>
 </section>

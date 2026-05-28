@@ -18,15 +18,15 @@ export default function Page() {
 
 <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap', marginBottom: '80px',  }}>
   
-  <a href="#" style={{ textDecoration: 'none', transition: 'transform 0.3s ease',  }} onMouseOver="this.style.transform='scale(1.05)'" onMouseOut="this.style.transform='scale(1)'">
+  <a href="#" className="store-btn" style={{ textDecoration: 'none' }}>
     <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1276560000&amp;h=7e7b68fad19738b5649a1bfb78ff46e9" alt="Download on the App Store" style={{ height: '48px',  }} />
   </a>
   
-  <a href="#" style={{ textDecoration: 'none', transition: 'transform 0.3s ease',  }} onMouseOver="this.style.transform='scale(1.05)'" onMouseOut="this.style.transform='scale(1)'">
+  <a href="#" className="store-btn" style={{ textDecoration: 'none' }}>
     <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style={{ height: '48px',  }} />
   </a>
   
-  <a href="#" style={{ textDecoration: 'none', transition: 'transform 0.3s ease',  }} onMouseOver="this.style.transform='scale(1.05)'" onMouseOut="this.style.transform='scale(1)'">
+  <a href="#" className="store-btn" style={{ textDecoration: 'none' }}>
     <div style={{ height: '48px', display: 'flex', alignItems: 'center', background: '#000', border: '1px solid #a6a6a6', borderRadius: '6px', padding: '0 16px', gap: '8px',  }}>
       <i className="ph-fill ph-bag" style={{ fontSize: '24px', color: '#E60012',  }}></i>
       <div style={{ textAlign: 'left', lineHeight: '1',  }}>

@@ -161,7 +161,7 @@ export default function Page() {
                 <path id="arcLeft2" d="M 75,155 A 80,80 0 0,1 75,-5" />
                 <path id="arcRight2" d="M 75,155 A 80,80 0 0,0 75,-5" />
               </defs>
-              <text fill="rgba(255,255,255,0.35)" font-size="9" font-family="'Inter', sans-serif" font-weight="600" letter-spacing="2" text-anchor="middle">
+              <text fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="'Inter', sans-serif" fontWeight="600" letterSpacing="2" textAnchor="middle">
                 <textPath href="#arcTop2" startOffset="50%">YAVAŞLAMA</textPath>
                 <textPath href="#arcBottom2" startOffset="50%">HIZLANMA</textPath>
                 <textPath href="#arcLeft2" startOffset="50%">SAĞA DÖNÜŞ</textPath>
@@ -170,9 +170,9 @@ export default function Page() {
             </svg>
             
             <canvas className="gforce-radar-trail" width="150" height="150" style={{ position: 'absolute', top: '0', left: '0', pointerEvents: 'none', zIndex: '4',  }}></canvas>
-            <div className="gforce-radar-dot"></div>
+            <div className="gforce-radar-dot" suppressHydrationWarning></div>
             
-            <div className="gforce-radar-value">0.00 G</div>
+            <div className="gforce-radar-value" suppressHydrationWarning>0.00 G</div>
           </div>
         </div>
           </div>
@@ -227,10 +227,12 @@ export default function Page() {
             <div className="bc-header"><i className="ph-fill ph-cloud-sun bc-icon"></i><span>Pist Şartları</span></div>
             <div className="bc-title">Pist Hava Durumu</div>
             <table className="bc-table" style={{ marginTop: '4px',  }}>
+              <tbody>
               <tr><td style={{ padding: '10px 0',  }}><i className="ph-fill ph-drop" style={{ color: '#3388FF',  }}></i> Nem</td><td style={{ padding: '10px 0',  }}>% 70</td></tr>
               <tr><td style={{ padding: '10px 0',  }}><i className="ph-fill ph-wind" style={{ color: '#00FF88',  }}></i> Rüzgar</td><td style={{ padding: '10px 0',  }}>15 km/h</td></tr>
               <tr><td style={{ padding: '10px 0',  }}><i className="ph-fill ph-thermometer" style={{ color: 'var(--accent)',  }}></i> Sıcaklık</td><td style={{ padding: '10px 0',  }}>25 °C</td></tr>
               <tr><td style={{ padding: '10px 0', borderBottom: 'none',  }}><i className="ph-fill ph-mountains" style={{ color: '#aaa',  }}></i> Rakım</td><td style={{ padding: '10px 0', borderBottom: 'none',  }}>130 m</td></tr>
+              </tbody>
             </table>
           </div>
           <div className="flip-card-back">

@@ -10,7 +10,7 @@ export default function Page() {
 
 
 
-function genSine(amp, period, length, yOffset) {
+function genSine(amp: number, period: number, length: number, yOffset: number) {
   let d = 'M 0 ' + yOffset;
   for(let x=0; x<=length; x+=10) {
     let y = yOffset + amp * Math.sin((x/period)*2*Math.PI);
@@ -19,7 +19,7 @@ function genSine(amp, period, length, yOffset) {
   return d;
 }
 
-function genMixed(amp1, p1, amp2, p2, amp3, p3, length, yOffset) {
+function genMixed(amp1: number, p1: number, amp2: number, p2: number, amp3: number, p3: number, length: number, yOffset: number) {
   let d = 'M 0 ' + yOffset;
   for(let x=0; x<=length; x+=10) {
     let y = yOffset 
@@ -31,9 +31,9 @@ function genMixed(amp1, p1, amp2, p2, amp3, p3, length, yOffset) {
   return d;
 }
 
-const noiseData = [];
-function genNoisyWithPeaks(length, yOffset) {
-  const tempY = [];
+const noiseData: {x: number, base: number, y: number, diff: number}[] = [];
+function genNoisyWithPeaks(length: number, yOffset: number) {
+  const tempY: {x: number, base: number, y: number, diff: number}[] = [];
   for(let x=0; x<=length; x+=25) {
     let base = yOffset + 30 * Math.sin((x/400)*2*Math.PI);
     let noise = (Math.random() * 80 - 40);
@@ -87,15 +87,15 @@ if(errorBarsSvg) {
   if(errorBarsSvg) errorBarsSvg.innerHTML = '';
   noiseData.forEach((pt, i) => {
     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    line.setAttribute('x1', pt.x); 
-    line.setAttribute('y1', pt.base);
-    line.setAttribute('x2', pt.x);
-    line.setAttribute('y2', pt.y);
+    line.setAttribute('x1', String(pt.x)); 
+    line.setAttribute('y1', String(pt.base));
+    line.setAttribute('x2', String(pt.x));
+    line.setAttribute('y2', String(pt.y));
     line.setAttribute('stroke', pt.diff > 0 ? '#FF4444' : '#00FF88');
     line.setAttribute('stroke-width', '4');
     line.setAttribute('stroke-linecap', 'round');
     line.setAttribute('class', 'kv-error-line');
-    line.setAttribute('data-len', Math.abs(pt.diff));
+    line.setAttribute('data-len', String(Math.abs(pt.diff)));
     errorBarsSvg.appendChild(line);
     
     if (i === 0) dashedD += 'M ' + pt.x + ' ' + pt.y;
@@ -150,7 +150,7 @@ if(peaksContainer && linesSvg) {
   }
 }
 
-function clamp(val, min, max) { return Math.min(Math.max(val, min), max); }
+function clamp(val: number, min: number, max: number) { return Math.min(Math.max(val, min), max); }
 
 const scrubKalman = document.getElementById('scrubKalman');
 const scrubFusion = document.getElementById('scrubFusion');
@@ -164,7 +164,7 @@ const filterBox = document.getElementById('kvFilterBox');
 const cleanSignal = document.getElementById('kvCleanSignal');
 const kResultBox = document.getElementById('kvResultBox');
 const errorBarsGroup = document.getElementById('kvErrorBars');
-const errorLines = document.querySelectorAll('.kv-error-line');
+const errorLines = document.querySelectorAll('.kv-error-line') as NodeListOf<HTMLElement>;
 
 const kvRawSvg = document.getElementById('kvRawSvg');
 const errorBarsSvgNode = document.getElementById('errorBarsSvg');
@@ -202,8 +202,8 @@ function render() {
     if(kvDashedSvg) kvDashedSvg.style.transform = 'translateX(' + transX + ')';
 
     kalmanSteps.forEach(step => {
-      const s = parseFloat(step.getAttribute('data-start'));
-      const e = parseFloat(step.getAttribute('data-end'));
+      const s = parseFloat(step.getAttribute('data-start') || '0');
+      const e = parseFloat(step.getAttribute('data-end') || '0');
       if (stickyP >= s && stickyP < e) step.classList.add('active');
       else step.classList.remove('active');
     });
@@ -213,34 +213,34 @@ function render() {
       if(kvDashedSignal) kvDashedSignal.style.opacity = '0';
       if(filterBox) filterBox.style.left = '-100px';
       if(cleanSignal) cleanSignal.style.clipPath = 'inset(0 100% 0 0)';
-      kResultBox.classList.remove('active');
+      kResultBox?.classList.remove('active');
       errorLines.forEach(l => l.style.strokeDasharray = '0 100');
     } else if (stickyP >= 0.05 && stickyP < 0.25) {
       if(errorBarsGroup) errorBarsGroup.style.opacity = '1';
       if(filterBox) filterBox.style.left = '-100px';
       if(cleanSignal) cleanSignal.style.clipPath = 'inset(0 100% 0 0)';
-      kResultBox.classList.remove('active');
+      kResultBox?.classList.remove('active');
       let subP = (stickyP - 0.05) / 0.20;
       errorLines.forEach(l => {
-         let maxL = parseFloat(l.getAttribute('data-len'));
-         l.style.strokeDasharray = (subP * maxL) + ' ' + maxL;
+         let maxL = parseFloat(l.getAttribute('data-len') || '0');
+         l.style.strokeDasharray = String(subP * maxL) + ' ' + String(maxL);
       });
-      if(kvDashedSignal) kvDashedSignal.style.opacity = subP;
+      if(kvDashedSignal) kvDashedSignal.style.opacity = String(subP);
     } else if (stickyP >= 0.25 && stickyP < 0.80) {
       if(errorBarsGroup) errorBarsGroup.style.opacity = '1';
       if(kvDashedSignal) kvDashedSignal.style.opacity = '1';
-      kResultBox.classList.remove('active');
+      kResultBox?.classList.remove('active');
       errorLines.forEach(l => {
-         let maxL = parseFloat(l.getAttribute('data-len'));
-         l.style.strokeDasharray = maxL + ' ' + maxL;
+         let maxL = parseFloat(l.getAttribute('data-len') || '0');
+         l.style.strokeDasharray = String(maxL) + ' ' + String(maxL);
       });
 
       let subP = (stickyP - 0.25) / 0.55;
-      if(filterBox) filterBox.style.left = (subP * 100) + '%';
-      if(cleanSignal) cleanSignal.style.clipPath = 'inset(0 ' + (100 - subP * 100) + '% 0 0)';
+      if(filterBox) filterBox.style.left = String(subP * 100) + '%';
+      if(cleanSignal) cleanSignal.style.clipPath = 'inset(0 ' + String(100 - subP * 100) + '% 0 0)';
       
       errorLines.forEach(l => {
-         let rawX = parseFloat(l.getAttribute('x1')) / 6000;
+         let rawX = parseFloat(l.getAttribute('x1') || '0') / 6000;
          let shiftedX = rawX * 3; 
          let visibleP = shiftedX - (stickyP * 0.60 * 3);
          if(visibleP < subP) l.style.opacity = '0';
@@ -251,8 +251,8 @@ function render() {
       if(kvDashedSignal) kvDashedSignal.style.opacity = '0';
       if(filterBox) filterBox.style.left = '100%';
       if(cleanSignal) cleanSignal.style.clipPath = 'inset(0 0 0 0)';
-      if(stickyP > 0.85) kResultBox.classList.add('active');
-      else kResultBox.classList.remove('active');
+      if(stickyP > 0.85) kResultBox?.classList.add('active');
+      else kResultBox?.classList.remove('active');
     }
   }
 
@@ -264,12 +264,12 @@ function render() {
     if(rect.bottom < wh) {
        let p = (wh - rect.bottom) / (wh);
        p = clamp(p, 0, 1);
-       simConnectorLine.style.height = (p * 100) + '%';
-       simConnectorDot.style.top = (p * 100) + '%';
-       simConnectorDot.style.opacity = p > 0.1 ? 1 : 0;
+       if(simConnectorLine) simConnectorLine.style.height = String(p * 100) + '%';
+       if(simConnectorDot) simConnectorDot.style.top = String(p * 100) + '%';
+       if(simConnectorDot) simConnectorDot.style.opacity = p > 0.1 ? '1' : '0';
     } else {
-       simConnectorLine.style.height = '0%';
-       simConnectorDot.style.opacity = 0;
+       if(simConnectorLine) simConnectorLine.style.height = '0%';
+       if(simConnectorDot) simConnectorDot.style.opacity = '0';
     }
   }
 
@@ -280,8 +280,8 @@ function render() {
     stickyP = clamp(stickyP, 0, 1);
 
     fusionSteps.forEach(step => {
-      const s = parseFloat(step.getAttribute('data-start'));
-      const e = parseFloat(step.getAttribute('data-end'));
+      const s = parseFloat(step.getAttribute('data-start') || '0');
+      const e = parseFloat(step.getAttribute('data-end') || '0');
       if (stickyP >= s && stickyP < e) step.classList.add('active');
       else step.classList.remove('active');
     });
@@ -319,12 +319,14 @@ function render() {
     if(rect.bottom < wh) {
        let p = (wh - rect.bottom) / (wh);
        p = clamp(p, 0, 1);
-       simConnectorLine2.style.height = (p * 100) + '%';
-       simConnectorDot2.style.top = (p * 100) + '%';
-       simConnectorDot2.style.opacity = p > 0.1 ? 1 : 0;
+       simConnectorLine2.style.height = String(p * 100) + '%';
+       if(simConnectorDot2) {
+         simConnectorDot2.style.top = String(p * 100) + '%';
+         simConnectorDot2.style.opacity = p > 0.1 ? '1' : '0';
+       }
     } else {
        simConnectorLine2.style.height = '0%';
-       simConnectorDot2.style.opacity = 0;
+       if(simConnectorDot2) simConnectorDot2.style.opacity = '0';
     }
   }
 
@@ -337,8 +339,8 @@ function render() {
 
     const topologySteps = document.querySelectorAll('#topologyStory .scrub-step');
     topologySteps.forEach(step => {
-      const s = parseFloat(step.getAttribute('data-start'));
-      const e = parseFloat(step.getAttribute('data-end'));
+      const s = parseFloat(step.getAttribute('data-start') || '0');
+      const e = parseFloat(step.getAttribute('data-end') || '0');
       if (stickyP >= s && stickyP < e) step.classList.add('active');
       else step.classList.remove('active');
     });
@@ -355,14 +357,14 @@ function render() {
     
     // Pair them up and associate fault codes
     let ecuItems = rawEcuNodes.map((node, i) => {
-        let x = parseFloat(node.getAttribute('x'));
-        let y = parseFloat(node.getAttribute('y'));
+        let x = parseFloat(node.getAttribute('x') || '0');
+        let y = parseFloat(node.getAttribute('y') || '0');
         let text = rawEcuTexts[i];
         
         let faultCode = null;
         topoFaultCodes.forEach(fc => {
-            let fcX = parseFloat(fc.getAttribute('x'));
-            let fcY = parseFloat(fc.getAttribute('y'));
+            let fcX = parseFloat(fc.getAttribute('x') || '0');
+            let fcY = parseFloat(fc.getAttribute('y') || '0');
             if (Math.abs(fcX - (x + 50)) < 10 && Math.abs(fcY - y) < 40) {
                 faultCode = fc;
             }
@@ -388,20 +390,23 @@ function render() {
     if (p3 > 1) p3 = 1; if (p3 < 0) p3 = 0;
 
     if (stickyP < 0.1) {
-       topoWrapper.style.opacity = 0;
-       topoWrapper.style.transform = 'scale(0.9)';
+       if(topoWrapper) topoWrapper.style.opacity = '0';
+       if(topoWrapper) topoWrapper.style.transform = 'scale(0.9)';
     } else {
-       topoWrapper.style.opacity = 1;
-       topoWrapper.style.transform = 'scale(1)';
+       if(topoWrapper) topoWrapper.style.opacity = '1';
+       if(topoWrapper) topoWrapper.style.transform = 'scale(1)';
     }
 
     // P1: Root node border & text
-    topoRoot.style.strokeDashoffset = 1500 - (1500 * p1);
-    if (p1 > 0.9) topoRoot.classList.add('active-color'); else topoRoot.classList.remove('active-color');
-    topoRootText.style.opacity = p1 > 0.5 ? (p1 - 0.5) * 2 : 0;
+    if(topoRoot) {
+      const topoRootEl = topoRoot as HTMLElement;
+      topoRootEl.style.strokeDashoffset = String(1500 - (1500 * p1));
+      if (p1 > 0.9) topoRootEl.classList.add('active-color'); else topoRootEl.classList.remove('active-color');
+    }
+    if(topoRootText) topoRootText.style.opacity = p1 > 0.5 ? String((p1 - 0.5) * 2) : '0';
 
     // P2: Lines & Individual ECU Nodes
-    topoLines.forEach(line => { line.style.strokeDashoffset = 1500 - (1500 * p2); });
+    topoLines.forEach(line => { (line as HTMLElement).style.strokeDashoffset = String(1500 - (1500 * p2)); });
     
     ecuItems.forEach((item, idx) => {
         // Calculate start draw based on X coordinate along the bus
@@ -413,17 +418,17 @@ function render() {
         if (localP > 1) localP = 1;
         if (localP < 0) localP = 0;
         
-        if(item.node) item.node.style.strokeDashoffset = 1500 - (1500 * localP);
-        if(item.text) item.text.style.opacity = localP > 0.8 ? (localP - 0.8) * 5 : 0; 
+        if(item.node) (item.node as HTMLElement).style.strokeDashoffset = String(1500 - (1500 * localP));
+        if(item.text) (item.text as HTMLElement).style.opacity = localP > 0.8 ? String((localP - 0.8) * 5) : '0'; 
         
         // P3: Coloring sequence
         let colorStart = idx / ecuItems.length;
         if (p3 > colorStart) {
             if(item.node) item.node.classList.add('active-color');
-            if (item.faultCode) item.faultCode.style.opacity = 1;
+            if (item.faultCode) (item.faultCode as HTMLElement).style.opacity = '1';
         } else {
             if(item.node) item.node.classList.remove('active-color');
-            if (item.faultCode) item.faultCode.style.opacity = 0;
+            if (item.faultCode) (item.faultCode as HTMLElement).style.opacity = '0';
         }
     });
   }
@@ -436,12 +441,14 @@ function render() {
     if(rect.bottom < wh) {
        let p = (wh - rect.bottom) / (wh);
        p = clamp(p, 0, 1);
-       simConnectorLine3.style.height = (p * 100) + '%';
-       simConnectorDot3.style.top = (p * 100) + '%';
-       simConnectorDot3.style.opacity = p > 0.1 ? 1 : 0;
+       simConnectorLine3.style.height = String(p * 100) + '%';
+       if(simConnectorDot3) {
+         simConnectorDot3.style.top = String(p * 100) + '%';
+         simConnectorDot3.style.opacity = p > 0.1 ? '1' : '0';
+       }
     } else {
        simConnectorLine3.style.height = '0%';
-       simConnectorDot3.style.opacity = 0;
+       if(simConnectorDot3) simConnectorDot3.style.opacity = '0';
     }
   }
 
@@ -452,83 +459,83 @@ function render() {
     stickyP = clamp(stickyP, 0, 1);
 
     appSteps.forEach(step => {
-      const s = parseFloat(step.getAttribute('data-start'));
-      const e = parseFloat(step.getAttribute('data-end'));
+      const s = parseFloat(step.getAttribute('data-start') || '0');
+      const e = parseFloat(step.getAttribute('data-end') || '0');
       if (stickyP >= s && stickyP < e) step.classList.add('active');
       else step.classList.remove('active');
     });
 
     if (stickyP < 0.10) {
        // Reset all
-       if(flyOBD) flyOBD.style.opacity = 0;
-       if(flyNVH) flyNVH.style.opacity = 0;
-       if(predictoCore) predictoCore.style.opacity = 0;
-       if(appUiMockup) appUiMockup.style.opacity = 0;
+       if(flyOBD) flyOBD.style.opacity = '0';
+       if(flyNVH) flyNVH.style.opacity = '0';
+       if(predictoCore) predictoCore.style.opacity = '0';
+       if(appUiMockup) appUiMockup.style.opacity = '0';
        if(motorBar) motorBar.style.width = '0%';
        if(sanzimanBar) sanzimanBar.style.width = '0%';
     } else if (stickyP >= 0.10 && stickyP < 0.35) {
        // Stage 1: Data comes in smoothly
        let sub = (stickyP - 0.10) / 0.25;
        if(flyOBD) {
-          flyOBD.style.opacity = Math.min(1, sub * 3); // Smooth fade in
-          flyOBD.style.top = (20 + sub * 25) + '%'; 
-          flyOBD.style.left = (10 + sub * 25) + '%';
+          flyOBD.style.opacity = String(Math.min(1, sub * 3)); // Smooth fade in
+          flyOBD.style.top = String(20 + sub * 25) + '%';
+          flyOBD.style.left = String(10 + sub * 25) + '%';
           flyOBD.style.transform = `scale(${1 - sub*0.3})`;
        }
        if(flyNVH) {
-          flyNVH.style.opacity = Math.min(1, sub * 3); // Smooth fade in
-          flyNVH.style.top = (20 + sub * 25) + '%';
-          flyNVH.style.right = (10 + sub * 25) + '%';
+          flyNVH.style.opacity = String(Math.min(1, sub * 3)); // Smooth fade in
+          flyNVH.style.top = String(20 + sub * 25) + '%';
+          flyNVH.style.right = String(10 + sub * 25) + '%';
           flyNVH.style.transform = `scale(${1 - sub*0.3})`;
        }
        if(predictoCore) {
-          predictoCore.style.opacity = sub > 0.5 ? (sub-0.5)*2 : 0;
+          predictoCore.style.opacity = sub > 0.5 ? String((sub-0.5)*2) : '0';
           predictoCore.style.transform = 'scale(1)';
           predictoCore.classList.remove('pulse');
        }
-       if(appUiMockup) appUiMockup.style.opacity = 0;
+       if(appUiMockup) appUiMockup.style.opacity = '0';
     } else if (stickyP >= 0.35 && stickyP < 0.55) {
        // Stage 2: Processing in Predicto (Smooth transition)
        let pulseSub = (stickyP - 0.35) / 0.20;
        if(flyOBD) {
-          flyOBD.style.opacity = Math.max(0, 1 - pulseSub * 3);
+          flyOBD.style.opacity = String(Math.max(0, 1 - pulseSub * 3));
           flyOBD.style.top = '45%';
           flyOBD.style.left = '35%';
        }
        if(flyNVH) {
-          flyNVH.style.opacity = Math.max(0, 1 - pulseSub * 3);
+          flyNVH.style.opacity = String(Math.max(0, 1 - pulseSub * 3));
           flyNVH.style.top = '45%';
           flyNVH.style.right = '35%';
        }
        if(predictoCore) {
-          predictoCore.style.opacity = 1;
+          predictoCore.style.opacity = '1';
           predictoCore.classList.add('pulse');
           predictoCore.style.transform = `scale(${1 + pulseSub*0.2})`; // Smooth scaling
        }
-       if(appUiMockup) appUiMockup.style.opacity = 0;
+       if(appUiMockup) appUiMockup.style.opacity = '0';
     } else if (stickyP >= 0.55 && stickyP < 0.70) {
        // Stage 3: Core morphs into App
        let sub = (stickyP - 0.55) / 0.15;
        if(predictoCore) {
-          predictoCore.style.opacity = 1 - sub;
+          predictoCore.style.opacity = String(1 - sub);
           predictoCore.style.transform = `scale(${1.2 + sub*2})`; // Blows up
        }
        if(appUiMockup) {
-          appUiMockup.style.opacity = sub;
+          appUiMockup.style.opacity = String(sub);
           appUiMockup.style.transform = `scale(${0.8 + sub*0.2})`;
        }
        if(motorBar) motorBar.style.width = '0%';
        if(sanzimanBar) sanzimanBar.style.width = '0%';
     } else if (stickyP >= 0.70) {
        // Stage 4: App shows data
-       if(predictoCore) predictoCore.style.opacity = 0;
+       if(predictoCore) predictoCore.style.opacity = '0';
        if(appUiMockup) {
-          appUiMockup.style.opacity = 1;
+          appUiMockup.style.opacity = '1';
           appUiMockup.style.transform = 'scale(1)';
        }
        let subP = (stickyP - 0.70) / 0.30;
-       if(motorBar) motorBar.style.width = (subP * 72) + '%';
-       if(sanzimanBar) sanzimanBar.style.width = (subP * 92) + '%';
+       if(motorBar) motorBar.style.width = String(subP * 72) + '%';
+       if(sanzimanBar) sanzimanBar.style.width = String(subP * 92) + '%';
     }
   }
 
@@ -564,7 +571,7 @@ const highPath = document.getElementById('highPath');
 const midPath = document.getElementById('midPath');
 const lowPath = document.getElementById('lowPath');
 
-function genSine(amp, period, length, yOffset) {
+function genSine(amp: number, period: number, length: number, yOffset: number) {
   let d = `M 0 ${yOffset}`;
   for(let x=0; x<=length; x+=10) {
     let y = yOffset + amp * Math.sin((x/period)*2*Math.PI);
@@ -573,7 +580,7 @@ function genSine(amp, period, length, yOffset) {
   return d;
 }
 
-function genMixed(amp1, p1, amp2, p2, amp3, p3, length, yOffset) {
+function genMixed(amp1: number, p1: number, amp2: number, p2: number, amp3: number, p3: number, length: number, yOffset: number) {
   let d = `M 0 ${yOffset}`;
   for(let x=0; x<=length; x+=10) {
     let y = yOffset 
@@ -611,7 +618,7 @@ for(let i = 0; i < 15; i++) {
   box.style.animationDelay = (Math.random() * 5) + 's';
   const shapeIdx = Math.floor(Math.random() * shapes.length);
   box.innerHTML = `<svg viewBox="0 0 100 100"><polygon points="${shapes[shapeIdx]}" /></svg>`;
-  dbBg.appendChild(box);
+  if(dbBg) dbBg.appendChild(box);
 }
 
 // Fixed percentages for 400x400 square mapping
@@ -633,7 +640,7 @@ dotCoords.forEach(pos => {
   dot.className = 'cine-peak-dot';
   dot.style.left = pos.x + '%';
   dot.style.top = pos.y + '%';
-  peaksContainer.appendChild(dot);
+  if(peaksContainer) peaksContainer.appendChild(dot);
 });
 
 // Draw lines
@@ -646,7 +653,7 @@ for (let i = 0; i < dotCoords.length; i++) {
   line.setAttribute('y1', from.y + '%');
   line.setAttribute('x2', to.x + '%');
   line.setAttribute('y2', to.y + '%');
-  linesSvg.appendChild(line);
+  if(linesSvg) linesSvg.appendChild(line);
 }
 
 const sequence = [
@@ -667,7 +674,7 @@ function runSequence() {
   if(resultText) resultText.classList.remove('active');
   waves.forEach(w => w.classList.remove('split'));
   document.querySelectorAll('.cine-peak-dot').forEach(d => d.classList.remove('active'));
-  document.getElementById('cineLines').classList.remove('active');
+  document.getElementById('cineLines')?.classList.remove('active');
   
   sequence.forEach(event => {
     setTimeout(() => {
@@ -677,7 +684,10 @@ function runSequence() {
       }
       
       storySteps.forEach(s => { if(s) s.classList.remove('active'); });
-      if(event.step >= 0) if(storySteps[event.step]) storySteps[event.step].classList.add('active');
+      if(event.step >= 0) {
+        const stepEl = storySteps[event.step];
+        if(stepEl) stepEl.classList.add('active');
+      }
 
       if(visuals) visuals.className = 'cine-visuals ' + event.class;
       
@@ -691,7 +701,7 @@ function runSequence() {
       }
       
       if(event.class === 'stage-4b') {
-        document.getElementById('cineLines').classList.add('active');
+        document.getElementById('cineLines')?.classList.add('active');
       }
 
       if (event.class === 'stage-6') {
